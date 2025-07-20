@@ -1100,7 +1100,7 @@
                 return;
             }
             
-            // Support for .m3u8 videos via proxy.eduiraq.my or direct mp4
+            // Support for .m3u8 videos via proxy or direct playback
             playerContainer.innerHTML = `
                 <video id="player" playsinline controls></video>
             `;
@@ -1109,11 +1109,20 @@
             const videoElement = document.getElementById("player");
             const isHLS = url.endsWith(".m3u8");
             const referer = "https://abwaab.com"; // Referer for proxy
-            const proxyUrl = isHLS
-                ? `https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=${encodeURIComponent(
-                      url
-                  )}&referer=${encodeURIComponent(referer)}`
-                : url;
+
+            let finalVideoUrl = url; // Default to original URL
+
+            // Check if it's an HLS video and starts with the specific domain for direct playback
+            if (isHLS && url.startsWith("https://vz-25858200-a22.becdn.net/")) {
+                // Play directly without proxy
+                finalVideoUrl = url;
+            } else if (isHLS) {
+                // Use proxy for other HLS videos
+                finalVideoUrl = `https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=${encodeURIComponent(
+                    url
+                )}&referer=${encodeURIComponent(referer)}`;
+            }
+            // If not HLS, it's assumed to be MP4 or other direct video, and `finalVideoUrl` remains `url`
 
             const savedTime = lectureProgress[url]
                 ? (lectureProgress[url] / 100) * (player?.duration || 0)
@@ -1153,7 +1162,7 @@
                     const hls = new Hls();
                     window.hlsInstance = hls;
                     hls.attachMedia(videoElement);
-                    hls.loadSource(proxyUrl);
+                    hls.loadSource(finalVideoUrl); // Use finalVideoUrl here
 
                     hls.on(Hls.Events.MANIFEST_PARSED, () => {
                         player
@@ -1183,7 +1192,7 @@
                         type: "video",
                         sources: [
                             {
-                                src: proxyUrl,
+                                src: finalVideoUrl, // Use finalVideoUrl here
                                 type: isHLS ? "application/x-mpegURL" : "video/mp4",
                             },
                         ],
