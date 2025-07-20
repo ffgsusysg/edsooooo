@@ -60,7 +60,7 @@
     },
     {
       "id": 1746651198934,
-      "name": "حيدر عبدالائمة 2025",
+      "name": "حيدر عبدالائمة الدور الثاني",
       "subject": "مدرس مادة الرياضيات",
       "image": "https://i.ytimg.com/vi/eJf7EK3D_Nc/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGEAgWShyMA8=&rs=AOn4CLDj-lcDxTjcqvEEaUuqJeTCADdErA",
       "classes": [
@@ -68,34 +68,20 @@
           "name": "الفصل الاول:  الدور الثاني",
           "lectures": [
             {
-              "title": "المحاضرة التعريفية",
+              "title": "1",
               "description": "ممكن تقرأ وماتسخت ؟",
-              "url": "https://iframe.mediadelivery.net/embed/215061/53e98122-e177-4b9b-a06c-525b9da6d895"
+              "url": "https://iframe.mediadelivery.net/embed/215061/776f0409-d4aa-403d-bdb8-13519e6adf81"
             },
             {
-              "title": "محاضرة 1",
+              "title": "🎥 المحاضرة 2 (مراجعة الفصل الاول (الجزء الثاني))",
               "description": "ممكن تقرأ وماتسخت ؟",
-              "url": "https://iframe.mediadelivery.net/embed/215061/cd2d15a6-156b-420e-9f31-4efbdfb85ba3"
+              "url": "https://iframe.mediadelivery.net/embed/215061/1ce9925b-a0ea-4da6-8e8f-077fbcb98677"
             },
             {
-              "title": "محاضرة 2",
+              "title": "🎥 المحاضرة 3 (مراجعة الفصل الاول (الجزء الثالث))",
               "description": "ممكن تقرأ وماتسخت ؟",
               "url": "https://iframe.mediadelivery.net/embed/215061/27af24cb-6ef1-4f16-9d74-320dc8915bf9"
-            },
-            {
-              "title": "محاضرة 3",
-              "description": "ممكن تقرأ وماتسخت ؟",
-              "url": "https://iframe.mediadelivery.net/embed/215061/73a0ef12-89ba-482a-88e3-e8bbe90d40f7"
-            },
-            {
-              "title": "محاضرة 4",
-              "description": "ممكن تقرأ وماتسخت ؟",
-              "url": "https://iframe.mediadelivery.net/embed/215061/5d58ba54-c960-4fae-b0e6-a92561185627"
-            },
-            {
-              "title": "محاضرة 5",
-              "description": "ممكن تقرأ وماتسخت ؟",
-              "url": "https://iframe.mediadelivery.net/embed/215061/fc69f7eb-d36b-4946-b027-d85a041229a8"
+           
             }
           ]
         }
