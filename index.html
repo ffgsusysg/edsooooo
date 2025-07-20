@@ -76,11 +76,9 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            min-height: 100vh;
+            min-height: 100vh; /* Ensure body takes full viewport height */
             overflow-y: auto;
             transition: background 0.3s ease, color 0.3s ease; /* Smooth theme transition */
-            display: flex; /* Use flexbox for layout */
-            flex-direction: column; /* Arrange children vertically */
         }
 
         img {
@@ -238,27 +236,28 @@
             padding: 2rem;
             max-width: 1300px;
             margin: 0 auto;
-            flex-grow: 1; /* Allow pages to take available space */
         }
 
         .page.active {
             display: block;
         }
 
-        /* Login Page styles */
+        /* Login Page Styles */
         #loginPage {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: calc(100vh - 80px); /* Adjust for header height */
-            background: var(--bg);
             padding: 2rem;
             text-align: center;
+            background: var(--bg); /* Ensure login page background matches body */
+            transition: background 0.3s ease;
         }
 
         .login-card {
             background: var(--card);
-            padding: 3rem 2.5rem;
+            padding: 2.5rem;
             border-radius: var(--radius);
             border: 1px solid var(--border);
             box-shadow: var(--shadow-lg);
@@ -268,16 +267,35 @@
             flex-direction: column;
             gap: 1.5rem;
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.5s ease-out; /* Added fade-in animation */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .login-card h2 {
             font-size: 2rem;
             color: var(--primary-1);
             margin-bottom: 1rem;
+            transition: color 0.3s ease;
         }
 
-        .login-card input {
-            width: 100%;
+        .login-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .login-input-group label {
+            text-align: right;
+            font-weight: 600;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .login-input-group input {
             padding: 1rem 1.2rem;
             font-size: 1.1rem;
             border: 2px solid var(--border);
@@ -287,27 +305,45 @@
             transition: border 0.25s, box-shadow 0.25s, background 0.3s ease, color 0.3s ease;
         }
 
-        .login-card input:focus {
+        .login-input-group input:focus {
             outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3);
-        }
-
-        .login-card .btn {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            justify-content: center;
+            border-color: var(--primary-1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
         }
 
         .login-error {
             color: var(--error);
-            font-size: 0.95rem;
-            margin-top: -0.5rem;
-            display: none; /* Hidden by default */
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: none;
+            animation: shake 0.3s ease-in-out; /* Added shake animation for error */
         }
 
-        /* Category grid (repurposed for teachers grid) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background: var(--primary-1);
+            color: white;
+            border-radius: var(--radius);
+            font-weight: 700;
+            transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .login-button:hover {
+            background: var(--primary-2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Teachers grid */
         .teachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -478,7 +514,7 @@
             transition: color 0.3s ease;
         }
 
-        .video-page {
+        .video-page-content { /* Renamed for clarity to avoid conflict with .page */
             display: flex;
             flex-direction: column;
             gap: 2rem;
@@ -588,6 +624,7 @@
             .search-container {
                 order: 3;
                 width: 100%;
+                margin-top: 0.8rem; /* Adjusted margin for better spacing */
             }
 
             .btn span {
@@ -621,10 +658,6 @@
             .btn {
                 padding: 0.8rem 1rem;
             }
-
-            .login-card {
-                padding: 2rem 1.5rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -644,6 +677,14 @@
 
             .site-title {
                 font-size: 1.5rem;
+            }
+
+            .login-card {
+                padding: 1.5rem;
+            }
+
+            .login-card h2 {
+                font-size: 1.7rem;
             }
         }
     </style>
@@ -674,20 +715,23 @@
         </div>
     </header>
 
-    <div id="loginPage" class="page active">
+    <!-- Login Page -->
+    <div id="loginPage" class="page">
         <div class="login-card">
             <h2>تسجيل الدخول</h2>
-            <input type="password" id="passwordInput" placeholder="ادخل كلمة السر" />
+            <div class="login-input-group">
+                <label for="passwordInput">كلمة السر:</label>
+                <input type="password" id="passwordInput" placeholder="أدخل كلمة السر هنا" />
+            </div>
             <p id="loginError" class="login-error">كلمة السر غير صحيحة. حاول مرة أخرى.</p>
-            <button id="loginButton" class="btn">
-                <i data-lucide="log-in"></i><span>دخول</span>
-            </button>
+            <button id="loginButton" class="login-button">دخول</button>
         </div>
     </div>
 
+    <!-- Teachers Page (formerly categoryPage) -->
     <div id="teachersPage" class="page">
-        <button class="btn back-button" onclick="logout()">
-            <i data-lucide="log-out"></i> تسجيل الخروج
+        <button class="btn back-button" onclick="navigate('teachers')">
+            <i data-lucide="arrow-right"></i>الرجوع للصفحة الرئيسية
         </button>
         
         <div class="section-title">
@@ -723,7 +767,7 @@
     </div>
 
     <div id="videoPage" class="page">
-        <div class="video-page">
+        <div class="video-page-content">
             <div id="videoContainer" class="video-container">
                 <div id="playerContainer"></div>
                 <!-- Loader for iframe videos -->
@@ -794,7 +838,7 @@
         const teacherRating = document.getElementById("teacherRating");
         const videoTitle = document.getElementById("videoTitle");
         const videoDescription = document.getElementById("videoDescription");
-        const categoryTitle = document.getElementById("categoryTitle"); // Still used for "المدرسين" title
+        const categoryTitle = document.getElementById("categoryTitle"); // This will now be "المدرسين"
         const classesList = document.getElementById("classesList");
         const teachersGrid = document.getElementById("teachersGrid");
         const playerContainer = document.getElementById("playerContainer");
@@ -804,6 +848,7 @@
         const passwordInput = document.getElementById("passwordInput");
         const loginButton = document.getElementById("loginButton");
         const loginError = document.getElementById("loginError");
+        const correctPassword = "www12399"; // Fixed password
 
         // Progress variables
         let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
@@ -812,7 +857,7 @@
         // Navigation
         const pages = {
             login: document.getElementById("loginPage"),
-            teachers: document.getElementById("teachersPage"), // Renamed from category to be more descriptive
+            teachers: document.getElementById("teachersPage"), // Renamed from category to teachers
             classes: document.getElementById("classesPage"),
             video: document.getElementById("videoPage")
         };
@@ -845,54 +890,38 @@
             pages[page].classList.add("active");
         }
 
-        /* ========= Login Logic ========= */
-        const CORRECT_PASSWORD = "www12399";
-
-        function checkLoginStatus() {
-            if (localStorage.getItem('loggedIn') === 'true') {
-                loadData("https://edson1.netlify.app/data.json");
-                navigate('teachers');
-            } else {
-                navigate('login');
-            }
-        }
-
-        function handleLogin() {
-            const enteredPassword = passwordInput.value;
-            if (enteredPassword === CORRECT_PASSWORD) {
-                localStorage.setItem('loggedIn', 'true');
-                loginError.style.display = 'none'; // Hide error if previously shown
-                loadData("https://edson1.netlify.app/data.json");
-                navigate('teachers');
-            } else {
-                loginError.style.display = 'block'; // Show error message
-                passwordInput.value = ''; // Clear password input
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('loggedIn');
-            navigate('login');
-            // Clear any loaded teacher data
-            teachers = [];
-            teachersGrid.innerHTML = '';
-            classesList.innerHTML = '';
-            passwordInput.value = ''; // Clear password on logout
-        }
-
-        loginButton.addEventListener('click', handleLogin);
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleLogin();
-            }
-        });
-
         /* ========= بيانات المدرسين ========= */
+        const searchInput = document.getElementById("searchInput");
+        const searchBtn = document.getElementById("searchButton");
         let teachers = [];
         let currentTeacher = null;
         let currentClassIndex = 0;
         let currentLectureIndex = 0;
         let currentLectureLink = "";
+
+        // Handle login
+        loginButton.addEventListener("click", () => {
+            if (passwordInput.value === correctPassword) {
+                loginError.style.display = 'none';
+                localStorage.setItem("isLoggedIn", "true"); // Save session
+                navigate('teachers'); // Navigate to teachers page after login
+                loadData(); // Load data automatically
+            } else {
+                loginError.style.display = 'block';
+            }
+        });
+
+        // Allow pressing Enter key to submit password
+        passwordInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                loginButton.click();
+            }
+        });
+
+        // Hide error message when user starts typing
+        passwordInput.addEventListener("input", () => {
+            loginError.style.display = 'none';
+        });
 
         function renderTeachers(list = teachers) {
             if (!list.length) {
@@ -1169,10 +1198,11 @@
             searchTimeout = setTimeout(handleSearch, 250);
         });
 
-        searchButton.addEventListener("click", handleSearch);
+        searchBtn.addEventListener("click", handleSearch);
 
         /* ========= تحميل البيانات ========= */
-        function loadData(endpoint) {
+        function loadData() {
+            const endpoint = "https://edson1.netlify.app/data.json"; // Hardcoded endpoint
             const err =
                 '<p style="color:var(--error); text-align: center;">حدث خطأ في تحميل البيانات.</p><button class="btn back-button" onclick="location.reload()" style="display: block; margin: 1rem auto;">إعادة المحاولة</button>';
 
@@ -1213,10 +1243,13 @@
                 });
         }
 
-        // Initial check for login status
-        checkLoginStatus();
-
-        // Initialize Lucide icons for all static and dynamically added elements
+        // Initialize by checking login status or showing the login page
+        if (localStorage.getItem("isLoggedIn") === "true") {
+            navigate('teachers');
+            loadData();
+        } else {
+            navigate('login');
+        }
         lucide.createIcons();
     </script>
 </body>
