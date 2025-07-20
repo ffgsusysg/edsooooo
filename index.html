@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>منصة اديسون</title>
+    <title>منصة اديسون المدفوعة PRO</title>
     
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="https://cdn.glitch.global/c07dc79d-c056-48b0-8b0b-912783754321/5424770778815132543.jpg?v=1751739020203">
@@ -24,42 +24,42 @@
     <style>
         /* CSS Variables for a more vibrant and smooth theme */
         :root {
-            --primary-1: #3b82f6; /* A slightly brighter blue */
-            --primary-2: #2563eb;
-            --primary-3: #1d4ed8;
-            --accent: #facc15; /* A more golden yellow */
-            --accent-2: #eab308;
-            --radius: 14px; /* Slightly larger border radius */
-            --bg: #f8fafc; /* Lighter background */
-            --bg-glass: rgba(255, 255, 255, 0.95); /* More opaque glass effect */
-            --text: #1f2937; /* Darker text for better contrast */
+            --primary-1: #007bff; /* A vibrant blue */
+            --primary-2: #0069d9;
+            --primary-3: #0056b3;
+            --accent: #ffc107; /* A bright yellow/orange */
+            --accent-2: #e0a800;
+            --radius: 16px; /* Slightly larger radius for a softer look */
+            --bg: #f5f8fa; /* Light grey-blue background */
+            --bg-glass: rgba(245, 248, 250, 0.95);
+            --text: #343a40; /* Darker text */
             --card: #ffffff;
-            --border: #e2e8f0;
-            --hover: rgba(0, 0, 0, 0.06); /* Slightly more visible hover */
-            --success: #22c55e;
-            --warning: #facc15;
-            --error: #ef4444;
+            --border: #dee2e6;
+            --hover: rgba(0, 0, 0, 0.04);
+            --success: #28a745;
+            --warning: #ffc107;
+            --error: #dc3545;
             --telegram-blue: #0088cc;
             --telegram-light: #2aabee;
             --telegram-text: #ffffff;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         /* Dark theme adjustments */
         [data-theme="dark"] {
-            --bg: #1e293b; /* Darker background */
-            --bg-glass: rgba(30, 41, 59, 0.95);
-            --text: #f1f5f9;
-            --card: #334155; /* Darker card background */
-            --border: #475569;
-            --hover: rgba(255, 255, 255, 0.1);
-            --primary-1: #60a5fa; /* Lighter primary for dark theme */
-            --primary-2: #3b82f6;
-            --primary-3: #2563eb;
-            --accent: #fcd34d; /* Lighter accent for dark theme */
-            --accent-2: #fbbf24;
+            --bg: #212529; /* Dark charcoal */
+            --bg-glass: rgba(33, 37, 41, 0.95);
+            --text: #e9ecef;
+            --card: #343a40;
+            --border: #495057;
+            --hover: rgba(255, 255, 255, 0.08);
+            --primary-1: #66b3ff; /* Lighter blue for dark theme */
+            --primary-2: #3399ff;
+            --primary-3: #007bff;
+            --accent: #ffd700; /* Gold for dark theme */
+            --accent-2: #ccac00;
         }
 
         /* General styles */
@@ -166,7 +166,7 @@
         .search-container input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3); /* Accent-based shadow */
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3); /* Accent-based shadow */
         }
 
         .search-icon {
@@ -308,7 +308,7 @@
         .login-input-group input:focus {
             outline: none;
             border-color: var(--primary-1);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
         }
 
         .login-error {
@@ -613,6 +613,18 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Loading card for teachers grid */
+        .loading-card {
+            opacity: 0.7;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             header {
@@ -694,15 +706,12 @@
     <header>
         <h1 class="site-title" onclick="navigate('teachers')">
             <div class="site-logo">إ</div>
-            منصة إديسون
+            منصة اديسون المدفوعة PRO
         </h1>
 
         <div class="header-actions">
             <button id="themeToggle" class="btn">
                 <i data-lucide="sun"></i><span>المظهر</span>
-            </button>
-            <button id="examsButton" class="btn">
-                <i data-lucide="file-text"></i><span>امتحانات الأساتذة</span>
             </button>
         </div>
 
@@ -800,7 +809,7 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <script type="text/babel">
-        // Initialize theme
+        // Initialize theme based on local storage or system preference
         function initializeTheme() {
             const stored = localStorage.getItem("theme");
             const preferred = window.matchMedia("(prefers-color-scheme: light)").matches
@@ -811,15 +820,17 @@
             updateThemeIcon(theme);
         }
 
+        // Update the theme toggle icon
         function updateThemeIcon(theme) {
             document
                 .querySelector("#themeToggle i")
                 .setAttribute("data-lucide", theme === "dark" ? "sun" : "moon");
-            lucide.createIcons();
+            lucide.createIcons(); // Re-render Lucide icons after changing data-lucide attribute
         }
 
         initializeTheme();
 
+        // Event listener for theme toggle button
         document.getElementById("themeToggle").addEventListener("click", () => {
             const cur = document.documentElement.getAttribute("data-theme");
             const next = cur === "dark" ? "light" : "dark";
@@ -828,7 +839,7 @@
             updateThemeIcon(next);
         });
 
-        // Set up player
+        // Plyr player instance
         let player = null;
 
         // DOM references
@@ -850,18 +861,19 @@
         const loginError = document.getElementById("loginError");
         const correctPassword = "www12399"; // Fixed password
 
-        // Progress variables
+        // Progress and ratings storage
         let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
         let ratings = JSON.parse(localStorage.getItem("ratings")) || {};
 
-        // Navigation
+        // Page navigation elements
         const pages = {
             login: document.getElementById("loginPage"),
-            teachers: document.getElementById("teachersPage"), // Renamed from category to teachers
+            teachers: document.getElementById("teachersPage"),
             classes: document.getElementById("classesPage"),
             video: document.getElementById("videoPage")
         };
 
+        // Function to navigate between pages
         function navigate(page) {
             window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -886,6 +898,7 @@
                 videoLoader.style.display = 'none'; // Ensure loader is hidden
             }
 
+            // Deactivate all pages and activate the target page
             Object.values(pages).forEach((p) => p.classList.remove("active"));
             pages[page].classList.add("active");
         }
@@ -927,6 +940,7 @@
             loginError.style.display = 'none';
         });
 
+        // Render teachers grid
         function renderTeachers(list = teachers) {
             if (!list.length) {
                 teachersGrid.innerHTML = "<p style='text-align: center; color: var(--text);'>لا توجد نتائج مطابقة.</p>";
@@ -950,10 +964,11 @@
                 `;
                 card.onclick = () => showTeacher(t.id);
                 teachersGrid.appendChild(card);
-                lucide.createIcons();
+                lucide.createIcons(); // Re-render Lucide icons for new elements
             });
         }
 
+        // Helper function to render star ratings
         function renderStars(rating) {
             let stars = "";
             for (let i = 1; i <= 5; i++) {
@@ -962,6 +977,7 @@
             return stars;
         }
 
+        // Show teacher details page
         window.showTeacher = (id) => {
             currentTeacher = teachers.find((t) => t.id == id);
             if (!currentTeacher) return;
@@ -974,7 +990,7 @@
             teacherName.textContent = currentTeacher.name;
             teacherSubject.textContent = currentTeacher.subject;
 
-            // عرض التقييم
+            // Display rating
             const rating = ratings[currentTeacher.id] || 0;
             teacherRating.innerHTML = renderStars(rating);
 
@@ -982,6 +998,7 @@
             navigate("classes");
         };
 
+        // Render classes for a selected teacher
         function renderClasses(classesData) {
             classesList.innerHTML = classesData
                 .map((cls, ci) => {
@@ -1009,9 +1026,10 @@
                 })
                 .join("");
 
-            lucide.createIcons();
+            lucide.createIcons(); // Re-render Lucide icons for new elements
         }
 
+        // Toggle lecture list visibility
         window.toggleLectures = (header) => {
             const list = header.parentElement.querySelector(".lectures-list");
             const icon = header.querySelector("[data-lucide]");
@@ -1023,6 +1041,7 @@
             lucide.createIcons();
         };
 
+        // Play selected lecture
         window.playLecture = (ci, li, url, title, desc) => {
             // Clean up any previous player instances
             if (player) {
@@ -1059,6 +1078,7 @@
                 videoLoader.style.display = 'flex'; // Show loader
 
                 const encodedUrl = btoa(url);
+                // Using a generic worker proxy URL. Replace with your actual worker if needed.
                 const iframeUrl = `https://weathered-truth-412e.hmyzc824-d08.workers.dev/proxy_iframe?url=${encodedUrl}`;
 
                 const iframeHtml = `
@@ -1080,7 +1100,7 @@
                 return;
             }
             
-            // Support for .m3u8 videos via proxy.eduiraq.my
+            // Support for .m3u8 videos via proxy.eduiraq.my or direct mp4
             playerContainer.innerHTML = `
                 <video id="player" playsinline controls></video>
             `;
@@ -1088,7 +1108,7 @@
             
             const videoElement = document.getElementById("player");
             const isHLS = url.endsWith(".m3u8");
-            const referer = "https://abwaab.com";
+            const referer = "https://abwaab.com"; // Referer for proxy
             const proxyUrl = isHLS
                 ? `https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=${encodeURIComponent(
                       url
@@ -1210,6 +1230,7 @@
             const err =
                 '<p style="color:var(--error); text-align: center;">حدث خطأ في تحميل البيانات.</p><button class="btn back-button" onclick="location.reload()" style="display: block; margin: 1rem auto;">إعادة المحاولة</button>';
 
+            // Display loading skeleton
             teachersGrid.innerHTML = `
                 <div class="loading-card teacher-card">
                     <div style="width: 120px; height: 120px; background: var(--border); border-radius: 50%; margin: 0 auto 1rem;"></div>
@@ -1230,8 +1251,8 @@
 
             fetch(endpoint, {
                 headers: {
-                    Referer: "https://careful-burnt-honesty.glitch.me/",
-                    "Cache-Control": "no-cache",
+                    Referer: "https://careful-burnt-honesty.glitch.me/", // Referer header for the fetch request
+                    "Cache-Control": "no-cache", // Ensure fresh data
                 },
             })
                 .then((r) => {
@@ -1256,7 +1277,7 @@
         } else {
             navigate('login');
         }
-        lucide.createIcons();
+        lucide.createIcons(); // Initial rendering of Lucide icons
     </script>
 </body>
 </html>
