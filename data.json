@@ -17,24 +17,43 @@
             {
               "title": "ا2",
               "description": "ممكن تقرأ وماتسخت ؟",
-              "url": "https://iframe.mediadelivery.net/embed/215061/b1e8199a-1e73-41f2-817b-195170e3fb2a"
+              "url": "https://vz-25858200-a22.becdn.net/dd2fe249-27d2-4df0-adf6-1811a33ace99/playlist.m3u8"
             },
             {
               "title": "3",
               "description": "ممكن تقرأ وماتسخت ؟",
-              "url": "https://iframe.mediadelivery.net/embed/215061/c1c1be8d-4121-43a3-98d7-e251226d320e"
+              "url": "https://vz-25858200-a22.becdn.net/bdfbcf46-54f1-4d99-9e18-359a94c96b96/playlist.m3u8"
             },
             {
               "title": "4",
               "description": "ممكن تقرأ وماتسخت ؟",
-              "url": "https://iframe.mediadelivery.net/embed/215061/b9071139-ffe3-403c-aea5-ee3b00e403eb"
+              "url": "https://vz-25858200-a22.becdn.net/3ce734b6-ac25-4fcf-8932-adb304e1e790/playlist.m3u8"
             },
             {
               "title": "5",
               "description": "المتسعة بوجود عازل",
-              "url": "https://iframe.mediadelivery.net/embed/215061/e245ad79-ba95-4afe-8b4d-1ec2fe769cd0"
-            
-}
+              "url": "https://vz-25858200-a22.becdn.net/e994ef00-5ae6-433b-824b-410cfa2915d8/playlist.m3u8"
+            },
+            {
+              "title": "6",
+              "description": "المتسعة بوجود عازل",
+              "url": "https://vz-25858200-a22.becdn.net/e3457643-14f4-403c-b371-92be3b5ecc10/playlist.m3u8"
+            },
+            {
+              "title": "7",
+              "description": "المتسعة بوجود عازل",
+              "url": "https://vz-25858200-a22.becdn.net/46719cca-a615-43e7-9a22-a2a31094e2c7/playlist.m3u8"
+            }
+          ]
+        },
+        {
+          "name": "الفصل الثاني",
+          "lectures": [
+            {
+              "title": "شريحات الفصل الثاني",
+              "description": "",
+              "url": "https://vz-25858200-a22.becdn.net/3e431f98-4ab3-4299-b089-b942a6b3b3d0/playlist.m3u8"
+            }
           ]
         }
       ]
@@ -77,7 +96,6 @@
               "title": "محاضرة 5",
               "description": "ممكن تقرأ وماتسخت ؟",
               "url": "https://iframe.mediadelivery.net/embed/215061/fc69f7eb-d36b-4946-b027-d85a041229a8"
-          
             }
           ]
         }
