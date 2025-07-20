@@ -79,6 +79,8 @@
             min-height: 100vh;
             overflow-y: auto;
             transition: background 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Arrange children vertically */
         }
 
         img {
@@ -236,26 +238,27 @@
             padding: 2rem;
             max-width: 1300px;
             margin: 0 auto;
+            flex-grow: 1; /* Allow pages to take available space */
         }
 
         .page.active {
             display: block;
         }
 
-        /* Login Page Styles */
+        /* Login Page styles */
         #loginPage {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: calc(100vh - 80px); /* Adjust for header height */
+            background: var(--bg);
             padding: 2rem;
             text-align: center;
         }
 
         .login-card {
             background: var(--card);
-            padding: 2.5rem;
+            padding: 3rem 2.5rem;
             border-radius: var(--radius);
             border: 1px solid var(--border);
             box-shadow: var(--shadow-lg);
@@ -271,23 +274,10 @@
             font-size: 2rem;
             color: var(--primary-1);
             margin-bottom: 1rem;
-            transition: color 0.3s ease;
         }
 
-        .login-input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .login-input-group label {
-            text-align: right;
-            font-weight: 600;
-            color: var(--text);
-            transition: color 0.3s ease;
-        }
-
-        .login-input-group input {
+        .login-card input {
+            width: 100%;
             padding: 1rem 1.2rem;
             font-size: 1.1rem;
             border: 2px solid var(--border);
@@ -297,38 +287,27 @@
             transition: border 0.25s, box-shadow 0.25s, background 0.3s ease, color 0.3s ease;
         }
 
-        .login-input-group input:focus {
+        .login-card input:focus {
             outline: none;
-            border-color: var(--primary-1);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3);
+        }
+
+        .login-card .btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            justify-content: center;
         }
 
         .login-error {
             color: var(--error);
-            font-weight: 600;
-            margin-top: 0.5rem;
-            display: none;
+            font-size: 0.95rem;
+            margin-top: -0.5rem;
+            display: none; /* Hidden by default */
         }
 
-        .login-button {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.2rem;
-            background: var(--primary-1);
-            color: white;
-            border-radius: var(--radius);
-            font-weight: 700;
-            transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-            box-shadow: var(--shadow-md);
-        }
-
-        .login-button:hover {
-            background: var(--primary-2);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* Teachers grid */
+        /* Category grid (repurposed for teachers grid) */
         .teachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -499,7 +478,7 @@
             transition: color 0.3s ease;
         }
 
-        .video-page-content { /* Renamed for clarity to avoid conflict with .page */
+        .video-page {
             display: flex;
             flex-direction: column;
             gap: 2rem;
@@ -642,6 +621,10 @@
             .btn {
                 padding: 0.8rem 1rem;
             }
+
+            .login-card {
+                padding: 2rem 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -661,14 +644,6 @@
 
             .site-title {
                 font-size: 1.5rem;
-            }
-
-            .login-card {
-                padding: 1.5rem;
-            }
-
-            .login-card h2 {
-                font-size: 1.7rem;
             }
         }
     </style>
@@ -699,23 +674,20 @@
         </div>
     </header>
 
-    <!-- Login Page -->
     <div id="loginPage" class="page active">
         <div class="login-card">
             <h2>تسجيل الدخول</h2>
-            <div class="login-input-group">
-                <label for="passwordInput">كلمة السر:</label>
-                <input type="password" id="passwordInput" placeholder="أدخل كلمة السر هنا" />
-            </div>
+            <input type="password" id="passwordInput" placeholder="ادخل كلمة السر" />
             <p id="loginError" class="login-error">كلمة السر غير صحيحة. حاول مرة أخرى.</p>
-            <button id="loginButton" class="login-button">دخول</button>
+            <button id="loginButton" class="btn">
+                <i data-lucide="log-in"></i><span>دخول</span>
+            </button>
         </div>
     </div>
 
-    <!-- Teachers Page (formerly categoryPage) -->
     <div id="teachersPage" class="page">
-        <button class="btn back-button" onclick="navigate('teachers')">
-            <i data-lucide="arrow-right"></i>الرجوع للصفحة الرئيسية
+        <button class="btn back-button" onclick="logout()">
+            <i data-lucide="log-out"></i> تسجيل الخروج
         </button>
         
         <div class="section-title">
@@ -751,7 +723,7 @@
     </div>
 
     <div id="videoPage" class="page">
-        <div class="video-page-content">
+        <div class="video-page">
             <div id="videoContainer" class="video-container">
                 <div id="playerContainer"></div>
                 <!-- Loader for iframe videos -->
@@ -822,7 +794,7 @@
         const teacherRating = document.getElementById("teacherRating");
         const videoTitle = document.getElementById("videoTitle");
         const videoDescription = document.getElementById("videoDescription");
-        const categoryTitle = document.getElementById("categoryTitle"); // This will now be "المدرسين"
+        const categoryTitle = document.getElementById("categoryTitle"); // Still used for "المدرسين" title
         const classesList = document.getElementById("classesList");
         const teachersGrid = document.getElementById("teachersGrid");
         const playerContainer = document.getElementById("playerContainer");
@@ -832,7 +804,6 @@
         const passwordInput = document.getElementById("passwordInput");
         const loginButton = document.getElementById("loginButton");
         const loginError = document.getElementById("loginError");
-        const correctPassword = "www12399"; // Fixed password
 
         // Progress variables
         let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
@@ -841,7 +812,7 @@
         // Navigation
         const pages = {
             login: document.getElementById("loginPage"),
-            teachers: document.getElementById("teachersPage"), // Renamed from category to teachers
+            teachers: document.getElementById("teachersPage"), // Renamed from category to be more descriptive
             classes: document.getElementById("classesPage"),
             video: document.getElementById("videoPage")
         };
@@ -874,32 +845,54 @@
             pages[page].classList.add("active");
         }
 
+        /* ========= Login Logic ========= */
+        const CORRECT_PASSWORD = "www12399";
+
+        function checkLoginStatus() {
+            if (localStorage.getItem('loggedIn') === 'true') {
+                loadData("https://edson1.netlify.app/data.json");
+                navigate('teachers');
+            } else {
+                navigate('login');
+            }
+        }
+
+        function handleLogin() {
+            const enteredPassword = passwordInput.value;
+            if (enteredPassword === CORRECT_PASSWORD) {
+                localStorage.setItem('loggedIn', 'true');
+                loginError.style.display = 'none'; // Hide error if previously shown
+                loadData("https://edson1.netlify.app/data.json");
+                navigate('teachers');
+            } else {
+                loginError.style.display = 'block'; // Show error message
+                passwordInput.value = ''; // Clear password input
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            navigate('login');
+            // Clear any loaded teacher data
+            teachers = [];
+            teachersGrid.innerHTML = '';
+            classesList.innerHTML = '';
+            passwordInput.value = ''; // Clear password on logout
+        }
+
+        loginButton.addEventListener('click', handleLogin);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+
         /* ========= بيانات المدرسين ========= */
-        const searchInput = document.getElementById("searchInput");
-        const searchBtn = document.getElementById("searchButton");
         let teachers = [];
         let currentTeacher = null;
         let currentClassIndex = 0;
         let currentLectureIndex = 0;
         let currentLectureLink = "";
-
-        // Handle login
-        loginButton.addEventListener("click", () => {
-            if (passwordInput.value === correctPassword) {
-                loginError.style.display = 'none';
-                navigate('teachers'); // Navigate to teachers page after login
-                loadData(); // Load data automatically
-            } else {
-                loginError.style.display = 'block';
-            }
-        });
-
-        // Allow pressing Enter key to submit password
-        passwordInput.addEventListener("keypress", (event) => {
-            if (event.key === "Enter") {
-                loginButton.click();
-            }
-        });
 
         function renderTeachers(list = teachers) {
             if (!list.length) {
@@ -1176,11 +1169,10 @@
             searchTimeout = setTimeout(handleSearch, 250);
         });
 
-        searchBtn.addEventListener("click", handleSearch);
+        searchButton.addEventListener("click", handleSearch);
 
         /* ========= تحميل البيانات ========= */
-        function loadData() {
-            const endpoint = "https://edson1.netlify.app/data.json"; // Hardcoded endpoint
+        function loadData(endpoint) {
             const err =
                 '<p style="color:var(--error); text-align: center;">حدث خطأ في تحميل البيانات.</p><button class="btn back-button" onclick="location.reload()" style="display: block; margin: 1rem auto;">إعادة المحاولة</button>';
 
@@ -1221,8 +1213,10 @@
                 });
         }
 
-        // Initialize by showing the login page
-        navigate('login');
+        // Initial check for login status
+        checkLoginStatus();
+
+        // Initialize Lucide icons for all static and dynamically added elements
         lucide.createIcons();
     </script>
 </body>
