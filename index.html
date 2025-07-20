@@ -904,7 +904,7 @@
             if (passwordInput.value === correctPassword) {
                 loginError.style.display = 'none';
                 localStorage.setItem("isLoggedIn", "true"); // Save session
-                navigate('teachers'); // Navigate to teachers page after login
+                navigate('teachers'); // Navigate to teachers page after login, which hides the login page
                 loadData(); // Load data automatically
             } else {
                 loginError.style.display = 'block';
