@@ -904,7 +904,11 @@
             if (passwordInput.value === correctPassword) {
                 loginError.style.display = 'none';
                 localStorage.setItem("isLoggedIn", "true"); // Save session
-                navigate('teachers'); // Navigate to teachers page after login, which hides the login page
+                
+                // Explicitly hide the login page element immediately
+                pages.login.style.display = 'none'; 
+                
+                navigate('teachers'); // This will make teachersPage active
                 loadData(); // Load data automatically
             } else {
                 loginError.style.display = 'block';
@@ -1245,6 +1249,8 @@
 
         // Initialize by checking login status or showing the login page
         if (localStorage.getItem("isLoggedIn") === "true") {
+            // Ensure login page is hidden immediately if already logged in
+            pages.login.style.display = 'none'; 
             navigate('teachers');
             loadData();
         } else {
