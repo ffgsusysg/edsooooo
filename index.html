@@ -22,44 +22,44 @@
     <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
-        /* CSS Variables for a more vibrant and smooth theme */
+        /* CSS Variables for a new, vibrant and smooth theme */
         :root {
-            --primary-1: #007bff; /* A vibrant blue */
-            --primary-2: #0069d9;
-            --primary-3: #0056b3;
-            --accent: #ffc107; /* A bright yellow/orange */
-            --accent-2: #e0a800;
+            --primary-1: #008C8C; /* Deep Teal */
+            --primary-2: #007A7A; /* Slightly darker Teal */
+            --primary-3: #006868; /* Even darker Teal */
+            --accent: #FF8C00; /* Vibrant Orange */
+            --accent-2: #E67A00; /* Darker Orange */
             --radius: 16px; /* Slightly larger radius for a softer look */
-            --bg: #f5f8fa; /* Light grey-blue background */
-            --bg-glass: rgba(245, 248, 250, 0.95);
-            --text: #343a40; /* Darker text */
-            --card: #ffffff;
-            --border: #dee2e6;
-            --hover: rgba(0, 0, 0, 0.04);
-            --success: #28a745;
-            --warning: #ffc107;
-            --error: #dc3545;
+            --bg: #F0F4F8; /* Light Blue-Gray background */
+            --bg-glass: rgba(240, 244, 248, 0.95);
+            --text: #2C3E50; /* Dark Charcoal Text */
+            --card: #FFFFFF; /* Pure White Cards */
+            --border: #D1D9E6; /* Light Gray-Blue Border */
+            --hover: rgba(0, 140, 140, 0.08); /* Primary color with transparency for hover */
+            --success: #28a745; /* Green */
+            --warning: #FFC107; /* Yellow */
+            --error: #DC3545; /* Red */
             --telegram-blue: #0088cc;
             --telegram-light: #2aabee;
             --telegram-text: #ffffff;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-sm: 0 2px 6px rgba(0,0,0,0.08);
+            --shadow-md: 0 6px 16px rgba(0,0,0,0.12);
+            --shadow-lg: 0 12px 30px rgba(0,0,0,0.18);
         }
 
         /* Dark theme adjustments */
         [data-theme="dark"] {
-            --bg: #212529; /* Dark charcoal */
-            --bg-glass: rgba(33, 37, 41, 0.95);
-            --text: #e9ecef;
-            --card: #343a40;
-            --border: #495057;
-            --hover: rgba(255, 255, 255, 0.08);
-            --primary-1: #66b3ff; /* Lighter blue for dark theme */
-            --primary-2: #3399ff;
-            --primary-3: #007bff;
-            --accent: #ffd700; /* Gold for dark theme */
-            --accent-2: #ccac00;
+            --bg: #1A202C; /* Darker Blue-Gray */
+            --bg-glass: rgba(26, 32, 44, 0.95);
+            --text: #E2E8F0; /* Light Gray Text */
+            --card: #2D3748; /* Dark Gray Cards */
+            --border: #4A5568; /* Medium Gray Border */
+            --hover: rgba(0, 140, 140, 0.15); /* Primary color with transparency for hover */
+            --primary-1: #4DD0E1; /* Lighter Teal for dark theme */
+            --primary-2: #26C6DA;
+            --primary-3: #00BCD4;
+            --accent: #FFAB40; /* Lighter Orange for dark theme */
+            --accent-2: #FF9100;
         }
 
         /* General styles */
@@ -166,7 +166,7 @@
         .search-container input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3); /* Accent-based shadow */
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.3); /* Accent-based shadow */
         }
 
         .search-icon {
@@ -308,7 +308,7 @@
         .login-input-group input:focus {
             outline: none;
             border-color: var(--primary-1);
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 0 0 3px rgba(0, 140, 140, 0.3); /* Primary color with transparency */
         }
 
         .login-error {
@@ -502,7 +502,7 @@
         }
 
         .lecture-item:hover {
-            background: rgba(0, 0, 0, 0.08); /* Slightly darker hover */
+            background: rgba(0, 140, 140, 0.12); /* Slightly darker hover based on primary */
         }
 
         .lecture-item i {
@@ -601,7 +601,7 @@
 
         .loader-spinner {
             border: 6px solid #f3f3f3; /* Light grey */
-            border-top: 6px solid var(--primary-1); /* Blue */
+            border-top: 6px solid var(--primary-1); /* Primary color */
             border-radius: 50%;
             width: 60px;
             height: 60px;
