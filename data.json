@@ -43,7 +43,8 @@
               "title": "7",
               "description": "المتسعة بوجود عازل",
               "url": "https://vz-25858200-a22.becdn.net/46719cca-a615-43e7-9a22-a2a31094e2c7/playlist.m3u8"
-            }
+          
+  }
           ]
         },
         {
@@ -53,7 +54,33 @@
               "title": "شرحيات الفصل الثاني",
               "description": "",
               "url": "https://vz-25858200-a22.becdn.net/3e431f98-4ab3-4299-b089-b942a6b3b3d0/playlist.m3u8"
-            }
+         },
+            {
+              "title": "مراجعه المولد والمحرك.",
+              "description": "",
+              "url": "https://vz-25858200-a22.becdn.net/52f65d87-b844-4cdb-a397-200cb7a66007/playlist.m3u8"
+    },
+            {
+              "title": "مراجعه اسئله الفصل الثاني.",
+              "description": "",
+              "url": "https://vz-25858200-a22.becdn.net/3e431f98-4ab3-4299-b089-b942a6b3b3d0/playlist.m3u8"
+},
+            {
+              "title": "انشطه الفصل الثاني.",
+              "description": "",
+              "url": "https://vz-25858200-a22.becdn.net/b4cc7fdb-13dd-4d5e-ae67-f79c11ce9291/playlist.m3u8"
+ },
+            {
+              "title": "مراجعه قوانين ومسائل الفصل الثاني.",
+              "description": "",
+              "url": "https://vz-25858200-a22.becdn.net/3f680a10-f34b-4251-a9de-8a687c3778ef/playlist.m3u8"
+ },
+            {
+              "title": "اشتقاقات الفصل الثاني",
+              "description": "",
+              "url": "https://vz-25858200-a22.becdn.net/82c6bd4e-3f38-4671-9ee2-341015eb6aa7/playlist.m3u8"
+
+ }
           ]
         }
       ]
