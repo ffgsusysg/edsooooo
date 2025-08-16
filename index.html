@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة حسين الهاشمي 2026</title>
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
     <style>
+        /* General body and container styling */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #121212;
             color: #e0e0e0;
             display: flex;
@@ -16,14 +17,15 @@
             min-height: 100vh;
             margin: 0;
             overflow-x: hidden;
+            direction: rtl; /* For right-to-left language support */
         }
-
         .container {
             width: 90%;
             max-width: 1200px;
             padding: 20px;
         }
 
+        /* Teacher Card Styling */
         .teacher-card {
             background-color: #1e1e1e;
             border-radius: 15px;
@@ -37,19 +39,16 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
         }
-
         .teacher-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
         }
-
         .teacher-card-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
         }
-
         .teacher-card-img {
             width: 150px;
             height: 150px;
@@ -59,16 +58,13 @@
             box-shadow: 0 0 20px rgba(74, 144, 226, 0.7);
             transition: all 0.5s ease-in-out;
         }
-
         .teacher-card:hover .teacher-card-img {
             border-color: #e0e0e0;
             box-shadow: 0 0 30px rgba(224, 224, 224, 0.8);
         }
-
         .teacher-card-info {
             margin-top: 20px;
         }
-
         .teacher-card-info h2 {
             font-size: 2.2rem;
             font-weight: 700;
@@ -76,11 +72,9 @@
             margin: 0;
             transition: color 0.3s ease;
         }
-
         .teacher-card:hover .teacher-card-info h2 {
             color: #e0e0e0;
         }
-
         .teacher-card-info p {
             font-size: 1.2rem;
             color: #a0a0a0;
@@ -88,13 +82,13 @@
             font-weight: 400;
         }
 
+        /* Lectures Section Styling */
         .lectures-container {
             display: none;
             flex-direction: column;
             align-items: center;
             width: 100%;
         }
-
         .back-button {
             background-color: #4a90e2;
             color: white;
@@ -104,12 +98,11 @@
             cursor: pointer;
             margin-bottom: 20px;
             transition: background-color 0.3s ease;
+            border: none;
         }
-
         .back-button:hover {
             background-color: #357bd9;
         }
-
         .lecture-item {
             background-color: #1e1e1e;
             padding: 15px;
@@ -118,40 +111,55 @@
             margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.2s ease;
+            cursor: pointer;
         }
-
         .lecture-item:hover {
             transform: translateX(10px);
         }
-
         .lecture-item h3 {
             margin: 0;
             font-size: 1.5rem;
             color: #4a90e2;
         }
-
         .lecture-item p {
             margin: 5px 0 0;
             color: #b0b0b0;
         }
 
+        /* Video Player Styling */
         .video-container {
             width: 100%;
             margin-top: 20px;
             display: none;
         }
-
         .video-js {
             width: 100% !important;
             height: auto !important;
+        }
+        
+        /* Security Message Box Styling */
+        .security-message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+            z-index: 1000;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Teacher Card -->
         <div id="teacherCard" class="teacher-card">
-            <div class="teacher-card-content">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_x-W7rS0K4sR-x0F_g1-gY9tA9h0A6l9f-A&s" alt="صورة المدرس حسين الهاشمي" class="teacher-card-img">
+            <div id="characterContainer" class="teacher-card-content">
+                <img src="https://placehold.co/150x150/4a90e2/FFFFFF?text=صورة+المدرس" alt="صورة المدرس حسين الهاشمي" class="teacher-card-img">
                 <div class="teacher-card-info">
                     <h2>حسين الهاشمي 2026</h2>
                     <p>كيمياء سادس علمي</p>
@@ -159,12 +167,15 @@
             </div>
         </div>
 
+        <!-- Lectures Section -->
         <div id="lecturesSection" class="lectures-container">
             <button id="backButton" class="back-button">العودة إلى البطاقة</button>
             <div class="lectures-list">
-                </div>
+                <!-- Lectures will be injected here by JavaScript -->
+            </div>
         </div>
 
+        <!-- Video Player Section -->
         <div id="videoPlayerSection" class="video-container">
             <button id="backToLectures" class="back-button">العودة إلى المحاضرات</button>
             <video
@@ -178,14 +189,15 @@
             >
                 <source src="" type="application/x-mpegURL" />
                 <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a
-                    web browser that
-                    <a href="https://videojs.com/html5-video-support/" target="_blank"
-                        >supports HTML5 video</a
-                    >
+                    لتشغيل هذا الفيديو، الرجاء تفعيل JavaScript، أو استخدام متصفح يدعم HTML5.
                 </p>
             </video>
         </div>
+    </div>
+    
+    <!-- Custom Security Message Box -->
+    <div id="securityMessageBox" class="security-message-box">
+        <p id="securityMessage"></p>
     </div>
 
     <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
@@ -193,62 +205,76 @@
         // Start of Security System
         (function () {
           let detected = false;
-          (function () {
-            let detected = false;
-            function triggerSecurity() {
-              if (detected) return;
-              detected = true;
-              document.documentElement.innerHTML = '';
-              alert("تم اكتشاف محاولة فحص، وتم تسجيل عنوان IP الخاص بك.");
-              
-              // Note: The fetch call below is for demonstration. It requires a backend to work.
-              fetch('/api/log-inspect', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  time: new Date().toISOString(),
-                  userAgent: navigator.userAgent,
-                  username: localStorage.getItem('username') || 'غير معروف'
-                })
-              }).catch(e => console.error("Failed to log inspection attempt:", e));
-              
-              setTimeout(() => location.href = "/login", 1000);
-            }
-            const el = new Image();
-            Object.defineProperty(el, 'id', {
-              get: function () { triggerSecurity(); }
-            });
-            console.log('%c لا تحاول العبث بالكود!', 'font-size:100px;', el);
-            function detectDebuggerDelay() {
-              const start = performance.now();
-              new Function("debugger")();
-              const duration = performance.now() - start;
-              if (duration > 100) triggerSecurity();
-            }
-            function detectWindowResize() {
-              const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || 
+
+          // Helper function to show security message in a custom UI
+          function showSecurityMessage(message) {
+              const msgBox = document.getElementById('securityMessageBox');
+              const msgText = document.getElementById('securityMessage');
+              msgText.textContent = message;
+              msgBox.style.display = 'block';
+          }
+
+          function triggerSecurity() {
+            if (detected) return;
+            detected = true;
+
+            // Using a custom message box instead of window.alert()
+            showSecurityMessage("تم اكتشاف محاولة فحص، وتم تسجيل بياناتك.");
+
+            // Note: The fetch call below is for demonstration. It requires a backend to work.
+            fetch('/api/log-inspect', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                time: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                username: localStorage.getItem('username') || 'غير معروف'
+              })
+            }).catch(e => console.error("Failed to log inspection attempt:", e));
+            
+            // Wait for 2 seconds before redirecting
+            setTimeout(() => location.href = "/login", 2000);
+          }
+          
+          const el = new Image();
+          Object.defineProperty(el, 'id', {
+            get: function () { triggerSecurity(); }
+          });
+          console.log('%c لا تحاول العبث بالكود!', 'font-size:100px;', el);
+          
+          function detectDebuggerDelay() {
+            const start = performance.now();
+            new Function("debugger")();
+            const duration = performance.now() - start;
+            if (duration > 100) triggerSecurity();
+          }
+          
+          function detectWindowResize() {
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || 
                            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-              if (isIOS) return; 
-              if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
-                triggerSecurity();
-              }
+            if (isIOS) return; 
+            if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
+              triggerSecurity();
             }
-            setInterval(() => { detectDebuggerDelay(); detectWindowResize(); }, 1000);
-            document.addEventListener("keydown", function (e) {
-              const combo = `${e.ctrlKey ? "CTRL+" : ""}${e.shiftKey ? "SHIFT+" : ""}${e.key.toUpperCase()}`;
-              const forbidden = [
-                "F12", "CTRL+SHIFT+I", "CTRL+SHIFT+C", "CTRL+SHIFT+J", "CTRL+U", "CTRL+S", "CTRL+A", "CTRL+C", "CTRL+P", "CTRL+E", "CTRL+SHIFT+E", "CTRL+SHIFT+K"
-              ];
-              if (forbidden.includes(combo)) { e.preventDefault(); triggerSecurity(); }
-            });
-            document.addEventListener("contextmenu", e => e.preventDefault());
-            document.addEventListener("selectstart", e => e.preventDefault());
-            document.addEventListener("dragstart", e => e.preventDefault());
-          })();
+          }
+          
+          setInterval(() => { detectDebuggerDelay(); detectWindowResize(); }, 1000);
+          
+          document.addEventListener("keydown", function (e) {
+            const combo = `${e.ctrlKey ? "CTRL+" : ""}${e.shiftKey ? "SHIFT+" : ""}${e.key.toUpperCase()}`;
+            const forbidden = [
+              "F12", "CTRL+SHIFT+I", "CTRL+SHIFT+C", "CTRL+SHIFT+J", "CTRL+U", "CTRL+S", "CTRL+A", "CTRL+C", "CTRL+P", "CTRL+E", "CTRL+SHIFT+E", "CTRL+SHIFT+K"
+            ];
+            if (forbidden.includes(combo)) { e.preventDefault(); triggerSecurity(); }
+          });
+          
+          document.addEventListener("contextmenu", e => e.preventDefault());
+          document.addEventListener("selectstart", e => e.preventDefault());
+          document.addEventListener("dragstart", e => e.preventDefault());
         })();
         // End of Security System
 
-        // Start of Teacher Card & Lectures Logic
+        // Start of Teacher Card, Lectures, and Video Player Logic
         const teacherCard = document.getElementById('teacherCard');
         const lecturesSection = document.getElementById('lecturesSection');
         const backButton = document.getElementById('backButton');
@@ -256,10 +282,12 @@
         const videoPlayerSection = document.getElementById('videoPlayerSection');
         const lecturesList = document.querySelector('.lectures-list');
         const myPlayer = videojs('my-video');
+        const characterContainer = document.getElementById('characterContainer'); // The container for the character
 
         const videoUrl = 'https://tiny-fire-acee.hmyzc824-d08.workers.dev/?url=https%3A%2F%2Fvz-66cdc7f5-9f3.b-cdn.net%2Fbcdn_token%3DOvHm2YqnbdTGsSyEkKVVz5BbcTT-CHI-fkHM9SkNs6E%26expires%3D1755335590%26token_path%3D%252Fd6e13cc8-7339-42a7-8b0f-11be84bd82dd%252F%2Fd6e13cc8-7339-42a7-8b0f-11be84bd82dd%2Fplaylist.m3u8';
+        const teacherImageURL = "https://i.imgur.com/kS53gI5.jpeg";
 
-        // Populate lectures list
+        // Function to create and populate the lectures list
         function createLectures() {
             lecturesList.innerHTML = '';
             for (let i = 1; i <= 10; i++) {
@@ -276,6 +304,7 @@
             }
         }
         
+        // Show/Hide UI sections
         function showLectures() {
             teacherCard.style.display = 'none';
             lecturesSection.style.display = 'flex';
@@ -295,6 +324,7 @@
             lecturesSection.style.display = 'none';
             videoPlayerSection.style.display = 'flex';
             myPlayer.src({ src: videoUrl, type: 'application/x-mpegURL' });
+            myPlayer.load(); // Load the new source
             myPlayer.play();
         }
 
@@ -305,29 +335,26 @@
             myPlayer.pause();
         }
 
+        // Attach event listeners for navigation
         teacherCard.addEventListener('click', showLectures);
         backButton.addEventListener('click', showTeacherCard);
         backToLectures.addEventListener('click', returnToLectures);
-        
-        // Character Expression Logic (as requested)
-        const characterContainer = document.querySelector('.teacher-card-img');
-        let inactivityTimer;
 
+        // Character Expression Logic
+        let inactivityTimer;
         function resetExpression() {
             clearTimeout(inactivityTimer);
-            // Example: removing a hypothetical 'focused' class
             characterContainer.classList.remove('focused', 'sleepy', 'happy', 'surprised');
             inactivityTimer = setTimeout(() => {
-                // Here you would add logic for a default or inactive state
-                // e.g., characterContainer.classList.add('idle');
+                // Here you can add a default 'idle' class if needed
             }, 3000);
         }
         
+        // Attach expression events
         document.addEventListener('mousemove', resetExpression);
         document.addEventListener('keydown', resetExpression);
-        document.addEventListener('click', resetExpression);
-        
-        // Initial setup
+
+        // Initial setup to show the teacher card
         showTeacherCard();
     </script>
 </body>
