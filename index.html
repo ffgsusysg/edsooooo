@@ -1,248 +1,1002 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>منصة حسين الهاشمي 2026</title>
-    <!-- تضمين مكتبة Tailwind CSS من CDN للحصول على تصميم عصري -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- تضمين مكتبة Video.js لتشغيل الفيديو -->
-    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
-    <!-- إضافة مكون Video.js الإضافي لتشغيل صيغة HLS (.m3u8) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
-    <!-- خطوط عربية جميلة -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon and Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="https://cdn.glitch.global/c07dc79d-c056-48b0-8b0b-912783754321/5424770778815132543.jpg?v=1751739020203">
+    
+    <!-- Updated Fonts for a Modern Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+    
+    <!-- Essential Libraries -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://assets.mediadelivery.net/hls/1.6.6/hls.min.js"></script>
+    <script src="https://assets.mediadelivery.net/plyr/3.7.8.4-bn/plyr.polyfilled.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+    
     <style>
-        /* تعريف الخط الأساسي لتطبيقه على جميع العناصر */
-        body {
-            font-family: 'Tajawal', sans-serif;
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
-
-        /* تعريف ألوان الوضع الليلي باستخدام متغيرات CSS */
+        /* Modernized CSS Variables */
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --text-color: #e6edf3;
-            --primary-color: #4c8bf5;
-            --secondary-text: #8b949e;
+            --primary-1: #0077B6; /* Deep Ocean Blue */
+            --primary-2: #006096; /* Darker Blue */
+            --primary-3: #004F7A; /* Even darker Blue */
+            --accent: #FF5722; /* Vibrant Tangerine */
+            --accent-2: #E64A19; /* Darker Tangerine */
+            --radius: 18px; /* Softer, more modern corners */
+            --bg: #F5F7FA; /* Very light gray background */
+            --bg-glass: rgba(245, 247, 250, 0.95);
+            --text: #1C2833; /* Dark Charcoal Text */
+            --card: #FFFFFF; /* Pure White Cards */
+            --border: #E0E4EB; /* Light border */
+            --hover: rgba(0, 119, 182, 0.08); /* Primary color with transparency for hover */
+            --success: #28a745;
+            --warning: #FFC107;
+            --error: #DC3545;
+            --telegram-blue: #0088cc;
+            --telegram-light: #2aabee;
+            --telegram-text: #ffffff;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.12);
+            --shadow-lg: 0 16px 40px rgba(0,0,0,0.18);
         }
 
-        /* تعريف ألوان الوضع الفاتح */
-        .light-mode {
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --text-color: #333;
-            --primary-color: #1a73e8;
-            --secondary-text: #666;
+        /* Dark theme adjustments */
+        [data-theme="dark"] {
+            --bg: #111827; /* Darker background */
+            --bg-glass: rgba(17, 24, 39, 0.95);
+            --text: #E5E7EB; /* Light gray text */
+            --card: #1F2937; /* Dark gray cards */
+            --border: #374151; /* Medium gray border */
+            --hover: rgba(0, 119, 182, 0.15);
+            --primary-1: #4FC3F7; /* Lighter blue for dark theme */
+            --primary-2: #29B6F6;
+            --primary-3: #03A9F4;
+            --accent: #FFA726; /* Lighter orange */
+            --accent-2: #FB8C00;
         }
 
-        /* تطبيق ألوان الخلفية والنص على جسم الصفحة */
-        .dark-mode-bg {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        /* General styles */
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        /* تخصيص مؤشر التحميل */
-        .loading-spinner {
-            border: 4px solid var(--secondary-text);
-            border-top: 4px solid var(--primary-color);
-            width: 40px;
-            height: 40px;
+        body {
+            font-family: "Cairo", "IBM Plex Sans Arabic", "Tajawal", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-y: auto;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        img { max-width: 100%; display: block; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; }
+        
+        /* Header styles */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            flex-wrap: wrap;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .site-title {
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
+            font-weight: 700;
+            color: var(--primary-1);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 1;
+            min-width: 200px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .site-logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-1), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 650px;
+            display: flex;
+            gap: 0.75rem;
+            position: relative;
+            min-width: 250px;
+            margin-top: 0.5rem;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 1rem 1.2rem 1rem 3.5rem;
+            font-size: 1.1rem;
+            background: var(--card);
+            color: var(--text);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            transition: border 0.25s, box-shadow 0.25s, background 0.3s ease, color 0.3s ease;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-1);
+            transition: color 0.3s ease;
+        }
+        
+        /* Button styles with gradients and lift effect */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 1rem 1.6rem;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--primary-1), var(--primary-2));
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            box-shadow: var(--shadow-sm);
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, var(--primary-2), var(--primary-3));
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-1);
+            color: var(--primary-1);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-1);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-icon {
+            padding: 0.8rem;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            justify-content: center;
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: linear-gradient(135deg, var(--accent-2), var(--accent));
+        }
+
+        /* Page layout */
+        .page {
+            display: none;
+            padding: 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .page.active { display: block; }
+        
+        /* Teacher's grid */
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .teacher-card {
+            background: var(--card);
+            padding: 1.6rem 1.3rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .teacher-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.2rem;
+            border: 4px solid var(--accent);
+            box-shadow: var(--shadow-sm);
+            transition: border-color 0.3s ease;
+        }
+
+        .teacher-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0.5rem 0 0.25rem;
+            color: var(--primary-1);
+            transition: color 0.3s ease;
+        }
+
+        .teacher-subject {
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            opacity: 0.7;
+            transition: color 0.3s ease;
+        }
+
+        .teacher-rating {
+            display: flex;
+            justify-content: center;
+            gap: 0.3rem;
+            margin: 0.6rem 0;
+        }
+
+        .teacher-rating svg {
+            color: var(--warning);
+            fill: var(--warning);
+            width: 20px;
+            height: 20px;
+        }
+
+        .back-button {
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary-2), var(--primary-3));
+            box-shadow: var(--shadow-sm);
+        }
+
+        .teacher-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: var(--card);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .teacher-img-lg {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent);
+            box-shadow: var(--shadow-md);
+            transition: border-color 0.3s ease;
+        }
+
+        .classes-list {
+            display: grid;
+            gap: 1.6rem;
+        }
+
+        .class-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .class-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.6rem;
+            cursor: pointer;
+            user-select: none;
+            background: var(--bg-glass);
+            backdrop-filter: blur(8px);
+            border-right: 5px solid var(--primary-2);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .class-header:hover {
+            background: var(--hover);
+        }
+
+        .class-header span { transition: transform 0.3s ease; }
+        .class-header.open span { transform: rotate(180deg); }
+
+        .lectures-list {
+            display: none;
+            flex-direction: column;
+            gap: 0.8rem;
+            padding: 1.2rem 1.8rem 1rem 0;
+        }
+
+        .lecture-item {
+            position: relative;
+            padding: 1rem 1.2rem 1rem 4rem;
+            background: var(--hover);
+            border-right: 3px solid var(--primary-3);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lecture-item:hover {
+            background: rgba(0, 119, 182, 0.12);
+        }
+
+        .lecture-item svg {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-1);
+            transition: color 0.3s ease;
+        }
+
+        .video-page-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .plyr { border-radius: var(--radius); overflow: hidden; width: 100%; height: 100%; }
+
+        .video-details {
+            background: var(--card);
+            padding: 1.8rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .video-info { text-align: right; padding: 1.2rem 0; }
+        
+        .video-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+            color: var(--text);
+        }
+
+        .video-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 2rem 0 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-1);
+            color: var(--primary-1);
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Smart Loader */
+        .video-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            border-radius: var(--radius);
+            transition: opacity 0.3s ease;
+        }
+
+        .loader-spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid var(--primary-1);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
             animation: spin 1s linear infinite;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Loading card skeleton */
+        .loading-card {
+            opacity: 0.7;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                padding: 1.2rem 1rem;
+                gap: 1rem;
+            }
+            .search-container {
+                order: 3;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            .btn span { display: none; }
+            .teacher-img { width: 100px; height: 100px; }
+            .video-details { padding: 1.2rem; }
+            .video-container {
+                margin: 0 -1rem;
+                width: calc(100% + 2rem);
+            }
+            .lecture-item { padding-left: 2.5rem; }
+            .video-meta {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+            .btn { padding: 0.9rem 1.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page { padding: 1rem; }
+            .teacher-info {
+                padding: 1.5rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            .teacher-img-lg { margin-bottom: 1.5rem; }
+            .site-title { font-size: 1.8rem; }
+            .teacher-name { font-size: 1.2rem; }
         }
     </style>
 </head>
-
-<body class="dark-mode-bg">
-    <div id="app-container" class="container mx-auto p-4 flex flex-col items-center min-h-screen">
-        <!-- قسم بطاقة المدرس - يظهر في البداية -->
-        <div id="teacherCard" class="transition-all duration-700 ease-in-out">
-            <div class="bg-gradient-to-br from-card-bg to-[#1c222c] border border-[#21262d] p-8 md:p-12 rounded-3xl shadow-2xl flex flex-col items-center text-center cursor-pointer hover:shadow-primary-color/30 hover:scale-105 transform transition-all duration-500 max-w-lg mx-auto">
-                <img src="https://placehold.co/200x200/4c8bf5/ffffff?text=صورة+مدرس" alt="صورة المدرس حسين الهاشمي" class="w-48 h-48 rounded-full object-cover border-4 border-primary-color shadow-xl transition-all duration-500 hover:border-text-color">
-                <div class="mt-8">
-                    <h1 class="text-4xl md:text-5xl font-bold text-primary-color transition-colors duration-500 drop-shadow-lg">
-                        حسين الهاشمي 2026
-                    </h1>
-                    <p class="text-xl md:text-2xl mt-2 text-secondary-text transition-colors duration-500">
-                        كيمياء سادس علمي
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- قسم المحاضرات - يظهر بعد النقر على البطاقة -->
-        <div id="lecturesSection" class="w-full max-w-4xl hidden flex-col items-center pt-8">
-            <div class="w-full flex flex-col md:flex-row-reverse justify-between items-center gap-4 mb-8">
-                <button id="backButton" class="back-button bg-primary-color text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:bg-blue-600 shadow-md w-full md:w-auto">
-                    العودة
-                </button>
-                <input type="text" id="searchInput" placeholder="ابحث عن المحاضرة..." class="flex-grow w-full md:w-auto px-6 py-3 rounded-xl bg-card-bg border border-gray-700 text-text-color focus:outline-none focus:ring-2 focus:ring-primary-color transition-all duration-300">
-                <button id="themeToggle" class="theme-button bg-gray-600 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:bg-gray-700 shadow-md w-full md:w-auto">
-                    الوضع الفاتح
-                </button>
-            </div>
-
-            <!-- قائمة المحاضرات -->
-            <div id="lecturesList" class="w-full space-y-4">
-                <!-- المحاضرات سيتم إضافتها هنا بواسطة JavaScript -->
-            </div>
-        </div>
-
-        <!-- قسم مشغل الفيديو - يظهر عند اختيار المحاضرة -->
-        <div id="videoPlayerSection" class="w-full max-w-4xl hidden flex-col items-center pt-8">
-            <button id="backToLectures" class="back-button bg-primary-color text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:bg-blue-600 shadow-md mb-6 w-full md:w-auto">
-                العودة إلى المحاضرات
+<body>
+    <header>
+        <h1 class="site-title" onclick="navigate('teachers')">
+            <div class="site-logo">ح</div>
+            منصة حسين الهاشمي 2026
+        </h1>
+        <div class="header-actions">
+            <button id="themeToggle" class="btn">
+                <i data-lucide="sun"></i><span>المظهر</span>
             </button>
-            <div class="w-full relative rounded-xl overflow-hidden shadow-2xl">
-                <!-- مؤشر التحميل يظهر قبل تشغيل الفيديو -->
-                <div id="loadingSpinner" class="absolute inset-0 flex items-center justify-center bg-card-bg/80 z-10 transition-opacity duration-300 opacity-0 hidden">
-                    <div class="loading-spinner"></div>
+        </div>
+        <div class="search-container">
+            <i class="search-icon" data-lucide="search"></i>
+            <input id="searchInput" type="text" placeholder="ابحث عن مدرس…" />
+            <button id="searchButton" class="btn btn-icon">
+                <i data-lucide="search"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Teachers Page -->
+    <div id="teachersPage" class="page">
+        <div class="section-title">
+            <i data-lucide="users"></i>
+            <h3 id="categoryTitle">المدرسين</h3>
+        </div>
+        <div id="teachersGrid" class="teachers-grid">
+            <!-- Teachers will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Classes Page -->
+    <div id="classesPage" class="page">
+        <button class="btn back-button" onclick="navigate('teachers')">
+            <i data-lucide="arrow-right"></i>الرجوع للمدرسين
+        </button>
+        <div class="teacher-info">
+            <img id="teacherImage" class="teacher-img-lg" alt="" />
+            <div>
+                <h2 id="teacherName"></h2>
+                <p id="teacherSubject" class="teacher-subject"></p>
+                <div id="teacherRating" class="teacher-rating"></div>
+            </div>
+        </div>
+        <div class="section-title">
+            <i data-lucide="book-open"></i>
+            <h3>الفصول الدراسية</h3>
+        </div>
+        <div id="classesList" class="classes-list"></div>
+    </div>
+
+    <!-- Video Page -->
+    <div id="videoPage" class="page">
+        <div class="video-page-content">
+            <div id="videoContainer" class="video-container">
+                <div id="playerContainer"></div>
+                <div id="videoLoader" class="video-loader" style="display: none;">
+                    <div class="loader-spinner"></div>
                 </div>
-                <!-- مشغل الفيديو -->
-                <video id="my-video" class="video-js vjs-theme-forest w-full aspect-video" controls preload="auto" data-setup="{}">
-                    <source src="" type="application/x-mpegURL" />
-                    <p class="vjs-no-js text-center p-4">
-                        لتشغيل هذا الفيديو، الرجاء تفعيل JavaScript، أو استخدام متصفح يدعم HTML5.
-                    </p>
-                </video>
+            </div>
+            <div class="video-details">
+                <h2 id="videoTitle"></h2>
+                <p id="videoDescription"></p>
+                <div class="video-info">
+                    <div class="video-meta">
+                        <span>
+                            <i data-lucide="calendar"></i> تاريخ النشر:
+                            <span id="videoDate">--/--/----</span>
+                        </span>
+                    </div>
+                </div>
+                <button class="btn back-button" onclick="navigate('classes')">
+                    <i data-lucide="arrow-right"></i>العودة للفصول
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- تضمين مكتبة Video.js -->
-    <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
-    <script>
-        // تحديد العناصر الأساسية في الصفحة
-        const teacherCard = document.getElementById('teacherCard');
-        const lecturesSection = document.getElementById('lecturesSection');
-        const backButton = document.getElementById('backButton');
-        const searchInput = document.getElementById('searchInput');
-        const lecturesList = document.getElementById('lecturesList');
-        const themeToggle = document.getElementById('themeToggle');
-        const videoPlayerSection = document.getElementById('videoPlayerSection');
-        const backToLectures = document.getElementById('backToLectures');
-        const loadingSpinner = document.getElementById('loadingSpinner');
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    
+    <script type="text/babel">
+        // Initialize theme based on local storage or system preference
+        function initializeTheme() {
+            const stored = localStorage.getItem("theme");
+            const preferred = window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+            const theme = stored || preferred;
+            document.documentElement.setAttribute("data-theme", theme);
+            updateThemeIcon(theme);
+        }
 
-        // تهيئة مشغل الفيديو
-        const myPlayer = videojs('my-video');
+        // Update the theme toggle icon
+        function updateThemeIcon(theme) {
+            document
+                .querySelector("#themeToggle i")
+                .setAttribute("data-lucide", theme === "dark" ? "sun" : "moon");
+            lucide.createIcons();
+        }
 
-        // بيانات المحاضرات (يمكن تحديثها بسهولة)
-        // ملاحظة: تم تحديث رابط الفيديو ليكون أكثر موثوقية كنموذج تجريبي
-        const videoUrl = 'https://tiny-fire-acee.hmyzc824-d08.workers.dev/?url=https%3A%2F%2Fvz-66cdc7f5-9f3.b-cdn.net%2Fbcdn_token%3DOvHm2YqnbdTGsSyEkKVVz5BbcTT-CHI-fkHM9SkNs6E%26expires%3D1755335590%26token_path%3D%252Fd6e13cc8-7339-42a7-8b0f-11be84bd82dd%252F%2Fd6e13cc8-7339-42a7-8b0f-11be84bd82dd%2Fplaylist.m3u8';
-        const lectures = [
-            { id: 1, title: 'محاضرة 1: أساسيات الكيمياء', chapter: 'الفصل الأول' },
-            { id: 2, title: 'محاضرة 2: التفاعلات الكيميائية', chapter: 'الفصل الأول' },
-            { id: 3, title: 'محاضرة 3: المعادلات الكيميائية', chapter: 'الفصل الأول' },
-            { id: 4, title: 'محاضرة 4: الكيمياء العضوية', chapter: 'الفصل الثاني' },
-            { id: 5, title: 'محاضرة 5: الهيدروكربونات', chapter: 'الفصل الثاني' },
-            { id: 6, title: 'محاضرة 6: الكيمياء غير العضوية', chapter: 'الفصل الثالث' },
-            { id: 7, title: 'محاضرة 7: المركبات الأيونية', chapter: 'الفصل الثالث' },
-            { id: 8, title: 'محاضرة 8: الكيمياء الحيوية', chapter: 'الفصل الرابع' },
-            { id: 9, title: 'محاضرة 9: البروتينات والكربوهيدرات', chapter: 'الفصل الرابع' },
-            { id: 10, title: 'محاضرة 10: الكيمياء النووية', chapter: 'الفصل الخامس' },
-        ];
+        initializeTheme();
 
-        // دالة لعرض المحاضرات بناءً على مصطلح البحث
-        function renderLectures(searchTerm = '') {
-            lecturesList.innerHTML = '';
-            const filteredLectures = lectures.filter(lecture =>
-                lecture.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                lecture.chapter.toLowerCase().includes(searchTerm.toLowerCase())
-            );
+        // Event listener for theme toggle button
+        document.getElementById("themeToggle").addEventListener("click", () => {
+            const cur = document.documentElement.getAttribute("data-theme");
+            const next = cur === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            localStorage.setItem("theme", next);
+            updateThemeIcon(next);
+        });
 
-            if (filteredLectures.length === 0) {
-                lecturesList.innerHTML = `<p class="text-center text-secondary-text mt-4">لا توجد نتائج مطابقة.</p>`;
-            } else {
-                filteredLectures.forEach(lecture => {
-                    const lectureItem = document.createElement('div');
-                    lectureItem.className = 'lecture-item bg-card-bg p-6 rounded-2xl shadow-lg border-r-4 border-primary-color cursor-pointer transition-all duration-300 hover:translate-x-3 hover:shadow-xl';
-                    lectureItem.innerHTML = `
-                        <h3 class="text-2xl font-bold text-primary-color">${lecture.title}</h3>
-                        <p class="mt-2 text-secondary-text">${lecture.chapter}</p>
-                    `;
-                    lectureItem.addEventListener('click', () => {
-                        playVideo();
-                    });
-                    lecturesList.appendChild(lectureItem);
-                });
+        // Plyr player instance
+        let player = null;
+
+        // DOM references
+        const teacherImage = document.getElementById("teacherImage");
+        const teacherName = document.getElementById("teacherName");
+        const teacherSubject = document.getElementById("teacherSubject");
+        const teacherRating = document.getElementById("teacherRating");
+        const videoTitle = document.getElementById("videoTitle");
+        const videoDescription = document.getElementById("videoDescription");
+        const categoryTitle = document.getElementById("categoryTitle");
+        const classesList = document.getElementById("classesList");
+        const teachersGrid = document.getElementById("teachersGrid");
+        const playerContainer = document.getElementById("playerContainer");
+        const videoLoader = document.getElementById("videoLoader");
+
+        // Progress and ratings storage
+        let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
+        let ratings = JSON.parse(localStorage.getItem("ratings")) || {};
+
+        // Page navigation elements
+        const pages = {
+            teachers: document.getElementById("teachersPage"),
+            classes: document.getElementById("classesPage"),
+            video: document.getElementById("videoPage")
+        };
+
+        // Function to navigate between pages
+        function navigate(page) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            if (page !== "video") {
+                if (player) {
+                    player.destroy();
+                    player = null;
+                }
+                if (window.hlsInstance) {
+                    window.hlsInstance.destroy();
+                    window.hlsInstance = null;
+                }
+                if (window.progressInterval) {
+                    clearInterval(window.progressInterval);
+                    window.progressInterval = null;
+                }
+                playerContainer.innerHTML = "";
+                videoLoader.style.display = 'none';
             }
+            Object.values(pages).forEach((p) => p.classList.remove("active"));
+            pages[page].classList.add("active");
         }
 
-        // دوال التنقل بين الأقسام
-        function showLectures() {
-            teacherCard.classList.add('hidden');
-            lecturesSection.classList.remove('hidden');
-            lecturesSection.classList.add('flex');
-            videoPlayerSection.classList.add('hidden');
-            myPlayer.pause();
-            renderLectures();
+        /* ========= بيانات المدرسين ========= */
+        const searchInput = document.getElementById("searchInput");
+        const searchBtn = document.getElementById("searchButton");
+        let teachers = [];
+        let currentTeacher = null;
+        let currentClassIndex = 0;
+        let currentLectureIndex = 0;
+        let currentLectureLink = "";
+
+        // Render teachers grid
+        function renderTeachers(list = teachers) {
+            if (!list.length) {
+                teachersGrid.innerHTML = "<p style='text-align: center; color: var(--text);'>لا توجد نتائج مطابقة.</p>";
+                return;
+            }
+
+            teachersGrid.innerHTML = "";
+            list.forEach((t, idx) => {
+                const rating = ratings[t.id] || 0;
+                const card = document.createElement("div");
+                card.className = "teacher-card";
+                card.innerHTML = `
+                    <img class="teacher-img" src="${t.image}" alt="${t.name}" onerror="this.onerror=null;this.src='https://placehold.co/140x140/E5E7EB/9CA3AF?text=صورة+غير+متوفرة';">
+                    <h3 class="teacher-name">${t.name}</h3>
+                    <p class="teacher-subject">${t.subject}</p>
+                    <div class="teacher-rating">
+                        ${renderStars(rating)}
+                    </div>
+                `;
+                card.onclick = () => showTeacher(t.id);
+                teachersGrid.appendChild(card);
+                lucide.createIcons();
+            });
+        }
+        
+        // Helper function to render Lucide star icons
+        function renderStars(rating) {
+            let stars = "";
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += `<i data-lucide="star"></i>`;
+                } else {
+                    stars += `<i data-lucide="star" style="color: var(--border); fill: none;"></i>`;
+                }
+            }
+            return stars;
         }
 
-        function showTeacherCard() {
-            teacherCard.classList.remove('hidden');
-            lecturesSection.classList.add('hidden');
-            videoPlayerSection.classList.add('hidden');
-            myPlayer.pause();
+        // Show teacher details page
+        window.showTeacher = (id) => {
+            currentTeacher = teachers.find((t) => t.id == id);
+            if (!currentTeacher) return;
+
+            teacherImage.src = currentTeacher.image;
+            teacherImage.onerror = function() {
+                this.onerror = null;
+                this.src = 'https://placehold.co/150x150/E5E7EB/9CA3AF?text=صورة+غير+متوفرة';
+            };
+            teacherName.textContent = currentTeacher.name;
+            teacherSubject.textContent = currentTeacher.subject;
+
+            const rating = ratings[currentTeacher.id] || 0;
+            teacherRating.innerHTML = renderStars(rating);
+
+            renderClasses(currentTeacher.classes);
+            navigate("classes");
+        };
+
+        // Render classes for a selected teacher
+        function renderClasses(classesData) {
+            classesList.innerHTML = classesData
+                .map((cls, ci) => {
+                    const lectures = cls.lectures
+                        .map((lec, li) => {
+                            return `
+                                <div class="lecture-item"
+                                     onclick="playLecture(${ci}, ${li}, '${lec.url}', '${lec.title}', '${lec.description}')">
+                                    <i data-lucide="play-circle"></i>
+                                    <span>${li + 1}. ${lec.title}</span>
+                                </div>
+                            `;
+                        })
+                        .join("");
+
+                    return `
+                        <div class="class-card">
+                            <div class="class-header" onclick="toggleLectures(this)">
+                                <h3>${cls.name}</h3>
+                                <span data-lucide="chevron-down"></span>
+                            </div>
+                            <div class="lectures-list">${lectures}</div>
+                        </div>
+                    `;
+                })
+                .join("");
+
+            lucide.createIcons();
         }
 
-        function playVideo() {
-            teacherCard.classList.add('hidden');
-            lecturesSection.classList.add('hidden');
-            videoPlayerSection.classList.remove('hidden');
-            videoPlayerSection.classList.add('flex');
+        // Toggle lecture list visibility
+        window.toggleLectures = (header) => {
+            const list = header.parentElement.querySelector(".lectures-list");
+            const icon = header.querySelector("[data-lucide]");
+            const open = list.style.display !== "flex";
+
+            list.style.display = open ? "flex" : "none";
+            header.classList.toggle("open", open);
+            icon.setAttribute("data-lucide", open ? "chevron-up" : "chevron-down");
+            lucide.createIcons();
+        };
+
+        // Play selected lecture
+        window.playLecture = (ci, li, url, title, desc) => {
+            if (player) {
+                player.destroy();
+                player = null;
+            }
+            if (window.hlsInstance) {
+                window.hlsInstance.destroy();
+                window.hlsInstance = null;
+            }
+            if (window.progressInterval) {
+                clearInterval(window.progressInterval);
+                window.progressInterval = null;
+            }
+
+            playerContainer.innerHTML = "";
+            videoLoader.style.display = 'none';
+
+            [currentClassIndex, currentLectureIndex, currentLectureLink] = [ci, li, url,];
+            videoTitle.textContent = title;
+            videoDescription.textContent = desc;
+            document.getElementById("videoDate").textContent = "15/10/2026";
+
+            if (url.includes("iframe.mediadelivery.net/embed/")) {
+                videoLoader.style.display = 'flex';
+                const encodedUrl = btoa(url);
+                const iframeUrl = `https://weathered-truth-412e.hmyzc824-d08.workers.dev/proxy_iframe?url=${encodedUrl}`;
+                const iframeHtml = `
+                    <div style="position: relative; width: 100%; padding-top: 56.25%;">
+                        <iframe 
+                            src="${iframeUrl}" 
+                            allowfullscreen 
+                            loading="eager"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 18px;"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                            onload="document.getElementById('videoLoader').style.display='none';"
+                        ></iframe>
+                    </div>
+                `;
+                playerContainer.innerHTML = iframeHtml;
+                navigate("video");
+                return;
+            }
+
+            playerContainer.innerHTML = `
+                <video id="player" playsinline controls></video>
+            `;
+            lucide.createIcons();
+            const videoElement = document.getElementById("player");
+            const isHLS = url.endsWith(".m3u8");
+            const referer = "https://abwaab.com";
+            let finalVideoUrl = url;
             
-            // إظهار مؤشر التحميل قبل بدء التشغيل
-            loadingSpinner.classList.remove('hidden');
-            loadingSpinner.classList.add('opacity-100');
+            if (isHLS && url.startsWith("https://vz-25858200-a22.becdn.net/")) {
+                finalVideoUrl = url;
+            } else if (isHLS) {
+                finalVideoUrl = `https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=${encodeURIComponent(url)}&referer=${encodeURIComponent(referer)}`;
+            }
+            
+            const savedTime = lectureProgress[url] ? (lectureProgress[url] / 100) * (player?.duration || 0) : 0;
 
-            // إعداد وتشغيل الفيديو
-            myPlayer.src({ src: videoUrl, type: 'application/x-mpegURL' });
-            myPlayer.load();
-
-            myPlayer.on('loadeddata', () => {
-                loadingSpinner.classList.remove('opacity-100');
-                loadingSpinner.classList.add('opacity-0');
-                setTimeout(() => loadingSpinner.classList.add('hidden'), 300); // إخفاء العنصر بعد الانتقال
-                myPlayer.play();
+            player = new Plyr("#player", {
+                controls: ["play-large", "play", "progress", "current-time", "fullscreen", "settings",],
+                keyboard: { focused: true, global: true },
+                tooltips: { controls: true, seek: true },
+                captions: { active: false },
+                settings: ["quality", "speed"],
+                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
             });
 
-            myPlayer.on('error', (e) => {
-                console.error("Video.js Error:", myPlayer.error());
-                loadingSpinner.classList.remove('opacity-100');
-                loadingSpinner.classList.add('opacity-0');
-                setTimeout(() => loadingSpinner.classList.add('hidden'), 300);
-            });
+            window.progressInterval = setInterval(() => {
+                if (player && player.duration > 0) {
+                    const progress = (player.currentTime / player.duration) * 100;
+                    lectureProgress[url] = progress;
+                    localStorage.setItem("lectureProgress", JSON.stringify(lectureProgress));
+                }
+            }, 5000);
+
+            function tryPlay() {
+                if (isHLS && Hls.isSupported()) {
+                    const hls = new Hls();
+                    window.hlsInstance = hls;
+                    hls.attachMedia(videoElement);
+                    hls.loadSource(finalVideoUrl);
+                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                        player
+                            .play()
+                            .then(() => { if (savedTime > 0) player.currentTime = savedTime; })
+                            .catch(console.error);
+                    });
+                    hls.on(Hls.Events.ERROR, (_, data) => {
+                        if (data.fatal) {
+                            switch (data.type) {
+                                case Hls.ErrorTypes.NETWORK_ERROR:
+                                    hls.startLoad();
+                                    break;
+                                case Hls.ErrorTypes.MEDIA_ERROR:
+                                    hls.recoverMediaError();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+                } else {
+                    player.source = {
+                        type: "video",
+                        sources: [
+                            {
+                                src: finalVideoUrl,
+                                type: isHLS ? "application/x-mpegURL" : "video/mp4",
+                            },
+                        ],
+                    };
+                    player
+                        .play()
+                        .then(() => { if (savedTime > 0) player.currentTime = savedTime; })
+                        .catch(() => { console.log("تعذر تشغيل الفيديو"); });
+                }
+            }
+            tryPlay();
+            navigate("video");
+        };
+
+        /* ========= البحث ========= */
+        function handleSearch() {
+            const term = searchInput.value.trim().toLowerCase();
+            renderTeachers(
+                teachers.filter(
+                    (t) =>
+                        t.name.toLowerCase().includes(term) ||
+                        t.subject.toLowerCase().includes(term)
+                )
+            );
         }
 
-        function returnToLectures() {
-            myPlayer.pause();
-            myPlayer.reset();
-            showLectures();
+        let searchTimeout;
+        searchInput.addEventListener("input", () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(handleSearch, 250);
+        });
+        searchBtn.addEventListener("click", handleSearch);
+
+        /* ========= تحميل البيانات ========= */
+        function loadData() {
+            const endpoint = "https://edsoo.netlify.app/data.json";
+            const err =
+                '<p style="color:var(--error); text-align: center;">حدث خطأ في تحميل البيانات.</p><button class="btn back-button" onclick="location.reload()" style="display: block; margin: 1rem auto;">إعادة المحاولة</button>';
+            
+            teachersGrid.innerHTML = `
+                <div class="loading-card teacher-card">
+                    <div style="width: 140px; height: 140px; background: var(--border); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
+                    <div style="height: 1.4rem; background: var(--border); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
+                    <div style="height: 1rem; background: var(--border); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
+                </div>
+                <div class="loading-card teacher-card">
+                    <div style="width: 140px; height: 140px; background: var(--border); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
+                    <div style="height: 1.4rem; background: var(--border); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
+                    <div style="height: 1rem; background: var(--border); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
+                </div>
+                <div class="loading-card teacher-card">
+                    <div style="width: 140px; height: 140px; background: var(--border); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
+                    <div style="height: 1.4rem; background: var(--border); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
+                    <div style="height: 1rem; background: var(--border); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
+                </div>
+            `;
+
+            fetch(endpoint, {
+                headers: {
+                    Referer: "https://careful-burnt-honesty.glitch.me/",
+                    "Cache-Control": "no-cache",
+                },
+            })
+                .then((r) => {
+                    if (!r.ok) throw new Error();
+                    return r.json();
+                })
+                .then((data) => {
+                    teachers = data.teachers;
+                    renderTeachers();
+                })
+                .catch(() => {
+                    teachersGrid.innerHTML = err;
+                });
         }
 
-        // إضافة معالجات الأحداث للتنقل والبحث وتغيير الوضع
-        teacherCard.addEventListener('click', showLectures);
-        backButton.addEventListener('click', showTeacherCard);
-        backToLectures.addEventListener('click', returnToLectures);
-        searchInput.addEventListener('input', (e) => {
-            renderLectures(e.target.value);
-        });
+        // Initialize the app directly without login
+        window.onload = () => {
+          loadData();
+          navigate('teachers');
+          lucide.createIcons();
+        };
 
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            document.body.classList.toggle('dark-mode-bg');
-            themeToggle.textContent = document.body.classList.contains('light-mode') ? 'الوضع الليلي' : 'الوضع الفاتح';
-        });
-
-        // إظهار البطاقة الرئيسية عند تحميل الصفحة
-        showTeacherCard();
     </script>
 </body>
 </html>
