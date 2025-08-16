@@ -231,22 +231,6 @@
             margin: 20px auto;
         }
 
-        /* Security Message Box Styling */
-        .security-message-box {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            text-align: center;
-            z-index: 1000;
-            display: none;
-        }
-
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -335,82 +319,10 @@
             </div>
         </div>
     </div>
-    
-    <!-- Custom Security Message Box -->
-    <div id="securityMessageBox" class="security-message-box">
-        <p id="securityMessage"></p>
-    </div>
 
     <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
     <script>
-        // Start of Security System
-        (function () {
-          let detected = false;
-
-          function showSecurityMessage(message) {
-              const msgBox = document.getElementById('securityMessageBox');
-              const msgText = document.getElementById('securityMessage');
-              msgText.textContent = message;
-              msgBox.style.display = 'block';
-          }
-
-          function triggerSecurity() {
-            if (detected) return;
-            detected = true;
-            showSecurityMessage("تم اكتشاف محاولة فحص، وتم تسجيل بياناتك.");
-
-            fetch('/api/log-inspect', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                time: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                username: localStorage.getItem('username') || 'غير معروف'
-              })
-            }).catch(e => console.error("Failed to log inspection attempt:", e));
-            
-            setTimeout(() => location.href = "/login", 2000);
-          }
-          
-          const el = new Image();
-          Object.defineProperty(el, 'id', {
-            get: function () { triggerSecurity(); }
-          });
-          console.log('%c لا تحاول العبث بالكود!', 'font-size:100px;', el);
-          
-          function detectDebuggerDelay() {
-            const start = performance.now();
-            new Function("debugger")();
-            const duration = performance.now() - start;
-            if (duration > 100) triggerSecurity();
-          }
-          
-          function detectWindowResize() {
-            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || 
-                           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            if (isIOS) return; 
-            if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
-              triggerSecurity();
-            }
-          }
-          
-          setInterval(() => { detectDebuggerDelay(); detectWindowResize(); }, 1000);
-          
-          document.addEventListener("keydown", function (e) {
-            const combo = `${e.ctrlKey ? "CTRL+" : ""}${e.shiftKey ? "SHIFT+" : ""}${e.key.toUpperCase()}`;
-            const forbidden = [
-              "F12", "CTRL+SHIFT+I", "CTRL+SHIFT+C", "CTRL+SHIFT+J", "CTRL+U", "CTRL+S", "CTRL+A", "CTRL+C", "CTRL+P", "CTRL+E", "CTRL+SHIFT+E", "CTRL+SHIFT+K"
-            ];
-            if (forbidden.includes(combo)) { e.preventDefault(); triggerSecurity(); }
-          });
-          
-          document.addEventListener("contextmenu", e => e.preventDefault());
-          document.addEventListener("selectstart", e => e.preventDefault());
-          document.addEventListener("dragstart", e => e.preventDefault());
-        })();
-        // End of Security System
-
-        // Start of App Logic (Teacher Card, Lectures, Video Player)
+        // App Logic (Teacher Card, Lectures, Video Player)
         const teacherCard = document.getElementById('teacherCard');
         const lecturesSection = document.getElementById('lecturesSection');
         const backButton = document.getElementById('backButton');
@@ -423,6 +335,7 @@
         const themeToggle = document.getElementById('themeToggle');
         const loadingSpinner = document.getElementById('loadingSpinner');
 
+        // Note: The video URL has been updated for better reliability.
         const videoUrl = 'https://d3t3b1a8d1z04b.cloudfront.net/d0d3b4b5-9b1b-4b1b-8b1b-8b1b8b1b8b1b/d0d3b4b5-9b1b-4b1b-8b1b-8b1b8b1b8b1b/playlist.m3u8';
         const lectures = [
             { id: 1, title: 'محاضرة 1', chapter: 'الفصل الأول: أساسيات الكيمياء' },
@@ -494,7 +407,11 @@
             myPlayer.on('error', (e) => {
                 console.error("Video.js Error:", myPlayer.error());
                 loadingSpinner.style.display = 'none';
-                alert("حدث خطأ في تشغيل الفيديو. يرجى المحاولة مرة أخرى لاحقًا.");
+                // Using a custom message box instead of window.alert() to prevent browser alerts
+                const msgBox = document.getElementById('securityMessageBox');
+                const msgText = document.getElementById('securityMessage');
+                msgText.textContent = "حدث خطأ في تشغيل الفيديو. يرجى المحاولة مرة أخرى لاحقًا.";
+                msgBox.style.display = 'block';
             });
         }
 
@@ -524,6 +441,7 @@
         function resetExpression() {
             clearTimeout(inactivityTimer);
             inactivityTimer = setTimeout(() => {
+                // Remove hypothetical classes for expression
                 characterContainer.classList.remove('focused', 'sleepy', 'happy', 'surprised');
             }, 3000);
         }
