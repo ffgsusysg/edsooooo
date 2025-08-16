@@ -29,7 +29,7 @@
       </div>
     </header>
 
-    <div id="teachersPage" class="page">
+    <div id="teachersPage" class="page active">
       <div class="section-title">
         <i data-lucide="graduation-cap"></i>
         <h3>المدرسون (كواكب المعرفة)</h3>
@@ -47,6 +47,9 @@
           <h2 id="teacherName"></h2>
           <p id="teacherSubject" class="teacher-subject"></p>
           <div id="teacherRating" class="teacher-rating"></div>
+          <button class="btn rate-button" onclick="openRatingModal()">
+            <i data-lucide="star"></i> تقييم المدرس
+          </button>
         </div>
       </div>
       <div class="section-title">
@@ -69,17 +72,28 @@
         </div>
         <div class="video-details">
           <h2 id="videoTitle"></h2>
-          <div class="video-info">
-            <div class="video-meta">
-              <span>
-                <i data-lucide="calendar"></i>
-                تاريخ النشر: <span id="videoDate">--/--/----</span>
-              </span>
-              <p id="videoDescription"></p>
-            </div>
+          <p id="videoDescription"></p>
+          <div class="video-meta">
+            <span>
+              <i data-lucide="calendar"></i>
+              تاريخ النشر: <span id="videoDate">--/--/----</span>
+            </span>
           </div>
         </div>
       </div>
     </div>
+
+    <div id="ratingModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeRatingModal()">&times;</span>
+        <h3>قيم المدرس <span id="ratingTeacherName"></span></h3>
+        <p>اختر عدد النجوم لتقييم المدرس:</p>
+        <div class="star-rating" id="starRatingContainer"></div>
+        <button class="btn save-rating-btn" onclick="saveRating()">
+          حفظ التقييم
+        </button>
+      </div>
+    </div>
+
   </body>
 </html>
