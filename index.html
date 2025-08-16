@@ -140,16 +140,26 @@
             font-size: 1.1rem;
         }
 
-        /* Video Player Styling */
+        /* Video Player Styling - Responsive */
         .video-container {
             width: 100%;
             margin-top: 20px;
             display: none;
             animation: fadeIn 1.5s ease-in-out;
         }
-        .video-js {
+
+        .video-wrapper {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            width: 100%;
+        }
+
+        .video-wrapper .video-js {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100% !important;
-            height: auto !important;
+            height: 100% !important;
         }
         
         /* Security Message Box Styling */
@@ -203,8 +213,7 @@
         <!-- Teacher Card -->
         <div id="teacherCard" class="teacher-card">
             <div id="characterContainer" class="teacher-card-content">
-                <!-- Added provided image URL -->
-                <img src="https://i.imgur.com/kS53gI5.jpeg" alt="صورة المدرس حسين الهاشمي" class="teacher-card-img">
+                <img src="https://i.imghippo.com/files/eiPJ5269dI.jpg" alt="صورة المدرس حسين الهاشمي" class="teacher-card-img">
                 <div class="teacher-card-info">
                     <h2>حسين الهاشمي 2026</h2>
                     <p>كيمياء سادس علمي</p>
@@ -223,20 +232,20 @@
         <!-- Video Player Section -->
         <div id="videoPlayerSection" class="video-container">
             <button id="backToLectures" class="back-button">العودة إلى المحاضرات</button>
-            <video
-                id="my-video"
-                class="video-js vjs-theme-forest"
-                controls
-                preload="auto"
-                width="640"
-                height="264"
-                data-setup="{}"
-            >
-                <source src="" type="application/x-mpegURL" />
-                <p class="vjs-no-js">
-                    لتشغيل هذا الفيديو، الرجاء تفعيل JavaScript، أو استخدام متصفح يدعم HTML5.
-                </p>
-            </video>
+            <div class="video-wrapper">
+                <video
+                    id="my-video"
+                    class="video-js vjs-theme-forest"
+                    controls
+                    preload="auto"
+                    data-setup="{}"
+                >
+                    <source src="" type="application/x-mpegURL" />
+                    <p class="vjs-no-js">
+                        لتشغيل هذا الفيديو، الرجاء تفعيل JavaScript، أو استخدام متصفح يدعم HTML5.
+                    </p>
+                </video>
+            </div>
         </div>
     </div>
     
@@ -330,7 +339,7 @@
         const characterContainer = document.getElementById('characterContainer'); // The container for the character
 
         const videoUrl = 'https://tiny-fire-acee.hmyzc824-d08.workers.dev/?url=https%3A%2F%2Fvz-66cdc7f5-9f3.b-cdn.net%2Fbcdn_token%3DOvHm2YqnbdTGsSyEkKVVz5BbcTT-CHI-fkHM9SkNs6E%26expires%3D1755335590%26token_path%3D%252Fd6e13cc8-7339-42a7-8b0f-11be84bd82dd%252F%2Fd6e13cc8-7339-42a7-8b0f-11be84bd82dd%2Fplaylist.m3u8';
-        const teacherImageURL = "https://i.imgur.com/kS53gI5.jpeg";
+        const teacherImageURL = "https://i.imghippo.com/files/eiPJ5269dI.jpg"; // Updated image URL
 
         // Function to create and populate the lectures list
         function createLectures() {
