@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>منصة حسين الهاشمي - فضاء المعرفة</title>
+    <title>منصة حسين الهاشمي 2026</title>
     
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="https://cdn.glitch.global/c07dc79d-c056-48b0-8b0b-912783754321/5424770778815132543.jpg?v=1751739020203">
@@ -305,7 +305,7 @@
             position: relative;
             padding: 1.2rem 1.5rem 1.2rem 4rem;
             background: var(--bg-glass);
-            border-right: 3px solid var(--primary-3);
+            border-right: 3px solid var(--primary-2);
             border-radius: var(--radius);
             cursor: pointer;
             transition: all 0.3s ease;
@@ -433,7 +433,7 @@
     <header>
         <h1 class="site-title" onclick="navigate('teachers')">
             <div class="site-logo">ح</div>
-            فضاء المعرفة
+            منصة حسين الهاشمي 2026
         </h1>
         <div class="header-actions">
             <button id="themeToggle" class="btn back-button">
@@ -613,7 +613,7 @@
             let stars = "";
             for (let i = 1; i <= 5; i++) {
                 if (i <= rating) {
-                    stars += `<i data-lucide="star"></i>`;
+                    stars += `<i data-lucide="star" style="fill: var(--accent); color: var(--accent);"></i>`;
                 } else {
                     stars += `<i data-lucide="star" style="color: rgba(226, 88, 74, 0.4); fill: none;"></i>`;
                 }
@@ -649,7 +649,7 @@
                         .map((lec, li) => {
                             return `
                                 <div class="lecture-item"
-                                     onclick="playLecture(${ci}, ${li}, '${lec.url}', '${lec.title}', '${lec.description}')">
+                                      onclick="playLecture(${ci}, ${li}, '${lec.url}', '${lec.title}', '${lec.description}')">
                                     <span>${li + 1}. ${lec.title}</span>
                                     <i data-lucide="play-circle"></i>
                                 </div>
