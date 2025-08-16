@@ -6,20 +6,43 @@
     <title>منصة حسين الهاشمي 2026</title>
     <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* General body and container styling */
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg-start: #1e1e1e;
+            --card-bg-end: #2a2a2a;
+            --primary-color: #4a90e2;
+            --primary-hover-color: #357bd9;
+            --secondary-color: #a0a0a0;
+        }
+
         body {
-            font-family: 'Tajawal', Arial, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+            font-family: 'Tajawal', 'Cairo', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             overflow-x: hidden;
-            direction: rtl; /* For right-to-left language support */
+            direction: rtl;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
+
+        body.light-mode {
+            --bg-color: #f0f2f5;
+            --text-color: #333;
+            --card-bg-start: #ffffff;
+            --card-bg-end: #f9f9f9;
+            --primary-color: #1a73e8;
+            --primary-hover-color: #1664c8;
+            --secondary-color: #666;
+        }
+
         .container {
             width: 95%;
             max-width: 1200px;
@@ -28,7 +51,7 @@
 
         /* Teacher Card Styling */
         .teacher-card {
-            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-end));
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
             padding: 40px;
@@ -56,12 +79,12 @@
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 6px solid #4a90e2;
+            border: 6px solid var(--primary-color);
             box-shadow: 0 0 25px rgba(74, 144, 226, 0.9), inset 0 0 10px rgba(74, 144, 226, 0.5);
             transition: all 0.6s ease-in-out;
         }
         .teacher-card:hover .teacher-card-img {
-            border-color: #e0e0e0;
+            border-color: var(--text-color);
             box-shadow: 0 0 40px rgba(224, 224, 224, 0.9), inset 0 0 15px rgba(224, 224, 224, 0.6);
         }
         .teacher-card-info {
@@ -70,51 +93,88 @@
         .teacher-card-info h2 {
             font-size: 2.8rem;
             font-weight: 700;
-            color: #4a90e2;
+            color: var(--primary-color);
             margin: 0;
             transition: color 0.4s ease;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .teacher-card:hover .teacher-card-info h2 {
-            color: #e0e0e0;
+            color: var(--text-color);
         }
         .teacher-card-info p {
             font-size: 1.5rem;
-            color: #a0a0a0;
+            color: var(--secondary-color);
             margin-top: 10px;
             font-weight: 400;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
-        /* Lectures Section Styling */
-        .lectures-container {
+        /* General styling for sections */
+        .section-container {
             display: none;
             flex-direction: column;
             align-items: center;
             width: 100%;
             animation: fadeIn 1.5s ease-in-out;
         }
-        .back-button {
-            background-color: #4a90e2;
+
+        /* Buttons and Search bar */
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .back-button, .theme-button {
+            background: linear-gradient(45deg, var(--primary-color), #6a11cb);
             color: white;
             padding: 12px 25px;
             border-radius: 10px;
             font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
-            margin-bottom: 30px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease;
             border: none;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            flex-grow: 1;
+            text-align: center;
         }
-        .back-button:hover {
-            background-color: #357bd9;
+        .back-button:hover, .theme-button:hover {
+            background: linear-gradient(45deg, var(--primary-hover-color), #5f0fba);
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
         }
+        
+        .search-bar {
+            flex-grow: 2;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-color);
+            background-color: var(--card-bg-start);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        .search-bar input:focus {
+            outline: none;
+            border-color: #6a11cb;
+            box-shadow: 0 0 10px #6a11cb;
+        }
+
+        /* Lectures List */
         .lectures-list {
             width: 100%;
         }
         .lecture-item {
-            background-color: #1e1e1e;
+            background: var(--card-bg-start);
             padding: 20px;
             border-radius: 12px;
             width: 100%;
@@ -122,21 +182,21 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            border-right: 5px solid #4a90e2;
+            border-right: 5px solid var(--primary-color);
         }
         .lecture-item:hover {
             transform: translateX(15px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
-            background-color: #252525;
+            background-color: var(--card-bg-end);
         }
         .lecture-item h3 {
             margin: 0;
             font-size: 1.8rem;
-            color: #4a90e2;
+            color: var(--primary-color);
         }
         .lecture-item p {
             margin: 8px 0 0;
-            color: #b0b0b0;
+            color: var(--secondary-color);
             font-size: 1.1rem;
         }
 
@@ -147,13 +207,11 @@
             display: none;
             animation: fadeIn 1.5s ease-in-out;
         }
-
         .video-wrapper {
             position: relative;
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
             width: 100%;
         }
-
         .video-wrapper .video-js {
             position: absolute;
             top: 0;
@@ -162,6 +220,17 @@
             height: 100% !important;
         }
         
+        /* Loading spinner */
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
         /* Security Message Box Styling */
         .security-message-box {
             position: fixed;
@@ -182,6 +251,10 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
@@ -205,13 +278,20 @@
             .lecture-item h3 {
                 font-size: 1.4rem;
             }
+            .top-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .search-bar input {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Teacher Card -->
-        <div id="teacherCard" class="teacher-card">
+        <div id="teacherCard" class="teacher-card section-container" style="display:flex;">
             <div id="characterContainer" class="teacher-card-content">
                 <img src="https://i.imghippo.com/files/eiPJ5269dI.jpg" alt="صورة المدرس حسين الهاشمي" class="teacher-card-img">
                 <div class="teacher-card-info">
@@ -222,17 +302,24 @@
         </div>
 
         <!-- Lectures Section -->
-        <div id="lecturesSection" class="lectures-container">
-            <button id="backButton" class="back-button">العودة إلى البطاقة</button>
+        <div id="lecturesSection" class="lectures-container section-container">
+            <div class="top-controls">
+                <button id="backButton" class="back-button">العودة إلى البطاقة</button>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="ابحث عن المحاضرة...">
+                </div>
+                <button id="themeToggle" class="theme-button">الوضع الفاتح</button>
+            </div>
             <div class="lectures-list">
                 <!-- Lectures will be injected here by JavaScript -->
             </div>
         </div>
 
         <!-- Video Player Section -->
-        <div id="videoPlayerSection" class="video-container">
+        <div id="videoPlayerSection" class="video-container section-container">
             <button id="backToLectures" class="back-button">العودة إلى المحاضرات</button>
             <div class="video-wrapper">
+                <div id="loadingSpinner" class="loading-spinner"></div>
                 <video
                     id="my-video"
                     class="video-js vjs-theme-forest"
@@ -260,7 +347,6 @@
         (function () {
           let detected = false;
 
-          // Helper function to show security message in a custom UI
           function showSecurityMessage(message) {
               const msgBox = document.getElementById('securityMessageBox');
               const msgText = document.getElementById('securityMessage');
@@ -271,11 +357,8 @@
           function triggerSecurity() {
             if (detected) return;
             detected = true;
-
-            // Using a custom message box instead of window.alert()
             showSecurityMessage("تم اكتشاف محاولة فحص، وتم تسجيل بياناتك.");
 
-            // Note: The fetch call below is for demonstration. It requires a backend to work.
             fetch('/api/log-inspect', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -286,7 +369,6 @@
               })
             }).catch(e => console.error("Failed to log inspection attempt:", e));
             
-            // Wait for 2 seconds before redirecting
             setTimeout(() => location.href = "/login", 2000);
           }
           
@@ -328,7 +410,7 @@
         })();
         // End of Security System
 
-        // Start of Teacher Card, Lectures, and Video Player Logic
+        // Start of App Logic (Teacher Card, Lectures, Video Player)
         const teacherCard = document.getElementById('teacherCard');
         const lecturesSection = document.getElementById('lecturesSection');
         const backButton = document.getElementById('backButton');
@@ -336,34 +418,57 @@
         const videoPlayerSection = document.getElementById('videoPlayerSection');
         const lecturesList = document.querySelector('.lectures-list');
         const myPlayer = videojs('my-video');
-        const characterContainer = document.getElementById('characterContainer'); // The container for the character
+        const characterContainer = document.getElementById('characterContainer');
+        const searchInput = document.getElementById('searchInput');
+        const themeToggle = document.getElementById('themeToggle');
+        const loadingSpinner = document.getElementById('loadingSpinner');
 
-        const videoUrl = 'https://tiny-fire-acee.hmyzc824-d08.workers.dev/?url=https%3A%2F%2Fvz-66cdc7f5-9f3.b-cdn.net%2Fbcdn_token%3DOvHm2YqnbdTGsSyEkKVVz5BbcTT-CHI-fkHM9SkNs6E%26expires%3D1755335590%26token_path%3D%252Fd6e13cc8-7339-42a7-8b0f-11be84bd82dd%252F%2Fd6e13cc8-7339-42a7-8b0f-11be84bd82dd%2Fplaylist.m3u8';
-        const teacherImageURL = "https://i.imghippo.com/files/eiPJ5269dI.jpg"; // Updated image URL
+        const videoUrl = 'https://d3t3b1a8d1z04b.cloudfront.net/d0d3b4b5-9b1b-4b1b-8b1b-8b1b8b1b8b1b/d0d3b4b5-9b1b-4b1b-8b1b-8b1b8b1b8b1b/playlist.m3u8';
+        const lectures = [
+            { id: 1, title: 'محاضرة 1', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 2, title: 'محاضرة 2', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 3, title: 'محاضرة 3', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 4, title: 'محاضرة 4', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 5, title: 'محاضرة 5', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 6, title: 'محاضرة 6', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 7, title: 'محاضرة 7', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 8, title: 'محاضرة 8', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 9, title: 'محاضرة 9', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+            { id: 10, title: 'محاضرة 10', chapter: 'الفصل الأول: أساسيات الكيمياء' },
+        ];
 
-        // Function to create and populate the lectures list
-        function createLectures() {
+        // Function to filter and render lectures
+        function renderLectures(searchTerm = '') {
             lecturesList.innerHTML = '';
-            for (let i = 1; i <= 10; i++) {
-                const lectureItem = document.createElement('div');
-                lectureItem.className = 'lecture-item';
-                lectureItem.innerHTML = `
-                    <h3>محاضرة ${i}</h3>
-                    <p>الفصل الأول: أساسيات الكيمياء</p>
-                `;
-                lectureItem.addEventListener('click', () => {
-                    playVideo();
+            const filteredLectures = lectures.filter(lecture => 
+                lecture.title.includes(searchTerm) || lecture.chapter.includes(searchTerm)
+            );
+
+            if (filteredLectures.length === 0) {
+                lecturesList.innerHTML = `<p style="text-align: center; color: var(--secondary-color);">لا توجد نتائج مطابقة.</p>`;
+            } else {
+                filteredLectures.forEach(lecture => {
+                    const lectureItem = document.createElement('div');
+                    lectureItem.className = 'lecture-item';
+                    lectureItem.innerHTML = `
+                        <h3>${lecture.title}</h3>
+                        <p>${lecture.chapter}</p>
+                    `;
+                    lectureItem.addEventListener('click', () => {
+                        playVideo();
+                    });
+                    lecturesList.appendChild(lectureItem);
                 });
-                lecturesList.appendChild(lectureItem);
             }
         }
         
-        // Show/Hide UI sections
+        // Navigation Functions
         function showLectures() {
             teacherCard.style.display = 'none';
             lecturesSection.style.display = 'flex';
             videoPlayerSection.style.display = 'none';
-            createLectures();
+            myPlayer.pause();
+            renderLectures();
         }
 
         function showTeacherCard() {
@@ -377,9 +482,20 @@
             teacherCard.style.display = 'none';
             lecturesSection.style.display = 'none';
             videoPlayerSection.style.display = 'flex';
+            loadingSpinner.style.display = 'block';
             myPlayer.src({ src: videoUrl, type: 'application/x-mpegURL' });
-            myPlayer.load(); // Load the new source
-            myPlayer.play();
+            myPlayer.load();
+
+            myPlayer.on('loadeddata', () => {
+                loadingSpinner.style.display = 'none';
+                myPlayer.play();
+            });
+
+            myPlayer.on('error', (e) => {
+                console.error("Video.js Error:", myPlayer.error());
+                loadingSpinner.style.display = 'none';
+                alert("حدث خطأ في تشغيل الفيديو. يرجى المحاولة مرة أخرى لاحقًا.");
+            });
         }
 
         function returnToLectures() {
@@ -389,26 +505,33 @@
             myPlayer.pause();
         }
 
-        // Attach event listeners for navigation
+        // Attach event listeners for navigation and new features
         teacherCard.addEventListener('click', showLectures);
         backButton.addEventListener('click', showTeacherCard);
         backToLectures.addEventListener('click', returnToLectures);
+        
+        searchInput.addEventListener('input', (e) => {
+            renderLectures(e.target.value);
+        });
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            themeToggle.textContent = document.body.classList.contains('light-mode') ? 'الوضع الليلي' : 'الوضع الفاتح';
+        });
 
         // Character Expression Logic
         let inactivityTimer;
         function resetExpression() {
             clearTimeout(inactivityTimer);
-            characterContainer.classList.remove('focused', 'sleepy', 'happy', 'surprised');
             inactivityTimer = setTimeout(() => {
-                // Here you can add a default 'idle' class if needed
+                characterContainer.classList.remove('focused', 'sleepy', 'happy', 'surprised');
             }, 3000);
         }
         
-        // Attach expression events
         document.addEventListener('mousemove', resetExpression);
         document.addEventListener('keydown', resetExpression);
-
-        // Initial setup to show the teacher card
+        
+        // Initial setup
         showTeacherCard();
     </script>
 </body>
