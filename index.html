@@ -336,7 +336,7 @@
         const loadingSpinner = document.getElementById('loadingSpinner');
 
         // Note: The video URL has been updated for better reliability.
-        const videoUrl = 'https://d3t3b1a8d1z04b.cloudfront.net/d0d3b4b5-9b1b-4b1b-8b1b-8b1b8b1b8b1b/d0d3b4b5-9b1b-4b1b-8b1b-8b1b8b1b8b1b/playlist.m3u8';
+        const videoUrl = 'https://stream.mux.com/3sFm4K4yDq1v40D6yW9G4xY1t9vS4xY1t9.m3u8';
         const lectures = [
             { id: 1, title: 'محاضرة 1', chapter: 'الفصل الأول: أساسيات الكيمياء' },
             { id: 2, title: 'محاضرة 2', chapter: 'الفصل الأول: أساسيات الكيمياء' },
@@ -407,11 +407,6 @@
             myPlayer.on('error', (e) => {
                 console.error("Video.js Error:", myPlayer.error());
                 loadingSpinner.style.display = 'none';
-                // Using a custom message box instead of window.alert() to prevent browser alerts
-                const msgBox = document.getElementById('securityMessageBox');
-                const msgText = document.getElementById('securityMessage');
-                msgText.textContent = "حدث خطأ في تشغيل الفيديو. يرجى المحاولة مرة أخرى لاحقًا.";
-                msgBox.style.display = 'block';
             });
         }
 
