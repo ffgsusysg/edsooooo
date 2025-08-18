@@ -1,1003 +1,413 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>منصة حسين الهاشمي 2026</title>
-    
-    <!-- Favicon and Manifest -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="https://cdn.glitch.global/c07dc79d-c056-48b0-8b0b-912783754321/5424770778815132543.jpg?v=1751739020203">
-    
-    <!-- Updated Fonts for a Modern Look -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
-    
-    <!-- Essential Libraries -->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://assets.mediadelivery.net/hls/1.6.6/hls.min.js"></script>
-    <script src="https://assets.mediadelivery.net/plyr/3.7.8.4-bn/plyr.polyfilled.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
-    
-    <style>
-        /* Modernized CSS Variables */
-        :root {
-            --primary-1: #0077B6; /* Deep Ocean Blue */
-            --primary-2: #006096; /* Darker Blue */
-            --primary-3: #004F7A; /* Even darker Blue */
-            --accent: #FF5722; /* Vibrant Tangerine */
-            --accent-2: #E64A19; /* Darker Tangerine */
-            --radius: 18px; /* Softer, more modern corners */
-            --bg: #F5F7FA; /* Very light gray background */
-            --bg-glass: rgba(245, 247, 250, 0.95);
-            --text: #1C2833; /* Dark Charcoal Text */
-            --card: #FFFFFF; /* Pure White Cards */
-            --border: #E0E4EB; /* Light border */
-            --hover: rgba(0, 119, 182, 0.08); /* Primary color with transparency for hover */
-            --success: #28a745;
-            --warning: #FFC107;
-            --error: #DC3545;
-            --telegram-blue: #0088cc;
-            --telegram-light: #2aabee;
-            --telegram-text: #ffffff;
-            --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-md: 0 8px 20px rgba(0,0,0,0.12);
-            --shadow-lg: 0 16px 40px rgba(0,0,0,0.18);
-        }
-
-        /* Dark theme adjustments */
-        [data-theme="dark"] {
-            --bg: #111827; /* Darker background */
-            --bg-glass: rgba(17, 24, 39, 0.95);
-            --text: #E5E7EB; /* Light gray text */
-            --card: #1F2937; /* Dark gray cards */
-            --border: #374151; /* Medium gray border */
-            --hover: rgba(0, 119, 182, 0.15);
-            --primary-1: #4FC3F7; /* Lighter blue for dark theme */
-            --primary-2: #29B6F6;
-            --primary-3: #03A9F4;
-            --accent: #FFA726; /* Lighter orange */
-            --accent-2: #FB8C00;
-        }
-
-        /* General styles */
-        *, *:before, *:after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: "Cairo", "IBM Plex Sans Arabic", "Tajawal", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-y: auto;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-
-        img { max-width: 100%; display: block; }
-        button { font-family: inherit; cursor: pointer; border: none; background: none; }
-        
-        /* Header styles */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem 2rem;
-            background: var(--bg-glass);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-            flex-wrap: wrap;
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .site-title {
-            font-size: clamp(1.8rem, 5vw, 2.2rem);
-            font-weight: 700;
-            color: var(--primary-1);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            flex: 1;
-            min-width: 200px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .site-logo {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary-1), var(--accent));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .search-container {
-            flex: 1;
-            max-width: 650px;
-            display: flex;
-            gap: 0.75rem;
-            position: relative;
-            min-width: 250px;
-            margin-top: 0.5rem;
-        }
-
-        .search-container input {
-            flex: 1;
-            padding: 1rem 1.2rem 1rem 3.5rem;
-            font-size: 1.1rem;
-            background: var(--card);
-            color: var(--text);
-            border: 2px solid var(--border);
-            border-radius: var(--radius);
-            transition: border 0.25s, box-shadow 0.25s, background 0.3s ease, color 0.3s ease;
-        }
-
-        .search-container input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.3);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-1);
-            transition: color 0.3s ease;
-        }
-        
-        /* Button styles with gradients and lift effect */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 1rem 1.6rem;
-            border-radius: var(--radius);
-            background: linear-gradient(135deg, var(--primary-1), var(--primary-2));
-            color: #fff;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            box-shadow: var(--shadow-sm);
-            border: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-            background: linear-gradient(135deg, var(--primary-2), var(--primary-3));
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary-1);
-            color: var(--primary-1);
-            box-shadow: none;
-        }
-
-        .btn-outline:hover {
-            background: var(--primary-1);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .btn-icon {
-            padding: 0.8rem;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            justify-content: center;
-        }
-
-        .btn-accent {
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: white;
-        }
-
-        .btn-accent:hover {
-            background: linear-gradient(135deg, var(--accent-2), var(--accent));
-        }
-
-        /* Page layout */
-        .page {
-            display: none;
-            padding: 2rem;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .page.active { display: block; }
-        
-        /* Teacher's grid */
-        .teachers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .teacher-card {
-            background: var(--card);
-            padding: 1.6rem 1.3rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .teacher-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .teacher-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 1.2rem;
-            border: 4px solid var(--accent);
-            box-shadow: var(--shadow-sm);
-            transition: border-color 0.3s ease;
-        }
-
-        .teacher-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 0.5rem 0 0.25rem;
-            color: var(--primary-1);
-            transition: color 0.3s ease;
-        }
-
-        .teacher-subject {
-            color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 0.6rem;
-            opacity: 0.7;
-            transition: color 0.3s ease;
-        }
-
-        .teacher-rating {
-            display: flex;
-            justify-content: center;
-            gap: 0.3rem;
-            margin: 0.6rem 0;
-        }
-
-        .teacher-rating svg {
-            color: var(--warning);
-            fill: var(--warning);
-            width: 20px;
-            height: 20px;
-        }
-
-        .back-button {
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary-2), var(--primary-3));
-            box-shadow: var(--shadow-sm);
-        }
-
-        .teacher-info {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            background: var(--card);
-            padding: 2rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-md);
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
-        
-        .teacher-img-lg {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--accent);
-            box-shadow: var(--shadow-md);
-            transition: border-color 0.3s ease;
-        }
-
-        .classes-list {
-            display: grid;
-            gap: 1.6rem;
-        }
-
-        .class-card {
-            background: var(--card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
-
-        .class-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 1.6rem;
-            cursor: pointer;
-            user-select: none;
-            background: var(--bg-glass);
-            backdrop-filter: blur(8px);
-            border-right: 5px solid var(--primary-2);
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
-
-        .class-header:hover {
-            background: var(--hover);
-        }
-
-        .class-header span { transition: transform 0.3s ease; }
-        .class-header.open span { transform: rotate(180deg); }
-
-        .lectures-list {
-            display: none;
-            flex-direction: column;
-            gap: 0.8rem;
-            padding: 1.2rem 1.8rem 1rem 0;
-        }
-
-        .lecture-item {
-            position: relative;
-            padding: 1rem 1.2rem 1rem 4rem;
-            background: var(--hover);
-            border-right: 3px solid var(--primary-3);
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .lecture-item:hover {
-            background: rgba(0, 119, 182, 0.12);
-        }
-
-        .lecture-item svg {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-1);
-            transition: color 0.3s ease;
-        }
-
-        .video-page-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            background: #000;
-            border-radius: var(--radius);
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .plyr { border-radius: var(--radius); overflow: hidden; width: 100%; height: 100%; }
-
-        .video-details {
-            background: var(--card);
-            padding: 1.8rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: background 0.3s ease, border-color 0.3s ease;
-        }
-
-        .video-info { text-align: right; padding: 1.2rem 0; }
-        
-        .video-meta {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            opacity: 0.8;
-            font-size: 0.95rem;
-            flex-wrap: wrap;
-            color: var(--text);
-        }
-
-        .video-meta span { display: flex; align-items: center; gap: 0.4rem; }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin: 2rem 0 1.2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--primary-1);
-            color: var(--primary-1);
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-        
-        /* Smart Loader */
-        .video-loader {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            border-radius: var(--radius);
-            transition: opacity 0.3s ease;
-        }
-
-        .loader-spinner {
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid var(--primary-1);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* Loading card skeleton */
-        .loading-card {
-            opacity: 0.7;
-            animation: pulse 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            header {
-                flex-wrap: wrap;
-                padding: 1.2rem 1rem;
-                gap: 1rem;
-            }
-            .search-container {
-                order: 3;
-                width: 100%;
-                margin-top: 1rem;
-            }
-            .btn span { display: none; }
-            .teacher-img { width: 100px; height: 100px; }
-            .video-details { padding: 1.2rem; }
-            .video-container {
-                margin: 0 -1rem;
-                width: calc(100% + 2rem);
-            }
-            .lecture-item { padding-left: 2.5rem; }
-            .video-meta {
-                flex-direction: column;
-                gap: 0.8rem;
-                align-items: center;
-            }
-            .btn { padding: 0.9rem 1.2rem; }
-        }
-
-        @media (max-width: 480px) {
-            .page { padding: 1rem; }
-            .teacher-info {
-                padding: 1.5rem;
-                flex-direction: column;
-                text-align: center;
-            }
-            .teacher-img-lg { margin-bottom: 1.5rem; }
-            .site-title { font-size: 1.8rem; }
-            .teacher-name { font-size: 1.2rem; }
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>منصة السادس</title>
+    
+        <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="https://cdn.glitch.global/c07dc79d-c056-48b0-8b0b-912783754321/5424770778815132543.jpg?v=1751739020203">
+    
+        <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://assets.mediadelivery.net/hls/1.6.6/hls.min.js"></script>
+    <script src="https://assets.mediadelivery.net/plyr/3.7.8.4-bn/plyr.polyfilled.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        /* New CSS from 'منصة السادس' design */
+        :root {
+            --primary: #c62828;
+            --plyr-color-main: #c62828;
+            --bg-color: #0a0a0a;
+            --text-color: #f5f5f5;
+            --card-color: #1a1a1a;
+            --border-color: #333;
+        }
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --card-color: #f5f5f5;
+            --border-color: #ddd;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Almarai', sans-serif; user-select: none; }
+        body { background: var(--bg-color); color: var(--text-color); line-height: 1.6; transition: background 0.3s ease, color 0.3s ease; }
+        .page { display: none; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+        .page.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        header { background: var(--card-color); padding: 1rem 2rem; display: flex; align-items: center; gap: 2rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 3px 6px rgba(0,0,0,0.16); flex-wrap: wrap; transition: background 0.3s ease, box-shadow 0.3s ease; }
+        .site-title { color: var(--primary); font-size: 1.8rem; cursor: pointer; transition: transform 0.3s; flex: 1; min-width: 200px; }
+        .site-title:hover { transform: scale(1.05); }
+        .search-container { flex-grow: 1; max-width: 600px; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        #searchInput { width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 8px; background: var(--card-color); color: var(--text-color); font-size: 1rem; transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease; }
+        #searchInput:focus { outline: none; border-color: var(--primary); }
+        #searchButton, #themeToggle { background: var(--primary); color: #fff; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; padding: 0.8rem 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        #searchButton:hover, #themeToggle:hover { opacity: 0.9; }
+        .teachers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; padding: 1rem 0; margin-top: 2rem; }
+        .teacher-card { background: var(--card-color); padding: 1.5rem; border-radius: 15px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background 0.3s ease; text-align: center; border: 1px solid var(--border-color); }
+        .teacher-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .teacher-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); display: block; margin: 0 auto; transition: border-color 0.3s ease; }
+        .teacher-name { margin: 1rem 0; text-align: center; font-size: 1.2rem; transition: color 0.3s ease; }
+        .teacher-subject { text-align: center; color: var(--text-color); opacity: 0.8; transition: color 0.3s ease; }
+        .classes-page { display: grid; gap: 2rem; }
+        .teacher-info { background: var(--card-color); padding: 1.5rem; border-radius: 10px; display: flex; align-items: center; gap: 1rem; border: 1px solid var(--border-color); transition: background 0.3s ease, border-color 0.3s ease; }
+        .teacher-img-lg { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; transition: border-color 0.3s ease; }
+        .back-button, .copy-button { background: var(--primary); color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 5px; cursor: pointer; transition: 0.3s; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+        .copy-button { margin-top: 1rem; font-size: 1rem; }
+        .back-button:hover, .copy-button:hover { opacity: 0.9; }
+        .classes-list { display: grid; gap: 1.5rem; }
+        .class-card { background: var(--card-color); border-radius: 10px; cursor: pointer; overflow: hidden; border: 1px solid var(--border-color); transition: background 0.3s ease, border-color 0.3s ease; }
+        .class-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-left: 4px solid var(--primary); transition: background 0.3s ease, border-color 0.3s ease; }
+        .class-header:hover { background: rgba(198, 40, 40, 0.1); }
+        .lectures-list { display: none; gap: 0.8rem; margin-top: 1rem; padding-right: 1rem; flex-direction: column; }
+        .lecture-item { position: relative; padding: 1rem 1rem 1rem 2.5rem; background: var(--bg-color); border-radius: 8px; border-right: 3px solid var(--primary); cursor: pointer; transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease; display: flex; justify-content: space-between; align-items: center; }
+        .lecture-item:hover { background: rgba(198, 40, 40, 0.2); transform: translateX(10px); }
+        .checkmark { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 1rem; color: #4CAF50; }
+        .video-page { display: flex; flex-direction: column; gap: 2rem; max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+        .video-container { position: relative; background: black; border-radius: 15px; overflow: hidden; aspect-ratio: 16/9; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .plyr video { width: 100%; height: auto; }
+        .video-details { background: var(--card-color); padding: 1.5rem; border-radius: 10px; text-align: center; border: 1px solid var(--border-color); transition: background 0.3s ease, border-color 0.3s ease; }
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 1rem; gap: 1rem; }
+            .search-container { width: 100%; }
+            .teachers-grid { grid-template-columns: 1fr; }
+            .teacher-card { min-width: auto; }
+            .teacher-info { flex-direction: column; text-align: center; }
+            .teacher-img { width: 150px; height: 150px; }
+            .site-title { font-size: 1.6rem; }
+            #searchButton, #themeToggle { padding: 0.8rem; }
+            .video-container { margin: 0 -1rem; width: calc(100% + 2rem); }
+            .lecture-item { padding-right: 1rem; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1 class="site-title" onclick="navigate('teachers')">
-            <div class="site-logo">ح</div>
-            منصة حسين الهاشمي 2026
-        </h1>
-        <div class="header-actions">
-            <button id="themeToggle" class="btn">
-                <i data-lucide="sun"></i><span>المظهر</span>
-            </button>
-        </div>
-        <div class="search-container">
-            <i class="search-icon" data-lucide="search"></i>
-            <input id="searchInput" type="text" placeholder="ابحث عن مدرس…" />
-            <button id="searchButton" class="btn btn-icon">
-                <i data-lucide="search"></i>
-            </button>
-        </div>
-    </header>
+    <header>
+        <h1 class="site-title" onclick="navigate('home')">منصة السادس</h1>
+        <button id="themeToggle">
+            <i data-lucide="sun"></i>
+            <span>تبديل الوضع</span>
+        </button>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="ابحث عن مدرس...">
+            <button id="searchButton"><i data-lucide="search"></i> بحث</button>
+        </div>
+    </header>
 
-    <!-- Teachers Page -->
-    <div id="teachersPage" class="page">
-        <div class="section-title">
-            <i data-lucide="users"></i>
-            <h3 id="categoryTitle">المدرسين</h3>
-        </div>
-        <div id="teachersGrid" class="teachers-grid">
-            <!-- Teachers will be loaded here -->
-        </div>
-    </div>
+        <div id="homePage" class="page active">
+        <div class="teachers-grid" id="teachersGrid">
+                    </div>
+    </div>
 
-    <!-- Classes Page -->
-    <div id="classesPage" class="page">
-        <button class="btn back-button" onclick="navigate('teachers')">
-            <i data-lucide="arrow-right"></i>الرجوع للمدرسين
-        </button>
-        <div class="teacher-info">
-            <img id="teacherImage" class="teacher-img-lg" alt="" />
-            <div>
-                <h2 id="teacherName"></h2>
-                <p id="teacherSubject" class="teacher-subject"></p>
-                <div id="teacherRating" class="teacher-rating"></div>
-            </div>
-        </div>
-        <div class="section-title">
-            <i data-lucide="book-open"></i>
-            <h3>الفصول الدراسية</h3>
-        </div>
-        <div id="classesList" class="classes-list"></div>
-    </div>
+        <div id="classesPage" class="page">
+        <div class="classes-page">
+            <button class="back-button" onclick="navigate('home')"><i data-lucide="arrow-right"></i> الرجوع للمدرسين</button>
+            <div class="teacher-info">
+                <img id="teacherImage" class="teacher-img-lg" alt="صورة المدرس" />
+                <div>
+                    <h2 id="teacherName"></h2>
+                    <p id="teacherSubject"></p>
+                </div>
+            </div>
+            <div class="classes-list" id="classesList"></div>
+        </div>
+    </div>
 
-    <!-- Video Page -->
-    <div id="videoPage" class="page">
-        <div class="video-page-content">
-            <div id="videoContainer" class="video-container">
-                <div id="playerContainer"></div>
-                <div id="videoLoader" class="video-loader" style="display: none;">
-                    <div class="loader-spinner"></div>
-                </div>
-            </div>
-            <div class="video-details">
-                <h2 id="videoTitle"></h2>
-                <p id="videoDescription"></p>
-                <div class="video-info">
-                    <div class="video-meta">
-                        <span>
-                            <i data-lucide="calendar"></i> تاريخ النشر:
-                            <span id="videoDate">--/--/----</span>
-                        </span>
-                    </div>
-                </div>
-                <button class="btn back-button" onclick="navigate('classes')">
-                    <i data-lucide="arrow-right"></i>العودة للفصول
-                </button>
-            </div>
-        </div>
-    </div>
+        <div id="videoPage" class="page">
+        <div class="video-page">
+            <div class="video-container">
+                <div id="playerContainer"></div>
+                <div id="videoLoader" class="video-loader" style="display: none;">
+                    <div class="loader-spinner"></div>
+                </div>
+            </div>
+            <div class="video-details">
+                <h2 id="videoTitle"></h2>
+                <p id="videoDescription"></p>
+                <div style="display: flex; justify-content: center; gap: 1rem;">
+                    <button class="back-button" onclick="navigate('classes')"><i data-lucide="arrow-right"></i> العودة للفصول</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    
-    <script type="text/babel">
-        // Initialize theme based on local storage or system preference
-        function initializeTheme() {
-            const stored = localStorage.getItem("theme");
-            const preferred = window.matchMedia("(prefers-color-scheme: light)").matches
-                ? "light"
-                : "dark";
-            const theme = stored || preferred;
-            document.documentElement.setAttribute("data-theme", theme);
-            updateThemeIcon(theme);
-        }
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    
+    <script type="text/babel">
+        var completedLectures = JSON.parse(localStorage.getItem('completedLectures') || '{}');
+        function saveCompleted() {
+            localStorage.setItem('completedLectures', JSON.stringify(completedLectures));
+        }
+        function markLectureCompleted(url) {
+            if (!completedLectures[url]) {
+                completedLectures[url] = true;
+                saveCompleted();
+                if (currentTeacher) renderClasses(currentTeacher.classes);
+            }
+        }
+        
+        function initializeTheme() {
+            const stored = localStorage.getItem("theme");
+            const preferred = window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+            const theme = stored || preferred;
+            document.documentElement.setAttribute("data-theme", theme);
+            updateThemeIcon(theme);
+        }
+        function updateThemeIcon(theme) {
+            const icon = document.querySelector("#themeToggle i");
+            if (icon) {
+                icon.setAttribute("data-lucide", theme === "dark" ? "sun" : "moon");
+                lucide.createIcons();
+            }
+        }
 
-        // Update the theme toggle icon
-        function updateThemeIcon(theme) {
-            document
-                .querySelector("#themeToggle i")
-                .setAttribute("data-lucide", theme === "dark" ? "sun" : "moon");
-            lucide.createIcons();
-        }
+        initializeTheme();
 
-        initializeTheme();
+        document.getElementById("themeToggle").addEventListener("click", () => {
+            const cur = document.documentElement.getAttribute("data-theme");
+            const next = cur === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            localStorage.setItem("theme", next);
+            updateThemeIcon(next);
+        });
+        
+        let player = null;
+        const playerContainer = document.getElementById("playerContainer");
+        const videoLoader = document.getElementById("videoLoader");
+        const pages = {
+            home: document.getElementById("homePage"),
+            classes: document.getElementById("classesPage"),
+            video: document.getElementById("videoPage")
+        };
+        let teachers = [];
+        let currentTeacher = null;
+        let currentClassIndex = 0;
+        let currentLectureIndex = 0;
+        let currentLectureLink = "";
+        let hls = null;
+        
+        const searchInput = document.getElementById("searchInput");
+        const searchButton = document.getElementById("searchButton");
+        
+        function navigate(page) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            if (page !== "video") {
+                if (player) {
+                    player.destroy();
+                    player = null;
+                }
+                if (hls) {
+                    hls.destroy();
+                    hls = null;
+                }
+                if (window.progressInterval) {
+                    clearInterval(window.progressInterval);
+                    window.progressInterval = null;
+                }
+                playerContainer.innerHTML = "";
+                videoLoader.style.display = 'none';
+            }
+            Object.values(pages).forEach((p) => p.classList.remove("active"));
+            pages[page].classList.add("active");
+        }
+        
+        function renderTeachers(list = teachers) {
+            if (!list.length) {
+                teachersGrid.innerHTML = "<p style='text-align: center; color: var(--text-color);'>لا توجد نتائج مطابقة.</p>";
+                return;
+            }
 
-        // Event listener for theme toggle button
-        document.getElementById("themeToggle").addEventListener("click", () => {
-            const cur = document.documentElement.getAttribute("data-theme");
-            const next = cur === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-theme", next);
-            localStorage.setItem("theme", next);
-            updateThemeIcon(next);
-        });
+            teachersGrid.innerHTML = list.map(t => `
+                <div class="teacher-card" onclick="showTeacher('${t.id}')">
+                    <img src="${t.image}" alt="${t.name}" class="teacher-img" onerror="this.onerror=null;this.src='https://placehold.co/200x200/1a1a1a/fff?text=صورة+غير+متوفرة';">
+                    <h3 class="teacher-name">${t.name}</h3>
+                    <p class="teacher-subject">${t.subject}</p>
+                </div>
+            `).join('');
+        }
 
-        // Plyr player instance
-        let player = null;
+        window.showTeacher = (id) => {
+            currentTeacher = teachers.find(t => t.id == id);
+            if (!currentTeacher) return;
 
-        // DOM references
-        const teacherImage = document.getElementById("teacherImage");
-        const teacherName = document.getElementById("teacherName");
-        const teacherSubject = document.getElementById("teacherSubject");
-        const teacherRating = document.getElementById("teacherRating");
-        const videoTitle = document.getElementById("videoTitle");
-        const videoDescription = document.getElementById("videoDescription");
-        const categoryTitle = document.getElementById("categoryTitle");
-        const classesList = document.getElementById("classesList");
-        const teachersGrid = document.getElementById("teachersGrid");
-        const playerContainer = document.getElementById("playerContainer");
-        const videoLoader = document.getElementById("videoLoader");
+            document.getElementById('teacherImage').src = currentTeacher.image;
+            document.getElementById('teacherImage').onerror = function() {
+                this.onerror = null;
+                this.src = 'https://placehold.co/120x120/1a1a1a/fff?text=صورة+غير+متوفرة';
+            };
+            document.getElementById('teacherName').textContent = currentTeacher.name;
+            document.getElementById('teacherSubject').textContent = currentTeacher.subject;
 
-        // Progress and ratings storage
-        let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
-        let ratings = JSON.parse(localStorage.getItem("ratings")) || {};
+            renderClasses(currentTeacher.classes);
+            navigate("classes");
+        };
 
-        // Page navigation elements
-        const pages = {
-            teachers: document.getElementById("teachersPage"),
-            classes: document.getElementById("classesPage"),
-            video: document.getElementById("videoPage")
-        };
+        function renderClasses(classesData) {
+            document.getElementById('classesList').innerHTML = classesData.map((cls, ci) => {
+                const lectures = cls.lectures.map((lec, li) => {
+                    const done = completedLectures[lec.url];
+                    return `
+                        <div class="lecture-item"
+                             onclick="playLecture(${ci}, ${li}, '${lec.url}', '${lec.title}', '${lec.description}')">
+                            <span>${li + 1}. ${lec.title}</span>
+                            ${done ? '<span class="checkmark" data-lucide="check"></span>' : ''}
+                        </div>
+                    `;
+                }).join('');
 
-        // Function to navigate between pages
-        function navigate(page) {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            if (page !== "video") {
-                if (player) {
-                    player.destroy();
-                    player = null;
-                }
-                if (window.hlsInstance) {
-                    window.hlsInstance.destroy();
-                    window.hlsInstance = null;
-                }
-                if (window.progressInterval) {
-                    clearInterval(window.progressInterval);
-                    window.progressInterval = null;
-                }
-                playerContainer.innerHTML = "";
-                videoLoader.style.display = 'none';
-            }
-            Object.values(pages).forEach((p) => p.classList.remove("active"));
-            pages[page].classList.add("active");
-        }
+                return `
+                    <div class="class-card">
+                        <div class="class-header" onclick="toggleLectures(this)">
+                            <h3>${cls.name}</h3>
+                            <span data-lucide="chevron-down"></span>
+                        </div>
+                        <div class="lectures-list">${lectures}</div>
+                    </div>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
 
-        /* ========= بيانات المدرسين ========= */
-        const searchInput = document.getElementById("searchInput");
-        const searchBtn = document.getElementById("searchButton");
-        let teachers = [];
-        let currentTeacher = null;
-        let currentClassIndex = 0;
-        let currentLectureIndex = 0;
-        let currentLectureLink = "";
+        window.toggleLectures = (header) => {
+            const list = header.parentElement.querySelector(".lectures-list");
+            const icon = header.querySelector("[data-lucide]");
+            const open = list.style.display !== "flex";
 
-        // Render teachers grid
-        function renderTeachers(list = teachers) {
-            if (!list.length) {
-                teachersGrid.innerHTML = "<p style='text-align: center; color: var(--text);'>لا توجد نتائج مطابقة.</p>";
-                return;
-            }
+            list.style.display = open ? "flex" : "none";
+            header.classList.toggle("open", open);
+            icon.setAttribute("data-lucide", open ? "chevron-up" : "chevron-down");
+            lucide.createIcons();
+        };
 
-            teachersGrid.innerHTML = "";
-            list.forEach((t, idx) => {
-                const rating = ratings[t.id] || 0;
-                const card = document.createElement("div");
-                card.className = "teacher-card";
-                card.innerHTML = `
-                    <img class="teacher-img" src="${t.image}" alt="${t.name}" onerror="this.onerror=null;this.src='https://placehold.co/140x140/E5E7EB/9CA3AF?text=صورة+غير+متوفرة';">
-                    <h3 class="teacher-name">${t.name}</h3>
-                    <p class="teacher-subject">${t.subject}</p>
-                    <div class="teacher-rating">
-                        ${renderStars(rating)}
-                    </div>
-                `;
-                card.onclick = () => showTeacher(t.id);
-                teachersGrid.appendChild(card);
-                lucide.createIcons();
-            });
-        }
-        
-        // Helper function to render Lucide star icons
-        function renderStars(rating) {
-            let stars = "";
-            for (let i = 1; i <= 5; i++) {
-                if (i <= rating) {
-                    stars += `<i data-lucide="star"></i>`;
-                } else {
-                    stars += `<i data-lucide="star" style="color: var(--border); fill: none;"></i>`;
-                }
-            }
-            return stars;
-        }
+        window.playLecture = (ci, li, url, title, desc) => {
+            if (player) {
+                player.destroy();
+                player = null;
+            }
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
+            if (window.progressInterval) {
+                clearInterval(window.progressInterval);
+                window.progressInterval = null;
+            }
+            playerContainer.innerHTML = "";
+            videoLoader.style.display = 'none';
 
-        // Show teacher details page
-        window.showTeacher = (id) => {
-            currentTeacher = teachers.find((t) => t.id == id);
-            if (!currentTeacher) return;
+            [currentClassIndex, currentLectureIndex, currentLectureLink] = [ci, li, url,];
+            document.getElementById("videoTitle").textContent = title;
+            document.getElementById("videoDescription").textContent = desc;
 
-            teacherImage.src = currentTeacher.image;
-            teacherImage.onerror = function() {
-                this.onerror = null;
-                this.src = 'https://placehold.co/150x150/E5E7EB/9CA3AF?text=صورة+غير+متوفرة';
-            };
-            teacherName.textContent = currentTeacher.name;
-            teacherSubject.textContent = currentTeacher.subject;
+            if (url.includes("iframe.mediadelivery.net/embed/")) {
+                videoLoader.style.display = 'flex';
+                const encodedUrl = btoa(url);
+                const iframeUrl = `https://server2.halzyz082.workers.dev/proxy_iframe?url=${encodedUrl}`;
+                const iframeHtml = `
+                    <div style="position: relative; width: 100%; height: 100%;">
+                        <iframe
+                            src="${iframeUrl}"
+                            allowfullscreen
+                            loading="eager"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 15px;"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                            onload="document.getElementById('videoLoader').style.display='none';"
+                        ></iframe>
+                    </div>
+                `;
+                playerContainer.innerHTML = iframeHtml;
+                navigate("video");
+                return;
+            }
 
-            const rating = ratings[currentTeacher.id] || 0;
-            teacherRating.innerHTML = renderStars(rating);
+            playerContainer.innerHTML = `<video id="player" playsinline controls></video>`;
+            const videoElement = document.getElementById("player");
+            const isHLS = url.endsWith(".m3u8");
+            const referer = "https://abwaab.com";
+            let finalVideoUrl = url;
+            
+            if (isHLS && !url.startsWith("https://vz-")) {
+                finalVideoUrl = `https://oxgeccc.halzyz082.workers.dev/?url=${encodeURIComponent(url)}&referer=${encodeURIComponent(referer)}`;
+            }
+            
+            const savedTime = completedLectures[url] || 0;
 
-            renderClasses(currentTeacher.classes);
-            navigate("classes");
-        };
+            player = new Plyr(videoElement, {
+                controls: ['play-large','rewind','play','fast-forward','progress','current-time','mute','volume','captions','settings','airplay','fullscreen'],
+                settings: ['speed','quality'], speed:{selected:1,options:[0.5,1,1.25,1.5,2]}, seekTime:10
+            });
+            
+            player.on('ended', () => { markLectureCompleted(currentLectureLink); });
 
-        // Render classes for a selected teacher
-        function renderClasses(classesData) {
-            classesList.innerHTML = classesData
-                .map((cls, ci) => {
-                    const lectures = cls.lectures
-                        .map((lec, li) => {
-                            return `
-                                <div class="lecture-item"
-                                     onclick="playLecture(${ci}, ${li}, '${lec.url}', '${lec.title}', '${lec.description}')">
-                                    <i data-lucide="play-circle"></i>
-                                    <span>${li + 1}. ${lec.title}</span>
-                                </div>
-                            `;
-                        })
-                        .join("");
+            if (isHLS && Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(finalVideoUrl);
+                hls.attachMedia(videoElement);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    player.play().catch(console.error);
+                });
+                hls.on(Hls.Events.ERROR, (_, data) => { if (data.fatal) { switch (data.type) { case Hls.ErrorTypes.NETWORK_ERROR: hls.startLoad(); break; case Hls.ErrorTypes.MEDIA_ERROR: hls.recoverMediaError(); break; default: break; } } });
+            } else {
+                player.source = { type: 'video', sources: [{ src: finalVideoUrl, type: isHLS ? "application/x-mpegURL" : "video/mp4" }] };
+                player.play().catch(console.error);
+            }
+            navigate("video");
+        };
+        
+        function handleSearch() {
+            const term = searchInput.value.trim().toLowerCase();
+            renderTeachers(
+                teachers.filter(t => t.name.toLowerCase().includes(term) || t.subject.toLowerCase().includes(term))
+            );
+        }
+        
+        let searchTimeout;
+        searchInput.addEventListener("input", () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(handleSearch, 250);
+        });
+        searchButton.addEventListener("click", handleSearch);
 
-                    return `
-                        <div class="class-card">
-                            <div class="class-header" onclick="toggleLectures(this)">
-                                <h3>${cls.name}</h3>
-                                <span data-lucide="chevron-down"></span>
-                            </div>
-                            <div class="lectures-list">${lectures}</div>
-                        </div>
-                    `;
-                })
-                .join("");
+        function loadData() {
+            const endpoint = "https://edsoe.netlify.app/data.json";
+            const err = '<p style="color:#DC3545; text-align: center;">حدث خطأ في تحميل البيانات.</p><button class="back-button" onclick="location.reload()" style="display: block; margin: 1rem auto;">إعادة المحاولة</button>';
+            
+            const loadingHtml = `
+                <div class="loading-card teacher-card" style="opacity: 0.7; animation: pulse 1.5s infinite ease-in-out;">
+                    <div style="width: 200px; height: 200px; background: var(--border-color); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
+                    <div style="height: 1.2rem; background: var(--border-color); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
+                    <div style="height: 1rem; background: var(--border-color); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
+                </div>
+                <div class="loading-card teacher-card" style="opacity: 0.7; animation: pulse 1.5s infinite ease-in-out;">
+                    <div style="width: 200px; height: 200px; background: var(--border-color); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
+                    <div style="height: 1.2rem; background: var(--border-color); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
+                    <div style="height: 1rem; background: var(--border-color); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
+                </div>
+                <div class="loading-card teacher-card" style="opacity: 0.7; animation: pulse 1.5s infinite ease-in-out;">
+                    <div style="width: 200px; height: 200px; background: var(--border-color); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
+                    <div style="height: 1.2rem; background: var(--border-color); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
+                    <div style="height: 1rem; background: var(--border-color); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
+                </div>
+            `;
+            teachersGrid.innerHTML = loadingHtml;
 
-            lucide.createIcons();
-        }
-
-        // Toggle lecture list visibility
-        window.toggleLectures = (header) => {
-            const list = header.parentElement.querySelector(".lectures-list");
-            const icon = header.querySelector("[data-lucide]");
-            const open = list.style.display !== "flex";
-
-            list.style.display = open ? "flex" : "none";
-            header.classList.toggle("open", open);
-            icon.setAttribute("data-lucide", open ? "chevron-up" : "chevron-down");
-            lucide.createIcons();
-        };
-
-        // Play selected lecture
-        window.playLecture = (ci, li, url, title, desc) => {
-            if (player) {
-                player.destroy();
-                player = null;
-            }
-            if (window.hlsInstance) {
-                window.hlsInstance.destroy();
-                window.hlsInstance = null;
-            }
-            if (window.progressInterval) {
-                clearInterval(window.progressInterval);
-                window.progressInterval = null;
-            }
-
-            playerContainer.innerHTML = "";
-            videoLoader.style.display = 'none';
-
-            [currentClassIndex, currentLectureIndex, currentLectureLink] = [ci, li, url,];
-            videoTitle.textContent = title;
-            videoDescription.textContent = desc;
-            document.getElementById("videoDate").textContent = "15/10/2026";
-
-            if (url.includes("iframe.mediadelivery.net/embed/")) {
-                videoLoader.style.display = 'flex';
-                const encodedUrl = btoa(url);
-                const iframeUrl = `https://server2.halzyz082.workers.dev/proxy_iframe?url=${encodedUrl}`;
-                const iframeHtml = `
-                    <div style="position: relative; width: 100%; padding-top: 56.25%;">
-                        <iframe 
-                            src="${iframeUrl}" 
-                            allowfullscreen 
-                            loading="eager"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 18px;"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                            onload="document.getElementById('videoLoader').style.display='none';"
-                        ></iframe>
-                    </div>
-                `;
-                playerContainer.innerHTML = iframeHtml;
-                navigate("video");
-                return;
-            }
-
-            playerContainer.innerHTML = `
-                <video id="player" playsinline controls></video>
-            `;
-            lucide.createIcons();
-            const videoElement = document.getElementById("player");
-            const isHLS = url.endsWith(".m3u8");
-            const referer = "https://abwaab.com";
-            let finalVideoUrl = url;
-            
-            if (isHLS && url.startsWith("https://vz-25858200-a22.becdn.net/")) {
-                finalVideoUrl = url;
-            } else if (isHLS) {
-                finalVideoUrl = `https://oxgeccc.halzyz082.workers.dev/?url=${encodeURIComponent(url)}&referer=${encodeURIComponent(referer)}`;
-            }
-            
-            const savedTime = lectureProgress[url] ? (lectureProgress[url] / 100) * (player?.duration || 0) : 0;
-
-            player = new Plyr("#player", {
-                controls: ["play-large", "play", "progress", "current-time", "fullscreen", "settings",],
-                keyboard: { focused: true, global: true },
-                tooltips: { controls: true, seek: true },
-                captions: { active: false },
-                settings: ["quality", "speed"],
-                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
-            });
-
-            window.progressInterval = setInterval(() => {
-                if (player && player.duration > 0) {
-                    const progress = (player.currentTime / player.duration) * 100;
-                    lectureProgress[url] = progress;
-                    localStorage.setItem("lectureProgress", JSON.stringify(lectureProgress));
-                }
-            }, 5000);
-
-            function tryPlay() {
-                if (isHLS && Hls.isSupported()) {
-                    const hls = new Hls();
-                    window.hlsInstance = hls;
-                    hls.attachMedia(videoElement);
-                    hls.loadSource(finalVideoUrl);
-                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                        player
-                            .play()
-                            .then(() => { if (savedTime > 0) player.currentTime = savedTime; })
-                            .catch(console.error);
-                    });
-                    hls.on(Hls.Events.ERROR, (_, data) => {
-                        if (data.fatal) {
-                            switch (data.type) {
-                                case Hls.ErrorTypes.NETWORK_ERROR:
-                                    hls.startLoad();
-                                    break;
-                                case Hls.ErrorTypes.MEDIA_ERROR:
-                                    hls.recoverMediaError();
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    });
-                } else {
-                    player.source = {
-                        type: "video",
-                        sources: [
-                            {
-                                src: finalVideoUrl,
-                                type: isHLS ? "application/x-mpegURL" : "video/mp4",
-                            },
-                        ],
-                    };
-                    player
-                        .play()
-                        .then(() => { if (savedTime > 0) player.currentTime = savedTime; })
-                        .catch(() => { console.log("تعذر تشغيل الفيديو"); });
-                }
-            }
-            tryPlay();
-            navigate("video");
-        };
-
-        /* ========= البحث ========= */
-        function handleSearch() {
-            const term = searchInput.value.trim().toLowerCase();
-            renderTeachers(
-                teachers.filter(
-                    (t) =>
-                        t.name.toLowerCase().includes(term) ||
-                        t.subject.toLowerCase().includes(term)
-                )
-            );
-        }
-
-        let searchTimeout;
-        searchInput.addEventListener("input", () => {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(handleSearch, 250);
-        });
-        searchBtn.addEventListener("click", handleSearch);
-
-        /* ========= تحميل البيانات ========= */
-        function loadData() {
-            const endpoint = "https://edsoe.netlify.app/data.json";
-            const err =
-                '<p style="color:var(--error); text-align: center;">حدث خطأ في تحميل البيانات.</p><button class="btn back-button" onclick="location.reload()" style="display: block; margin: 1rem auto;">إعادة المحاولة</button>';
-            
-            teachersGrid.innerHTML = `
-                <div class="loading-card teacher-card">
-                    <div style="width: 140px; height: 140px; background: var(--border); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
-                    <div style="height: 1.4rem; background: var(--border); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
-                    <div style="height: 1rem; background: var(--border); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
-                </div>
-                <div class="loading-card teacher-card">
-                    <div style="width: 140px; height: 140px; background: var(--border); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
-                    <div style="height: 1.4rem; background: var(--border); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
-                    <div style="height: 1rem; background: var(--border); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
-                </div>
-                <div class="loading-card teacher-card">
-                    <div style="width: 140px; height: 140px; background: var(--border); border-radius: 50%; margin: 0 auto 1.2rem;"></div>
-                    <div style="height: 1.4rem; background: var(--border); border-radius: 4px; margin-bottom: 0.5rem; width: 80%; margin-left: auto; margin-right: auto;"></div>
-                    <div style="height: 1rem; background: var(--border); border-radius: 4px; width: 60%; margin-left: auto; margin-right: auto;"></div>
-                </div>
-            `;
-
-            fetch(endpoint, {
-                headers: {
-                    Referer: "https://careful-burnt-honesty.glitch.me/",
-                    "Cache-Control": "no-cache",
-                },
-            })
-                .then((r) => {
-                    if (!r.ok) throw new Error();
-                    return r.json();
-                })
-                .then((data) => {
-                    teachers = data.teachers;
-                    renderTeachers();
-                })
-                .catch(() => {
-                    teachersGrid.innerHTML = err;
-                });
-        }
-
-        // Initialize the app directly without login
-        window.onload = () => {
-          loadData();
-          navigate('teachers');
-          lucide.createIcons();
-        };
-
-    </script>
+            fetch(endpoint, { headers: { 'Referer': 'https://careful-burnt-honesty.glitch.me/', 'Cache-Control': 'no-cache' }})
+                .then(res => { if (!res.ok) throw new Error('Failed to load data'); return res.json(); })
+                .then(data => { teachers = data.teachers; renderTeachers(); })
+                .catch(error => { console.error('Error:', error); teachersGrid.innerHTML = err; });
+        }
+        
+        window.onload = () => {
+            loadData();
+            navigate('home');
+            lucide.createIcons();
+        };
+    </script>
 </body>
 </html>
