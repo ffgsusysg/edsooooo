@@ -1077,6 +1077,7 @@
 
         // Play selected lecture
         window.playLecture = (ci, li, url, title, desc) => {
+            // تدمير أي مشغل موجود قبل بدء تشغيل الفيديو الجديد
             if (player) {
                 player.destroy();
                 player = null;
@@ -1096,11 +1097,23 @@
             videoDescription.textContent = desc;
             document.getElementById("videoDate").textContent = "15/10/2026";
 
-            // If the URL is an iframe, create an iframe directly
-            if (url.includes("iframe.mediadelivery.net/embed/")) {
+            // تحديد الروابط التي يجب تشغيلها عبر البروكسي
+            const specificProxyPrefix = "https://iframe.mediadelivery.net/embed/484313/";
+            // URL البروكسي الذي طلبه المستخدم
+            const proxyBaseUrl = "https://vip.halzyz082.workers.dev/proxy_iframe?url=";
+
+            let finalUrl = url;
+
+            // إذا كان الرابط يبدأ بالمسار المحدد، قم بإنشاء الرابط عبر البروكسي
+            if (url.startsWith(specificProxyPrefix)) {
+                finalUrl = proxyBaseUrl + encodeURIComponent(url);
+            }
+
+            // إذا كان الرابط النهائي يتضمن كلمة "embed" (سواء كان أصليًا أو عبر البروكسي)، قم بإنشاء iframe
+            if (finalUrl.includes("embed")) {
                 const iframeHtml = `
                     <iframe
-                        src="${url}" 
+                        src="${finalUrl}" 
                         allowfullscreen 
                         loading="eager"
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 18px;"
@@ -1110,21 +1123,21 @@
                 `;
                 playerContainerParent.innerHTML = iframeHtml;
             } else {
-                // For direct video URLs (MP4, HLS, etc.), use the Plyr player
+                // للروابط الأخرى التي لا تتطلب iframe (مثل روابط HLS مباشرة)
                 playerContainerParent.innerHTML = `
                     <video id="player" playsinline controls></video>
                 `;
                 const videoElement = document.getElementById("player");
-                const isHLS = url.endsWith(".m3u8");
+                const isHLS = finalUrl.endsWith(".m3u8");
                 
-                const savedTime = lectureProgress[url] ? (lectureProgress[url] / 100) * (videoElement.duration || 0) : 0;
+                const savedTime = lectureProgress[finalUrl] ? (lectureProgress[finalUrl] / 100) * (videoElement.duration || 0) : 0;
                 
                 // Use HLS.js for HLS streams, otherwise use a direct source
                 if (isHLS && Hls.isSupported()) {
                     const hls = new Hls();
                     window.hlsInstance = hls;
                     hls.attachMedia(videoElement);
-                    hls.loadSource(url);
+                    hls.loadSource(finalUrl);
                     hls.on(Hls.Events.MANIFEST_PARSED, () => {
                         player.play().then(() => { 
                             if (savedTime > 0) player.currentTime = savedTime; 
@@ -1146,7 +1159,7 @@
                         }
                     });
                 } else {
-                    videoElement.src = url;
+                    videoElement.src = finalUrl;
                     videoElement.type = isHLS ? "application/x-mpegURL" : "video/mp4";
                     videoElement.play().then(() => { 
                         if (savedTime > 0) videoElement.currentTime = savedTime;
@@ -1169,7 +1182,7 @@
                 window.progressInterval = setInterval(() => {
                     if (player && player.duration > 0) {
                         const progress = (player.currentTime / player.duration) * 100;
-                        lectureProgress[url] = progress;
+                        lectureProgress[finalUrl] = progress;
                         localStorage.setItem("lectureProgress", JSON.stringify(lectureProgress));
                     }
                 }, 5000);
