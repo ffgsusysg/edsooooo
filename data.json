@@ -1,7 +1,7 @@
 {
   "teachers": [
     {
-      "id": 1740790303973,
+    "id": 1740790303973,
       "name": "حسين الهاشمي 2026",
       "subject": " ",
       "image": "https://i.imghippo.com/files/znmV1809Xss.jpg",
@@ -43,7 +43,7 @@
               "title": "محاضرة 7",
               "description": "وصف المحاضرة",
               "url": "https://iframe.mediadelivery.net/embed/484313/7b44885e-b881-4053-bdcd-e969e3847913"
-            }
+					 }
           ]
         }
       ]
