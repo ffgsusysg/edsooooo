@@ -718,7 +718,7 @@
         const teachersGrid = document.getElementById("teachersGrid");
         const playerContainer = document.getElementById("playerContainer");
         const videoLoader = document.getElementById("videoLoader");
-        const securityOverlay = document.getElementById("securityOverlay");
+        const securityOverlay = document.getElementById("securityOverlay"); // Security overlay reference
 
         // Progress and ratings storage
         let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
@@ -1060,13 +1060,42 @@
             startSecurityCheck(); // بدء فحص الحماية
         };
 
-        /* ========= وظيفة فحص الحماية المتقدمة ========= */
+        /* ========= وظيفة فحص الحماية ========= */
+        function startSecurityCheck() {
+            // كشف أدوات المطور من خلال مقارنة أبعاد النافذة
+            setInterval(() => {
+                const threshold = 160; // عتبة للكشف عن تغيير في الأبعاد
+
+                // إذا كانت أبعاد النافذة الداخلية تختلف بشكل كبير عن الأبعاد الخارجية
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    showSecurityOverlay();
+                }
+            }, 1000); // الفحص كل ثانية
+            
+            // كشف أدوات المطور عند فتحها من خلال اختصارات لوحة المفاتيح
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                    showSecurityOverlay();
+                }
+            });
+            
+            // كشف فتح أدوات المطور من خلال فحص الحجم
+            window.addEventListener('resize', () => {
+                if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
+                    showSecurityOverlay();
+                }
+            });
+        }
+        
+        // عرض شاشة الحماية
         function showSecurityOverlay() {
             if (securityOverlay) {
                 securityOverlay.classList.add('active');
+                // إيقاف جميع الأزرار والروابط لمنع أي تفاعل
                 document.querySelectorAll('a, button, [onclick]').forEach(el => {
                     el.style.pointerEvents = 'none';
                 });
+                // إيقاف جميع المؤقتات
                 const intervalId = setInterval(() => {}, 1);
                 for (let i = 1; i < intervalId; i++) {
                     clearInterval(i);
@@ -1077,68 +1106,7 @@
                 }
             }
         }
-        
-        function startSecurityCheck() {
-            let lastCheckTime = performance.now();
-            let checkCounter = 0;
-            const threshold = 160;
 
-            // كشف أبعاد النافذة واختصارات لوحة المفاتيح
-            setInterval(() => {
-                const isDevToolsOpenByDimensions = (window.outerWidth - window.innerWidth > threshold) || (window.outerHeight - window.innerHeight > threshold);
-                const isDevToolsOpenByKeyboard = false; // تم نقل هذا الفحص إلى المستمع
-
-                if (isDevToolsOpenByDimensions || isDevToolsOpenByKeyboard) {
-                    showSecurityOverlay();
-                }
-
-                // كشف من خلال أداء وحدة التحكم (Console)
-                const currentTime = performance.now();
-                const timeDifference = currentTime - lastCheckTime;
-                lastCheckTime = currentTime;
-                if (timeDifference > 1000 + 200) { // 200ms of tolerance
-                    showSecurityOverlay();
-                }
-            }, 1000);
-
-            // كشف عبر فخ المُصحّح (Debugger Trap)
-            function debuggerTrap() {
-                try {
-                    // يحاول تنفيذ كود مُعَرَّف باسم 'debugger'
-                    Function('debugger')();
-                } catch (e) {
-                    // إذا تم الكشف عن أداة المطور، سيتم إيقاف التنفيذ هنا
-                    showSecurityOverlay();
-                }
-            }
-            // فحص دوري لفخ المُصحّح
-            setInterval(debuggerTrap, 5000);
-
-            // فحص عبر الفخ الخاص بالدالة toString()
-            const devtoolsOpen = (() => {
-                let func = function() {};
-                return func.toString().indexOf('debugger') !== -1;
-            })();
-            if (devtoolsOpen) {
-                showSecurityOverlay();
-            }
-
-            // فخ العنصر (Element Trap)
-            const img = new Image();
-            Object.defineProperty(img, 'id', {
-                get: function() {
-                    showSecurityOverlay();
-                }
-            });
-            console.log(img);
-
-            // كشف اختصارات لوحة المفاتيح
-            window.addEventListener('keydown', (e) => {
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-                    showSecurityOverlay();
-                }
-            });
-        }
     </script>
 </body>
 </html>
