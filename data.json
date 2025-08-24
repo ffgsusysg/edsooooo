@@ -2,223 +2,53 @@
   "teachers": [
     {
       "id": 1740790303973,
-      "name": "حيدر عبدالائمة 2025",
-      "subject": "مدرس مادة الرياضيات ",
+      "name": "حسين الهاشمي 2026",
+      "subject": " ",
       "image": "https://i.imghippo.com/files/znmV1809Xss.jpg",
       "classes": [
         {
-          "name": "الفصل الاول: الاعداد المركبة",
+          "name": "الفصل الثاني:  ",
           "lectures": [
             {
               "title": "محاضرة 1",
               "description": "وصف المحاضرة",
-              "url": "https://edsoe.netlify.app/"
+              "url": "https://iframe.mediadelivery.net/embed/157276/247045d6-e4b5-4401-818d-c94fe5b5079f"
             },
             {
               "title": "محاضرة 2",
               "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/749a4a33-f27c-4859-9b10-fd6e3053558b/1080p/video.m3u8"
+              "url": "https://iframe.mediadelivery.net/embed/157276/e52de93c-c228-4768-8d8f-dd3931e6561c"
             },
             {
               "title": "محاضرة 3",
               "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/3e5cb5ee-5d88-4903-b3cd-2683a38307d9/1080p/video.m3u8"
+              "url": "https://iframe.mediadelivery.net/embed/157276/f1a14705-35d5-473a-bf15-dd9bdbc75372"
             },
             {
               "title": "محاضرة 4",
               "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/897b13b2-7a21-4544-9730-9e6a35b5f421/1080p/video.m3u8"
+              "url": "https://iframe.mediadelivery.net/embed/484313/6c29050b-34c4-4d3a-ba12-2887e5372873"
             },
             {
               "title": "محاضرة 5",
               "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/108f1c68-5b5d-493d-9019-c6f46d6b2ab8/1080p/video.m3u8"
+              "url": "https://iframe.mediadelivery.net/embed/484313/00bb92ce-2c0f-4ced-9a22-4a66df1f7afe"
             },
             {
               "title": "محاضرة 6",
               "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/6ed2abd5-1d44-405e-b6f5-ee879edfa656/1080p/video.m3u8"
+              "url": "https://iframe.mediadelivery.net/embed/484313/8a7591bc-5a6e-4fef-8be9-a913fe735db7"
             },
             {
               "title": "محاضرة 7",
               "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/87b4d89e-04cc-419c-bb2f-7122c322beab/1080p/video.m3u8"
-            },
-            {
-              "title": "محاضرة 8",
-              "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/943d17f6-7154-4466-a6f6-acfb9bd51ba3/480p/video.m3u8"
-            },
-            {
-              "title": "محاضرة 9",
-              "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/fafc7036-1ab2-4e75-8405-600718a35071/360p/video.m3u8"
-            },
-            {
-              "title": "محاضرة 10",
-              "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/3a2ef061-4893-44e1-b959-7734dc917f2e/1080p/video.m3u8"
-            },
-            {
-              "title": "محاضرة 11",
-              "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/02d3fe32-0bfe-4c33-9a82-37d1b842d056/360p/video.m3u8"
-            },
-            {
-              "title": "محاضرة 12",
-              "description": "وصف المحاضرة",
-              "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/4eab7e14-b01f-496e-b7c4-3c1609ae5f26/1080p/video.m3u8"
-            },
-            {
-             "title": "محاضرة 13",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/61d26913-f56a-48c8-99ca-e5f2eec74030/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 14",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/0a9a624c-dee4-4176-a28e-d90773d641ff/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 15",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/a217e49f-009b-4a48-bc88-0f378c30c33d/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 16",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/b76b4312-d66d-47fe-9d31-e41ef473d86e/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 17",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/22581eb6-0e4f-47ed-8234-be5d2997ca5d/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 18",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/7147fc03-94dd-40f3-817c-07f691f03c9e/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 19",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/b82c5ddc-46b2-427f-9792-7eb98aa5cf72/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 20",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/58ce49eb-369c-47b1-9b94-565a15eb5d75/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 21",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/c6734573-8b38-4106-93a0-83e4c03f7400/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 22",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/04d06faa-453e-4325-8aa5-52d752b0ba6a/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 23",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/52f73a9f-ccfd-41d2-be7c-584ce95ffa5c/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 24",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/6aee0fbb-ecda-4bf9-8b05-7aed3e67df00/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 25",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/97543d46-68cc-42cb-9eee-729f79f90456/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 26",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/43ee5b0f-5a26-453a-b985-5ff8dce472fa/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 27",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/807768fb-cd9e-4713-a4ee-a61a5bec1d7f/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 28",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/f9993615-297a-45f2-909e-2a032a4a6a3b/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 29",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/b6648342-eb09-43f7-a273-c004e8f5d257/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 30",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/362e2b3c-752b-4c2f-a4a2-56ba108bada7/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 31",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/a847d812-9f93-4807-a62f-108bd8475bc4/480p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 32",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/8074423a-cb7d-4fbb-8fe1-91752c31c184/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 33",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/0b0a08e1-fa08-4482-b97e-2f4bbfff5d18/1080p/video.m3u8"
-  },
-  {
-    "title": "محاضرة 34",
-    "description": "وصف المحاضرة",
-    "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/65607897-d2eb-4016-b4dc-559aa412cc7e/1080p/video.m3u8"
-  },
-  {
-   "title": "محاضرة 35",
-  "description": "وصف المحاضرة",
-  "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/8407587d-63ad-4377-9caf-e9b1f6038c3a/1080p/video.m3u8"
-},
-{
-  "title": "محاضرة 36",
-  "description": "وصف المحاضرة",
-  "url": "https://tiny-fire-acee.hmyzc824-d08.workers.dev/proxy?url=https://vz-99e5c202-ca5.b-cdn.net/d76f5ddf-945a-4432-822a-62ba0b85b433/1080p/video.m3u8"
-}
-]
-},
-{
-  "name": "اثرائيات الفصل الاول",
-    "lectures": [
-      {
-        "title": "محاضرة 1",
-        "description": "﴿ فَصَبْرٌ جَمِيلٌ ﴾ [يوسف: 18]",
-        "url": "https://vz-99e5c202-ca5.b-cdn.net/00386bfa-fc2d-418b-8a99-9b368b8dec37/1080p/video.m3u8"
-      },
-      {
-        "title": "محاضرة 2",
-        "description": "﴿ وَعَسَىٰ أَن تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَّكُمْ ﴾ [البقرة: 216]",
-        "url": "https://vz-99e5c202-ca5.b-cdn.net/9c0748ef-1c0a-4ad1-a60a-89ba9621bfc9/1080p/video.m3u8"
-      },
-      {
-        "title": "محاضرة 3",
-        "description": "﴿ وَاللَّهُ سَرِيعُ الْحِسَابِ ﴾ [آل عمران: 199]",
-        "url": "https://vz-99e5c202-ca5.b-cdn.net/619b4de9-6dc7-4b3d-9df6-89fe9915e6c4/1080p/video.m3u8"
-      }
+              "url": "https://iframe.mediadelivery.net/embed/484313/7b44885e-b881-4053-bdcd-e969e3847913"
+       
+  }
           ]
         }
       ]
-    },
-    {
-      "id": 1748301353208,
-      "name": "jdhehe",
-      "subject": "hsheh",
-      "image": "irueueu",
-      "classes": []
     }
   ]
 }
+
