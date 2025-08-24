@@ -10,8 +10,8 @@
     <link rel="icon" href="https://cdn.glitch.global/c07dc79d-c056-48b0-8b0b-912783754321/5424770778815132543.jpg?v=1751739020203">
     
     <!-- Updated Fonts for a Modern Look -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
     
     <!-- Essential Libraries -->
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
@@ -30,10 +30,13 @@
             --accent: #FFC107; /* لون مميز للإبراز */
             --accent-2: #F9A825; /* لون مميز أغمق */
             
-            --radius: 18px; /* Softer, more modern corners */
+            --radius: 16px; /* Softer, more modern corners */
+            --radius-lg: 20px;
+            --radius-xl: 24px;
             --bg: #F5F7FA; /* Very light gray background */
             --bg-glass: rgba(245, 247, 250, 0.95);
             --text: #1C2833; /* Dark Charcoal Text */
+            --text-light: #64748b;
             --card: #FFFFFF; /* Pure White Cards */
             --border: #E0E4EB; /* Light border */
             --hover: rgba(6, 182, 212, 0.08); /* Primary color with transparency for hover */
@@ -45,9 +48,15 @@
             --telegram-text: #ffffff;
             
             /* تم تطبيق الظل الجديد هنا */
-            --shadow-sm: 0 4px 12px rgba(6,182,212,0.08);
-            --shadow-md: 0 8px 30px rgba(6,182,212,0.12);
-            --shadow-lg: 0 16px 40px rgba(6,182,212,0.18);
+            --shadow-sm: 0 2px 8px rgba(6,182,212,0.06);
+            --shadow-md: 0 6px 20px rgba(6,182,212,0.10);
+            --shadow-lg: 0 12px 32px rgba(6,182,212,0.15);
+            --shadow-xl: 0 20px 50px rgba(6,182,212,0.20);
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
         }
 
         /* Dark theme adjustments */
@@ -55,6 +64,7 @@
             --bg: #111827; /* Darker background */
             --bg-glass: rgba(17, 24, 39, 0.95);
             --text: #E5E7EB; /* Light gray text */
+            --text-light: #94a3b8;
             --card: #1F2937; /* Dark gray cards */
             --border: #374151; /* Medium gray border */
             --hover: rgba(6, 182, 212, 0.15);
@@ -72,14 +82,19 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: "Cairo", "IBM Plex Sans Arabic", "Tajawal", sans-serif;
+            font-family: "Tajawal", "Cairo", "IBM Plex Sans Arabic", sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.7;
             min-height: 100vh;
             overflow-y: auto;
             transition: background 0.3s ease, color 0.3s ease;
+            font-weight: 400;
         }
 
         img { max-width: 100%; display: block; }
@@ -93,18 +108,19 @@
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            padding: 1.5rem 2rem;
+            padding: 1.2rem 2rem;
             background: var(--bg-glass);
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-sm);
             flex-wrap: wrap;
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: all var(--transition-normal);
         }
 
         .site-title {
-            font-size: clamp(1.8rem, 5vw, 2.2rem);
-            font-weight: 700;
+            font-size: clamp(1.7rem, 5vw, 2.1rem);
+            font-weight: 800;
             color: var(--primary-1);
             display: flex;
             align-items: center;
@@ -112,21 +128,28 @@
             flex: 1;
             min-width: 200px;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: color var(--transition-normal);
         }
 
         .site-logo {
             width: 48px;
             height: 48px;
             /* تم تحديث التدرج اللوني هنا */
-            background: linear-gradient(90deg, #06b6d4, #7c3aed);
-            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-1), var(--primary-2));
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
             font-weight: bold;
-            box-shadow: var(--shadow-sm);
+            font-size: 1.4rem;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+        }
+
+        .site-title:hover .site-logo {
+            transform: rotate(10deg);
+            box-shadow: var(--shadow-lg);
         }
 
         .header-actions {
@@ -139,25 +162,30 @@
         .search-container {
             position: relative;
             flex: 1;
-            max-width: 400px;
-            min-width: 250px;
+            max-width: 420px;
+            min-width: 260px;
         }
 
         .search-container input {
             width: 100%;
             padding: 1rem 1.2rem 1rem 3.5rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
             background: var(--card);
             color: var(--text);
             border: 2px solid var(--border);
             border-radius: var(--radius);
-            transition: border 0.25s, box-shadow 0.25s, background 0.3s ease, color 0.3s ease;
+            transition: all var(--transition-normal);
+            font-family: inherit;
         }
 
         .search-container input:focus {
             outline: none;
             border-color: var(--primary-2);
-            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+        }
+
+        .search-container input::placeholder {
+            color: var(--text-light);
         }
 
         .search-icon {
@@ -166,7 +194,7 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary-1);
-            transition: color 0.3s ease;
+            transition: color var(--transition-normal);
         }
         
         /* Button styles with gradients and lift effect */
@@ -174,23 +202,42 @@
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
-            padding: 1rem 1.6rem;
+            padding: 0.9rem 1.6rem;
             border-radius: var(--radius);
             /* تم تحديث التدرج اللوني هنا */
-            background: linear-gradient(90deg, #06b6d4, #7c3aed); 
+            background: linear-gradient(90deg, var(--primary-1), var(--primary-2)); 
             color: #fff;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            transition: all var(--transition-normal);
             white-space: nowrap;
             box-shadow: var(--shadow-sm);
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity var(--transition-normal);
         }
 
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-md);
             /* تم تحديث التدرج اللوني هنا */
-            background: linear-gradient(90deg, #7c3aed, #06b6d4);
+            background: linear-gradient(90deg, var(--primary-2), var(--primary-1));
+        }
+
+        .btn:hover::before {
+            opacity: 1;
         }
 
         .btn-outline {
@@ -210,8 +257,8 @@
         .btn-icon {
             padding: 0.8rem;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             justify-content: center;
         }
 
@@ -222,6 +269,7 @@
 
         .btn-accent:hover {
             background: linear-gradient(135deg, var(--accent-2), var(--accent));
+            transform: translateY(-3px);
         }
 
         /* Page layout */
@@ -230,6 +278,12 @@
             padding: 2rem;
             max-width: 1300px;
             margin: 0 auto;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .page.active { display: block; }
@@ -237,27 +291,45 @@
         /* Teacher's grid */
         .teachers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
         .teacher-card {
             background: var(--card);
-            padding: 1.6rem 1.3rem;
-            border-radius: var(--radius);
+            padding: 1.8rem 1.5rem;
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border);
             text-align: center;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            transition: all var(--transition-normal);
             box-shadow: var(--shadow-sm);
         }
 
         .teacher-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-1);
+        }
+
+        .teacher-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-1), var(--primary-2));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--transition-normal);
+        }
+
+        .teacher-card:hover::after {
+            transform: scaleX(1);
         }
 
         .teacher-img {
@@ -265,33 +337,38 @@
             height: 140px;
             border-radius: 50%;
             object-fit: cover;
+            margin: 0 auto;
             /* تم تحديث لون الإطار هنا */
             border: 4px solid var(--primary-2);
-            box-shadow: var(--shadow-sm);
-            transition: border-color 0.3s ease;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+        }
+
+        .teacher-card:hover .teacher-img {
+            border-color: var(--primary-1);
+            transform: scale(1.05);
         }
 
         .teacher-name {
             font-size: 1.4rem;
             font-weight: 700;
-            margin: 0.5rem 0 0.25rem;
+            margin: 1rem 0 0.4rem;
             color: var(--primary-1);
-            transition: color 0.3s ease;
+            transition: color var(--transition-normal);
         }
 
         .teacher-subject {
-            color: var(--text);
+            color: var(--text-light);
             font-size: 1rem;
-            margin-bottom: 0.6rem;
-            opacity: 0.7;
-            transition: color 0.3s ease;
+            margin-bottom: 0.8rem;
+            transition: color var(--transition-normal);
         }
 
         .teacher-rating {
             display: flex;
             justify-content: center;
             gap: 0.3rem;
-            margin: 0.6rem 0;
+            margin: 0.8rem 0;
         }
 
         .teacher-rating svg {
@@ -303,7 +380,7 @@
 
         .back-button {
             margin-bottom: 2rem;
-            background: linear-gradient(90deg, #06b6d4, #7c3aed);
+            background: linear-gradient(90deg, var(--primary-1), var(--primary-2));
             box-shadow: var(--shadow-sm);
         }
 
@@ -312,99 +389,110 @@
             align-items: center;
             gap: 2rem;
             background: var(--card);
-            padding: 2rem;
-            border-radius: var(--radius);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border);
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             box-shadow: var(--shadow-md);
-            transition: background 0.3s ease, border-color 0.3s ease;
+            transition: all var(--transition-normal);
         }
         
         .teacher-img-lg {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
             /* تم تحديث لون الإطار هنا */
             border: 5px solid var(--primary-2);
-            box-shadow: var(--shadow-md);
-            transition: border-color 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
         }
 
         .classes-list {
             display: grid;
-            gap: 1.6rem;
+            gap: 1.8rem;
         }
 
         .class-card {
             background: var(--card);
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            transition: background 0.3s ease, border-color 0.3s ease;
+            transition: all var(--transition-normal);
+        }
+
+        .class-card:hover {
+            box-shadow: var(--shadow-md);
         }
 
         .class-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 1.6rem;
+            padding: 1.4rem 1.8rem;
             cursor: pointer;
             user-select: none;
             background: var(--bg-glass);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             /* تم تحديث لون الخط الجانبي هنا */
             border-right: 5px solid var(--primary-2);
-            transition: background 0.3s ease, border-color 0.3s ease;
+            transition: all var(--transition-normal);
         }
 
         .class-header:hover {
             background: var(--hover);
         }
 
-        .class-header span { transition: transform 0.3s ease; }
+        .class-header h3 {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .class-header span { transition: transform var(--transition-normal); }
         .class-header.open span { transform: rotate(180deg); }
 
         .lectures-list {
             display: none;
             flex-direction: column;
             gap: 0.8rem;
-            padding: 1.2rem 1.8rem 1rem 0;
+            padding: 1.4rem 2rem 1.2rem 0;
         }
 
         .lecture-item {
             position: relative;
-            padding: 1rem 1.2rem 1rem 4rem;
+            padding: 1.1rem 1.4rem 1.1rem 4.5rem;
             background: var(--hover);
             /* تم تحديث لون الخط الجانبي هنا */
             border-right: 3px solid var(--primary-3);
             border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+            transition: all var(--transition-fast);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .lecture-item:hover {
-            background: rgba(6, 182, 212, 0.12);
+            background: rgba(6, 182, 212, 0.15);
+            transform: translateX(-5px);
         }
 
         .lecture-item svg {
             position: absolute;
-            left: 1rem;
+            left: 1.5rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary-1);
-            transition: color 0.3s ease;
+            transition: color var(--transition-normal);
         }
 
         .video-page-content {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 2.5rem;
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 1rem;
@@ -414,49 +502,57 @@
             position: relative;
             width: 100%;
             background: #000;
-            border-radius: var(--radius);
+            border-radius: var(--radius-xl);
             overflow: hidden;
             aspect-ratio: 16/9;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
         }
 
-        .plyr { border-radius: var(--radius); overflow: hidden; width: 100%; height: 100%; }
+        .plyr { border-radius: var(--radius-xl); overflow: hidden; width: 100%; height: 100%; }
 
         .video-details {
             background: var(--card);
-            padding: 1.8rem;
-            border-radius: var(--radius);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border);
             text-align: center;
             box-shadow: var(--shadow-md);
-            transition: background 0.3s ease, border-color 0.3s ease;
+            transition: all var(--transition-normal);
         }
 
-        .video-info { text-align: right; padding: 1.2rem 0; }
+        .video-info { text-align: right; padding: 1.4rem 0; }
         
         .video-meta {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-top: 1rem;
+            margin-top: 1.2rem;
             opacity: 0.8;
             font-size: 0.95rem;
             flex-wrap: wrap;
             color: var(--text);
         }
 
-        .video-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .video-meta span { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            background: var(--bg);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+        }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            margin: 2rem 0 1.2rem;
-            padding-bottom: 0.5rem;
+            margin: 2.5rem 0 1.5rem;
+            padding-bottom: 0.7rem;
             /* تم تحديث لون الخط هنا */
             border-bottom: 3px solid var(--primary-1);
             color: var(--primary-1);
-            transition: color 0.3s ease, border-color 0.3s ease;
+            transition: all var(--transition-normal);
+            font-size: 1.5rem;
         }
         
         /* Smart Loader */
@@ -466,13 +562,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10;
-            border-radius: var(--radius);
-            transition: opacity 0.3s ease;
+            border-radius: var(--radius-xl);
+            transition: opacity var(--transition-normal);
         }
 
         .loader-spinner {
@@ -498,44 +594,160 @@
             100% { opacity: 0.7; }
         }
 
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-2);
+        }
+
         /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .teachers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.8rem;
+            }
+        }
+
         @media (max-width: 768px) {
             header {
                 flex-wrap: wrap;
-                padding: 1.2rem 1rem;
+                padding: 1rem;
                 gap: 1rem;
             }
+            
             .search-container {
                 order: 3;
                 width: 100%;
-                margin-top: 1rem;
+                max-width: 100%;
+                margin-top: 0.5rem;
             }
-            .btn span { display: none; }
-            .teacher-img { width: 100px; height: 100px; }
-            .video-details { padding: 1.2rem; }
+            
+            .btn span { 
+                display: none; 
+            }
+            
+            .btn-icon {
+                width: 44px;
+                height: 44px;
+            }
+            
+            .teacher-img { 
+                width: 120px; 
+                height: 120px; 
+            }
+            
+            .teacher-img-lg {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .video-details { 
+                padding: 1.5rem; 
+            }
+            
             .video-container {
-                margin: 0 -1rem;
-                width: calc(100% + 2rem);
+                margin: 0 -0.5rem;
+                width: calc(100% + 1rem);
+                border-radius: var(--radius-lg);
             }
-            .lecture-item { padding-left: 2.5rem; }
+            
+            .lecture-item { 
+                padding-left: 3.5rem; 
+            }
+            
             .video-meta {
                 flex-direction: column;
                 gap: 0.8rem;
                 align-items: center;
             }
-            .btn { padding: 0.9rem 1.2rem; }
+            
+            .btn { 
+                padding: 0.8rem 1.2rem; 
+            }
+            
+            .page {
+                padding: 1.5rem 1rem;
+            }
+            
+            .teacher-info {
+                padding: 2rem 1.5rem;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+                margin: 2rem 0 1.2rem;
+            }
         }
 
         @media (max-width: 480px) {
-            .page { padding: 1rem; }
+            .page { 
+                padding: 1rem 0.8rem; 
+            }
+            
             .teacher-info {
                 padding: 1.5rem;
                 flex-direction: column;
                 text-align: center;
+                gap: 1.5rem;
             }
-            .teacher-img-lg { margin-bottom: 1.5rem; }
-            .site-title { font-size: 1.8rem; }
-            .teacher-name { font-size: 1.2rem; }
+            
+            .teacher-img-lg { 
+                margin-bottom: 0; 
+            }
+            
+            .site-title { 
+                font-size: 1.6rem; 
+            }
+            
+            .site-logo {
+                width: 42px;
+                height: 42px;
+                font-size: 1.2rem;
+            }
+            
+            .teacher-name { 
+                font-size: 1.3rem; 
+            }
+            
+            .teachers-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .class-header {
+                padding: 1.2rem 1.4rem;
+            }
+            
+            .lectures-list {
+                padding: 1.2rem 1.5rem 1rem 0;
+            }
+            
+            .video-details {
+                padding: 1.2rem;
+            }
+            
+            .video-meta span {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
         }
         
     </style>
@@ -627,7 +839,7 @@
             <i data-lucide="gavel"></i>
             <h3>أحكام وشروط المنصة</h3>
         </div>
-        <div class="rules-content" style="background: var(--card); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
+        <div class="rules-content" style="background: var(--card); padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
             <h4>1. حقوق الملكية الفكرية</h4>
             <p>جميع المحتويات على هذه المنصة، بما في ذلك الفيديوهات والمواد الدراسية، محمية بموجب حقوق النشر. لا يُسمح بإعادة نشر أو توزيع هذه المحتويات بأي شكل من الأشكال دون إذن مسبق.</p>
             <br>
@@ -738,7 +950,7 @@
         // Render teachers grid
         function renderTeachers(list = teachers) {
             if (!list.length) {
-                teachersGrid.innerHTML = "<p style='text-align: center; color: var(--text);'>لا توجد نتائج مطابقة.</p>";
+                teachersGrid.innerHTML = "<p style='text-align: center; color: var(--text); padding: 2rem;'>لا توجد نتائج مطابقة.</p>";
                 return;
             }
 
@@ -984,7 +1196,7 @@
         function loadData() {
             const endpoint = "https://edsoe.netlify.app/data.json";
             const err =
-                '<p style="color:var(--error); text-align: center;">حدث خطأ في تحميل البيانات.</p><button class="btn back-button" onclick="location.reload()" style="display: block; margin: 1rem auto;">إعادة المحاولة</button>';
+                '<p style="color:var(--error); text-align: center; padding: 2rem;">حدث خطأ في تحميل البيانات.</p><button class="btn back-button" onclick="location.reload()" style="display: block; margin: 1rem auto;">إعادة المحاولة</button>';
             
             teachersGrid.innerHTML = `
                 <div class="loading-card teacher-card">
