@@ -22,9 +22,9 @@
     
     <style>
         /*
-         * تحديثات التصميم لتحويله إلى مظهر عصري وأنيق (Modern & Sleek)
-         * تم التركيز على التباعد، الظلال، حواف العناصر، وتأثيرات التحويم (hover)
-         */
+        * تحديثات التصميم لتحويله إلى مظهر عصري وأنيق (Modern & Sleek)
+        * تم التركيز على التباعد، الظلال، حواف العناصر، وتأثيرات التحويم (hover)
+        */
 
         /* Modernized CSS Variables */
         :root {
@@ -521,15 +521,24 @@
             overflow: hidden;
             aspect-ratio: 16/9;
             box-shadow: var(--shadow-xl);
-            /* إضافة حجم ثابت لـ plyr */
-            min-height: 500px;
+        }
+        
+        #player-container-parent {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: var(--radius-xl);
+            overflow: hidden;
         }
 
         .plyr { 
-            border-radius: var(--radius-xl); 
-            overflow: hidden; 
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%; 
             height: 100%; 
+            border-radius: var(--radius-xl); 
+            overflow: hidden; 
         }
 
         .video-details {
@@ -830,10 +839,8 @@
     <div id="videoPage" class="page">
         <div class="video-page-content">
             <div id="videoContainer" class="video-container">
-                <div id="playerContainer"></div>
-                <!-- تم إخفاء دائرة التحميل بشكل دائم من HTML -->
-                <div id="videoLoader" class="video-loader">
-                    <div class="loader-spinner"></div>
+                <div id="player-container-parent">
+                    <!-- Video player will be placed here by JavaScript -->
                 </div>
             </div>
             <div class="video-details">
@@ -925,8 +932,7 @@
         const categoryTitle = document.getElementById("categoryTitle");
         const classesList = document.getElementById("classesList");
         const teachersGrid = document.getElementById("teachersGrid");
-        const playerContainer = document.getElementById("playerContainer");
-        const videoLoader = document.getElementById("videoLoader");
+        const playerContainerParent = document.getElementById("player-container-parent");
 
         // Progress and ratings storage
         let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
@@ -956,8 +962,7 @@
                     clearInterval(window.progressInterval);
                     window.progressInterval = null;
                 }
-                playerContainer.innerHTML = "";
-                videoLoader.style.display = 'none';
+                playerContainerParent.innerHTML = "";
             }
             Object.values(pages).forEach((p) => p.classList.remove("active"));
             pages[page].classList.add("active");
@@ -967,9 +972,6 @@
         const searchInput = document.getElementById("searchInput");
         let teachers = [];
         let currentTeacher = null;
-        let currentClassIndex = 0;
-        let currentLectureIndex = 0;
-        let currentLectureLink = "";
 
         // Render teachers grid
         function renderTeachers(list = teachers) {
@@ -1088,10 +1090,8 @@
                 window.progressInterval = null;
             }
 
-            playerContainer.innerHTML = "";
-            // تم إزالة السطر الذي يظهر مؤشر التحميل
+            playerContainerParent.innerHTML = "";
 
-            [currentClassIndex, currentLectureIndex, currentLectureLink] = [ci, li, url,];
             videoTitle.textContent = title;
             videoDescription.textContent = desc;
             document.getElementById("videoDate").textContent = "15/10/2026";
@@ -1099,27 +1099,25 @@
             // If the URL is an iframe, create an iframe directly
             if (url.includes("iframe.mediadelivery.net/embed/")) {
                 const iframeHtml = `
-                    <div style="position: relative; width: 100%; height: 100%;">
-                        <iframe 
-                            src="${url}" 
-                            allowfullscreen 
-                            loading="eager"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 18px;"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                        ></iframe>
-                    </div>
+                    <iframe
+                        src="${url}" 
+                        allowfullscreen 
+                        loading="eager"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 18px;"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    ></iframe>
                 `;
-                playerContainer.innerHTML = iframeHtml;
+                playerContainerParent.innerHTML = iframeHtml;
             } else {
                 // For direct video URLs (MP4, HLS, etc.), use the Plyr player
-                playerContainer.innerHTML = `
+                playerContainerParent.innerHTML = `
                     <video id="player" playsinline controls></video>
                 `;
                 const videoElement = document.getElementById("player");
                 const isHLS = url.endsWith(".m3u8");
                 
-                const savedTime = lectureProgress[url] ? (lectureProgress[url] / 100) * (player?.duration || 0) : 0;
+                const savedTime = lectureProgress[url] ? (lectureProgress[url] / 100) * (videoElement.duration || 0) : 0;
                 
                 // Use HLS.js for HLS streams, otherwise use a direct source
                 if (isHLS && Hls.isSupported()) {
@@ -1142,7 +1140,6 @@
                                     hls.recoverMediaError();
                                     break;
                                 default:
-                                    // A generic error message to the user would be better
                                     console.error("HLS fatal error:", data);
                                     break;
                             }
@@ -1154,7 +1151,6 @@
                     videoElement.play().then(() => { 
                         if (savedTime > 0) videoElement.currentTime = savedTime;
                     }).catch(() => {
-                        // Handle play error, e.g., browser restrictions
                         console.log("تعذر تشغيل الفيديو تلقائيًا، الرجاء النقر لتشغيله.");
                     });
                 }
@@ -1169,9 +1165,6 @@
                     speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
                 });
 
-                // Update loader visibility when the video starts playing
-                // تم حذف هذا الحدث لإخفاء التحميل
-                
                 // Update progress every 5 seconds
                 window.progressInterval = setInterval(() => {
                     if (player && player.duration > 0) {
@@ -1251,7 +1244,6 @@
             navigate('teachers');
             lucide.createIcons();
         };
-
     </script>
 </body>
 </html>
