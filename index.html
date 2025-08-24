@@ -21,6 +21,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
     
     <style>
+        /*
+         * تحديثات التصميم لتحويله إلى مظهر عصري وأنيق (Modern & Sleek)
+         * تم التركيز على التباعد، الظلال، حواف العناصر، وتأثيرات التحويم (hover)
+         */
+
         /* Modernized CSS Variables */
         :root {
             /* الألوان الجديدة التي طلبتها */
@@ -30,16 +35,16 @@
             --accent: #FFC107; /* لون مميز للإبراز */
             --accent-2: #F9A825; /* لون مميز أغمق */
             
-            --radius: 16px; /* Softer, more modern corners */
+            --radius: 16px; /* حواف أكثر نعومة وعصرية */
             --radius-lg: 20px;
             --radius-xl: 24px;
-            --bg: #F5F7FA; /* Very light gray background */
+            --bg: #F5F7FA; /* خلفية رمادية فاتحة جداً */
             --bg-glass: rgba(245, 247, 250, 0.95);
-            --text: #1C2833; /* Dark Charcoal Text */
+            --text: #1C2833; /* لون نص داكن */
             --text-light: #64748b;
-            --card: #FFFFFF; /* Pure White Cards */
-            --border: #E0E4EB; /* Light border */
-            --hover: rgba(6, 182, 212, 0.08); /* Primary color with transparency for hover */
+            --card: #FFFFFF; /* بطاقات بيضاء نقية */
+            --border: #E0E4EB; /* خطوط فاصلة فاتحة */
+            --hover: rgba(6, 182, 212, 0.08); /* لون أساسي مع شفافية لتأثير التحويم */
             --success: #28a745;
             --warning: #FFC107;
             --error: #DC3545;
@@ -47,11 +52,11 @@
             --telegram-light: #2aabee;
             --telegram-text: #ffffff;
             
-            /* تم تطبيق الظل الجديد هنا */
-            --shadow-sm: 0 2px 8px rgba(6,182,212,0.06);
-            --shadow-md: 0 6px 20px rgba(6,182,212,0.10);
-            --shadow-lg: 0 12px 32px rgba(6,182,212,0.15);
-            --shadow-xl: 0 20px 50px rgba(6,182,212,0.20);
+            /* تم تحديث الظلال لتكون أكثر عمقاً ونعومة */
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.15);
             
             /* Transitions */
             --transition-fast: 0.2s ease;
@@ -61,18 +66,24 @@
 
         /* Dark theme adjustments */
         [data-theme="dark"] {
-            --bg: #111827; /* Darker background */
+            --bg: #111827;
             --bg-glass: rgba(17, 24, 39, 0.95);
-            --text: #E5E7EB; /* Light gray text */
+            --text: #E5E7EB;
             --text-light: #94a3b8;
-            --card: #1F2937; /* Dark gray cards */
-            --border: #374151; /* Medium gray border */
+            --card: #1F2937;
+            --border: #374151;
             --hover: rgba(6, 182, 212, 0.15);
-            --primary-1: #4FC3F7; /* Lighter blue for dark theme */
-            --primary-2: #B194F9; /* لون بنفسجي فاتح للمظهر الداكن */
+            --primary-1: #4FC3F7;
+            --primary-2: #B194F9;
             --primary-3: #9776E6;
-            --accent: #FFA726; /* Lighter orange */
+            --accent: #FFA726;
             --accent-2: #FB8C00;
+
+            /* ظلال أكثر نعومة للمظهر الداكن */
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.4);
+            --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.5);
         }
 
         /* General styles */
@@ -100,7 +111,7 @@
         img { max-width: 100%; display: block; }
         button { font-family: inherit; cursor: pointer; border: none; background: none; }
         
-        /* Header styles */
+        /* Header styles - تم تحسينه ليطفو فوق المحتوى مع ظل أعمق */
         header {
             position: sticky;
             top: 0;
@@ -108,12 +119,12 @@
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            padding: 1.2rem 2rem;
+            padding: 1.2rem 2.5rem;
             background: var(--bg-glass);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             flex-wrap: wrap;
             transition: all var(--transition-normal);
         }
@@ -131,10 +142,10 @@
             transition: color var(--transition-normal);
         }
 
+        /* تأثير شعار الموقع عند التحويم */
         .site-logo {
             width: 48px;
             height: 48px;
-            /* تم تحديث التدرج اللوني هنا */
             background: linear-gradient(135deg, var(--primary-1), var(--primary-2));
             border-radius: 14px;
             display: flex;
@@ -197,14 +208,13 @@
             transition: color var(--transition-normal);
         }
         
-        /* Button styles with gradients and lift effect */
+        /* Button styles with gradients and lift effect - تم تحسين التظليل والانتقالات */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
             padding: 0.9rem 1.6rem;
             border-radius: var(--radius);
-            /* تم تحديث التدرج اللوني هنا */
             background: linear-gradient(90deg, var(--primary-1), var(--primary-2)); 
             color: #fff;
             font-weight: 600;
@@ -215,6 +225,7 @@
             border: none;
             position: relative;
             overflow: hidden;
+            font-weight: 700;
         }
 
         .btn::before {
@@ -232,7 +243,6 @@
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-md);
-            /* تم تحديث التدرج اللوني هنا */
             background: linear-gradient(90deg, var(--primary-2), var(--primary-1));
         }
 
@@ -275,7 +285,7 @@
         /* Page layout */
         .page {
             display: none;
-            padding: 2rem;
+            padding: 2.5rem;
             max-width: 1300px;
             margin: 0 auto;
             animation: fadeIn 0.4s ease;
@@ -288,17 +298,18 @@
 
         .page.active { display: block; }
         
-        /* Teacher's grid */
+        /* Teacher's grid - تم تحسين التباعد */
         .teachers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 2.5rem; /* زيادة التباعد بين البطاقات */
+            margin-top: 2.5rem; /* زيادة التباعد العلوي */
         }
 
+        /* Teacher Card - تأثيرات التحويم والظلال تم تحسينها */
         .teacher-card {
             background: var(--card);
-            padding: 1.8rem 1.5rem;
+            padding: 2rem;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border);
             text-align: center;
@@ -332,14 +343,14 @@
             transform: scaleX(1);
         }
 
+        /* Teacher Image - تم تحسين الإطار والظل */
         .teacher-img {
             width: 140px;
             height: 140px;
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto;
-            /* تم تحديث لون الإطار هنا */
-            border: 4px solid var(--primary-2);
+            border: 5px solid var(--primary-2);
             box-shadow: var(--shadow-md);
             transition: all var(--transition-normal);
         }
@@ -350,16 +361,16 @@
         }
 
         .teacher-name {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin: 1rem 0 0.4rem;
+            margin: 1.2rem 0 0.5rem;
             color: var(--primary-1);
             transition: color var(--transition-normal);
         }
 
         .teacher-subject {
             color: var(--text-light);
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin-bottom: 0.8rem;
             transition: color var(--transition-normal);
         }
@@ -374,26 +385,28 @@
         .teacher-rating svg {
             color: var(--warning);
             fill: var(--warning);
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
         }
 
+        /* Back Button */
         .back-button {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             background: linear-gradient(90deg, var(--primary-1), var(--primary-2));
             box-shadow: var(--shadow-sm);
         }
 
+        /* Teacher Info Section - تصميم أنظف وأكثر تباعداً */
         .teacher-info {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
             background: var(--card);
-            padding: 2.5rem;
+            padding: 3rem;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border);
             flex-wrap: wrap;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             box-shadow: var(--shadow-md);
             transition: all var(--transition-normal);
         }
@@ -403,7 +416,6 @@
             height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            /* تم تحديث لون الإطار هنا */
             border: 5px solid var(--primary-2);
             box-shadow: var(--shadow-lg);
             transition: all var(--transition-normal);
@@ -411,9 +423,10 @@
 
         .classes-list {
             display: grid;
-            gap: 1.8rem;
+            gap: 2rem;
         }
 
+        /* Class Card - تصميم قابل للطي أنيق */
         .class-card {
             background: var(--card);
             border-radius: var(--radius-lg);
@@ -431,13 +444,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.4rem 1.8rem;
+            padding: 1.6rem 2rem;
             cursor: pointer;
             user-select: none;
             background: var(--bg-glass);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            /* تم تحديث لون الخط الجانبي هنا */
             border-right: 5px solid var(--primary-2);
             transition: all var(--transition-normal);
         }
@@ -448,7 +460,8 @@
 
         .class-header h3 {
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            color: var(--text);
         }
 
         .class-header span { transition: transform var(--transition-normal); }
@@ -457,15 +470,15 @@
         .lectures-list {
             display: none;
             flex-direction: column;
-            gap: 0.8rem;
-            padding: 1.4rem 2rem 1.2rem 0;
+            gap: 1rem;
+            padding: 1.6rem 2.5rem 1.4rem 0;
         }
 
+        /* Lecture Item - تصميم أكثر وضوحاً */
         .lecture-item {
             position: relative;
-            padding: 1.1rem 1.4rem 1.1rem 4.5rem;
+            padding: 1.2rem 1.6rem 1.2rem 4.5rem;
             background: var(--hover);
-            /* تم تحديث لون الخط الجانبي هنا */
             border-right: 3px solid var(--primary-3);
             border-radius: var(--radius);
             cursor: pointer;
@@ -473,6 +486,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: 500;
         }
 
         .lecture-item:hover {
@@ -482,17 +496,18 @@
 
         .lecture-item svg {
             position: absolute;
-            left: 1.5rem;
+            left: 1.8rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary-1);
             transition: color var(--transition-normal);
         }
 
+        /* Video Page - تصميم أكثر تركيزاً */
         .video-page-content {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 3rem;
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 1rem;
@@ -512,7 +527,7 @@
 
         .video-details {
             background: var(--card);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--radius-lg);
             border: 1px solid var(--border);
             text-align: center;
@@ -538,21 +553,22 @@
             align-items: center; 
             gap: 0.5rem; 
             background: var(--bg);
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: var(--radius);
         }
 
+        /* Section Title - خطوط وتظليل أفضل */
         .section-title {
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            margin: 2.5rem 0 1.5rem;
-            padding-bottom: 0.7rem;
-            /* تم تحديث لون الخط هنا */
-            border-bottom: 3px solid var(--primary-1);
+            margin: 3rem 0 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid var(--primary-1);
             color: var(--primary-1);
             transition: all var(--transition-normal);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
         }
         
         /* Smart Loader */
