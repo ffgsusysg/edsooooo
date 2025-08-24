@@ -1081,21 +1081,19 @@
             }
 
             playerContainer.innerHTML = "";
-            videoLoader.style.display = 'none';
+            videoLoader.style.display = 'flex'; // Show loader initially
 
             [currentClassIndex, currentLectureIndex, currentLectureLink] = [ci, li, url,];
             videoTitle.textContent = title;
             videoDescription.textContent = desc;
             document.getElementById("videoDate").textContent = "15/10/2026";
 
+            // If the URL is an iframe, create an iframe directly
             if (url.includes("iframe.mediadelivery.net/embed/")) {
-                videoLoader.style.display = 'flex';
-                const encodedUrl = btoa(url);
-                const iframeUrl = `https://server2.halzyz082.workers.dev/proxy_iframe?url=${encodedUrl}`;
                 const iframeHtml = `
-                    <div style="position: relative; width: 100%; padding-top: 56.25%;">
+                    <div style="position: relative; width: 100%; height: 100%;">
                         <iframe 
-                            src="${iframeUrl}" 
+                            src="${url}" 
                             allowfullscreen 
                             loading="eager"
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 18px;"
@@ -1106,55 +1104,26 @@
                     </div>
                 `;
                 playerContainer.innerHTML = iframeHtml;
-                navigate("video");
-                return;
-            }
-
-            playerContainer.innerHTML = `
-                <video id="player" playsinline controls></video>
-            `;
-            lucide.createIcons();
-            const videoElement = document.getElementById("player");
-            const isHLS = url.endsWith(".m3u8");
-            const referer = "https://abwaab.com";
-            let finalVideoUrl = url;
-            
-            if (isHLS && url.startsWith("https://vz-25858200-a22.becdn.net/")) {
-                finalVideoUrl = url;
-            } else if (isHLS) {
-                finalVideoUrl = `https://oxgeccc.halzyz082.workers.dev/?url=${encodeURIComponent(url)}&referer=${encodeURIComponent(referer)}`;
-            }
-            
-            const savedTime = lectureProgress[url] ? (lectureProgress[url] / 100) * (player?.duration || 0) : 0;
-
-            player = new Plyr("#player", {
-                controls: ["play-large", "play", "progress", "current-time", "fullscreen", "settings",],
-                keyboard: { focused: true, global: true },
-                tooltips: { controls: true, seek: true },
-                captions: { active: false },
-                settings: ["quality", "speed"],
-                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
-            });
-
-            window.progressInterval = setInterval(() => {
-                if (player && player.duration > 0) {
-                    const progress = (player.currentTime / player.duration) * 100;
-                    lectureProgress[url] = progress;
-                    localStorage.setItem("lectureProgress", JSON.stringify(lectureProgress));
-                }
-            }, 5000);
-
-            function tryPlay() {
+            } else {
+                // For direct video URLs (MP4, HLS, etc.), use the Plyr player
+                playerContainer.innerHTML = `
+                    <video id="player" playsinline controls></video>
+                `;
+                const videoElement = document.getElementById("player");
+                const isHLS = url.endsWith(".m3u8");
+                
+                const savedTime = lectureProgress[url] ? (lectureProgress[url] / 100) * (player?.duration || 0) : 0;
+                
+                // Use HLS.js for HLS streams, otherwise use a direct source
                 if (isHLS && Hls.isSupported()) {
                     const hls = new Hls();
                     window.hlsInstance = hls;
                     hls.attachMedia(videoElement);
-                    hls.loadSource(finalVideoUrl);
+                    hls.loadSource(url);
                     hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                        player
-                            .play()
-                            .then(() => { if (savedTime > 0) player.currentTime = savedTime; })
-                            .catch(console.error);
+                        player.play().then(() => { 
+                            if (savedTime > 0) player.currentTime = savedTime; 
+                        }).catch(console.error);
                     });
                     hls.on(Hls.Events.ERROR, (_, data) => {
                         if (data.fatal) {
@@ -1166,27 +1135,47 @@
                                     hls.recoverMediaError();
                                     break;
                                 default:
+                                    // A generic error message to the user would be better
+                                    console.error("HLS fatal error:", data);
                                     break;
                             }
                         }
                     });
                 } else {
-                    player.source = {
-                        type: "video",
-                        sources: [
-                            {
-                                src: finalVideoUrl,
-                                type: isHLS ? "application/x-mpegURL" : "video/mp4",
-                            },
-                        ],
-                    };
-                    player
-                        .play()
-                        .then(() => { if (savedTime > 0) player.currentTime = savedTime; })
-                        .catch(() => { console.log("تعذر تشغيل الفيديو"); });
+                    videoElement.src = url;
+                    videoElement.type = isHLS ? "application/x-mpegURL" : "video/mp4";
+                    videoElement.play().then(() => { 
+                        if (savedTime > 0) videoElement.currentTime = savedTime;
+                    }).catch(() => {
+                        // Handle play error, e.g., browser restrictions
+                        console.log("تعذر تشغيل الفيديو تلقائيًا، الرجاء النقر لتشغيله.");
+                    });
                 }
+
+                // Initialize Plyr instance
+                player = new Plyr(videoElement, {
+                    controls: ["play-large", "play", "progress", "current-time", "fullscreen", "settings"],
+                    keyboard: { focused: true, global: true },
+                    tooltips: { controls: true, seek: true },
+                    captions: { active: false },
+                    settings: ["quality", "speed"],
+                    speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
+                });
+
+                // Update loader visibility when the video starts playing
+                player.on("playing", () => {
+                    videoLoader.style.display = 'none';
+                });
+
+                // Update progress every 5 seconds
+                window.progressInterval = setInterval(() => {
+                    if (player && player.duration > 0) {
+                        const progress = (player.currentTime / player.duration) * 100;
+                        lectureProgress[url] = progress;
+                        localStorage.setItem("lectureProgress", JSON.stringify(lectureProgress));
+                    }
+                }, 5000);
             }
-            tryPlay();
             navigate("video");
         };
 
