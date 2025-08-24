@@ -133,20 +133,18 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            align-items: center;
         }
-
+        
         .search-container {
-            flex: 1;
-            max-width: 650px;
-            display: flex;
-            gap: 0.75rem;
             position: relative;
+            flex: 1;
+            max-width: 400px;
             min-width: 250px;
-            margin-top: 0.5rem;
         }
 
         .search-container input {
-            flex: 1;
+            width: 100%;
             padding: 1rem 1.2rem 1rem 3.5rem;
             font-size: 1.1rem;
             background: var(--card);
@@ -267,7 +265,6 @@
             height: 140px;
             border-radius: 50%;
             object-fit: cover;
-            margin: 0 auto 1.2rem;
             /* تم تحديث لون الإطار هنا */
             border: 4px solid var(--primary-2);
             box-shadow: var(--shadow-sm);
@@ -541,45 +538,6 @@
             .teacher-name { font-size: 1.2rem; }
         }
         
-        /* Security Overlay - يتم إضافة هذا الجزء الجديد للحماية */
-        #securityOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #111827; /* خلفية داكنة */
-            color: #E5E7EB; /* نص فاتح */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            text-align: center;
-            padding: 2rem;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
-            transition: opacity 0.5s ease;
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        #securityOverlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #securityOverlay h2 {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            margin-bottom: 1rem;
-            color: #ef4444; /* لون أحمر للإشعار */
-        }
-        
-        #securityOverlay p {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            max-width: 600px;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
     </style>
 </head>
 <body>
@@ -588,22 +546,22 @@
             <div class="site-logo">ح</div>
             منصة حسين الهاشمي 2026
         </h1>
-        <div class="header-actions">
-            <button id="themeToggle" class="btn">
-                <i data-lucide="sun"></i><span>المظهر</span>
-            </button>
-        </div>
         <div class="search-container">
             <i class="search-icon" data-lucide="search"></i>
             <input id="searchInput" type="text" placeholder="ابحث عن مدرس…" />
-            <button id="searchButton" class="btn btn-icon">
-                <i data-lucide="search"></i>
+        </div>
+        <div class="header-actions">
+            <button id="rulesBtn" class="btn btn-outline" onclick="navigate('rules')">
+                <i data-lucide="gavel"></i><span>الأحكام</span>
+            </button>
+            <button id="themeToggle" class="btn">
+                <i data-lucide="sun"></i><span>المظهر</span>
             </button>
         </div>
     </header>
 
     <!-- Teachers Page -->
-    <div id="teachersPage" class="page">
+    <div id="teachersPage" class="page active">
         <div class="section-title">
             <i data-lucide="users"></i>
             <h3 id="categoryTitle">المدرسين</h3>
@@ -659,14 +617,29 @@
             </div>
         </div>
     </div>
-
-    <!-- Security Overlay -->
-    <div id="securityOverlay">
-        <h2>تم اكتشاف أدوات المطور</h2>
-        <p>
-            لقد تم كشف محاولة استخدام أدوات المطور. للحفاظ على أمان المنصة وسلامتها،
-            تم إيقاف جميع وظائف الموقع. يرجى إغلاق أدوات المطور وإعادة تحميل الصفحة.
-        </p>
+    
+    <!-- Rules Page -->
+    <div id="rulesPage" class="page">
+        <button class="btn back-button" onclick="navigate('teachers')">
+            <i data-lucide="arrow-right"></i>الرجوع للرئيسية
+        </button>
+        <div class="section-title">
+            <i data-lucide="gavel"></i>
+            <h3>أحكام وشروط المنصة</h3>
+        </div>
+        <div class="rules-content" style="background: var(--card); padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm);">
+            <h4>1. حقوق الملكية الفكرية</h4>
+            <p>جميع المحتويات على هذه المنصة، بما في ذلك الفيديوهات والمواد الدراسية، محمية بموجب حقوق النشر. لا يُسمح بإعادة نشر أو توزيع هذه المحتويات بأي شكل من الأشكال دون إذن مسبق.</p>
+            <br>
+            <h4>2. الاستخدام الشخصي فقط</h4>
+            <p>يقتصر استخدام هذه المنصة على الأغراض الشخصية والتعليمية فقط. يُمنع منعًا باتًا استخدامها لأغراض تجارية أو غير قانونية.</p>
+            <br>
+            <h4>3. مسؤولية المستخدم</h4>
+            <p>يتحمل المستخدم مسؤولية الحفاظ على سرية معلومات حسابه وعدم مشاركتها مع أي شخص آخر. المنصة غير مسؤولة عن أي استخدام غير مصرح به للحساب.</p>
+            <br>
+            <h4>4. التعديل على الأحكام</h4>
+            <p>تحتفظ إدارة المنصة بالحق في تعديل هذه الأحكام والشروط في أي وقت، وسيتم إعلام المستخدمين بأي تغييرات جوهرية.</p>
+        </div>
     </div>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
@@ -718,7 +691,6 @@
         const teachersGrid = document.getElementById("teachersGrid");
         const playerContainer = document.getElementById("playerContainer");
         const videoLoader = document.getElementById("videoLoader");
-        const securityOverlay = document.getElementById("securityOverlay"); // Security overlay reference
 
         // Progress and ratings storage
         let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
@@ -728,7 +700,8 @@
         const pages = {
             teachers: document.getElementById("teachersPage"),
             classes: document.getElementById("classesPage"),
-            video: document.getElementById("videoPage")
+            video: document.getElementById("videoPage"),
+            rules: document.getElementById("rulesPage")
         };
 
         // Function to navigate between pages
@@ -756,7 +729,6 @@
 
         /* ========= بيانات المدرسين ========= */
         const searchInput = document.getElementById("searchInput");
-        const searchBtn = document.getElementById("searchButton");
         let teachers = [];
         let currentTeacher = null;
         let currentClassIndex = 0;
@@ -1007,7 +979,6 @@
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(handleSearch, 250);
         });
-        searchBtn.addEventListener("click", handleSearch);
 
         /* ========= تحميل البيانات ========= */
         function loadData() {
@@ -1057,55 +1028,7 @@
             loadData();
             navigate('teachers');
             lucide.createIcons();
-            startSecurityCheck(); // بدء فحص الحماية
         };
-
-        /* ========= وظيفة فحص الحماية ========= */
-        function startSecurityCheck() {
-            // كشف أدوات المطور من خلال مقارنة أبعاد النافذة
-            setInterval(() => {
-                const threshold = 160; // عتبة للكشف عن تغيير في الأبعاد
-
-                // إذا كانت أبعاد النافذة الداخلية تختلف بشكل كبير عن الأبعاد الخارجية
-                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
-                    showSecurityOverlay();
-                }
-            }, 1000); // الفحص كل ثانية
-            
-            // كشف أدوات المطور عند فتحها من خلال اختصارات لوحة المفاتيح
-            window.addEventListener('keydown', (e) => {
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-                    showSecurityOverlay();
-                }
-            });
-            
-            // كشف فتح أدوات المطور من خلال فحص الحجم
-            window.addEventListener('resize', () => {
-                if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
-                    showSecurityOverlay();
-                }
-            });
-        }
-        
-        // عرض شاشة الحماية
-        function showSecurityOverlay() {
-            if (securityOverlay) {
-                securityOverlay.classList.add('active');
-                // إيقاف جميع الأزرار والروابط لمنع أي تفاعل
-                document.querySelectorAll('a, button, [onclick]').forEach(el => {
-                    el.style.pointerEvents = 'none';
-                });
-                // إيقاف جميع المؤقتات
-                const intervalId = setInterval(() => {}, 1);
-                for (let i = 1; i < intervalId; i++) {
-                    clearInterval(i);
-                }
-                const timeoutId = setTimeout(() => {}, 1);
-                for (let i = 1; i < timeoutId; i++) {
-                    clearTimeout(i);
-                }
-            }
-        }
 
     </script>
 </body>
