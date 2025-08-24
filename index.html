@@ -540,6 +540,46 @@
             .site-title { font-size: 1.8rem; }
             .teacher-name { font-size: 1.2rem; }
         }
+        
+        /* Security Overlay - يتم إضافة هذا الجزء الجديد للحماية */
+        #securityOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #111827; /* خلفية داكنة */
+            color: #E5E7EB; /* نص فاتح */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            text-align: center;
+            padding: 2rem;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+            transition: opacity 0.5s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        #securityOverlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #securityOverlay h2 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 1rem;
+            color: #ef4444; /* لون أحمر للإشعار */
+        }
+        
+        #securityOverlay p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            max-width: 600px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -620,6 +660,15 @@
         </div>
     </div>
 
+    <!-- Security Overlay -->
+    <div id="securityOverlay">
+        <h2>تم اكتشاف أدوات المطور</h2>
+        <p>
+            لقد تم كشف محاولة استخدام أدوات المطور. للحفاظ على أمان المنصة وسلامتها،
+            تم إيقاف جميع وظائف الموقع. يرجى إغلاق أدوات المطور وإعادة تحميل الصفحة.
+        </p>
+    </div>
+
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     
@@ -669,6 +718,7 @@
         const teachersGrid = document.getElementById("teachersGrid");
         const playerContainer = document.getElementById("playerContainer");
         const videoLoader = document.getElementById("videoLoader");
+        const securityOverlay = document.getElementById("securityOverlay"); // Security overlay reference
 
         // Progress and ratings storage
         let lectureProgress = JSON.parse(localStorage.getItem("lectureProgress")) || {};
@@ -1007,7 +1057,55 @@
             loadData();
             navigate('teachers');
             lucide.createIcons();
+            startSecurityCheck(); // بدء فحص الحماية
         };
+
+        /* ========= وظيفة فحص الحماية ========= */
+        function startSecurityCheck() {
+            // كشف أدوات المطور من خلال مقارنة أبعاد النافذة
+            setInterval(() => {
+                const threshold = 160; // عتبة للكشف عن تغيير في الأبعاد
+
+                // إذا كانت أبعاد النافذة الداخلية تختلف بشكل كبير عن الأبعاد الخارجية
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    showSecurityOverlay();
+                }
+            }, 1000); // الفحص كل ثانية
+            
+            // كشف أدوات المطور عند فتحها من خلال اختصارات لوحة المفاتيح
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                    showSecurityOverlay();
+                }
+            });
+            
+            // كشف فتح أدوات المطور من خلال فحص الحجم
+            window.addEventListener('resize', () => {
+                if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
+                    showSecurityOverlay();
+                }
+            });
+        }
+        
+        // عرض شاشة الحماية
+        function showSecurityOverlay() {
+            if (securityOverlay) {
+                securityOverlay.classList.add('active');
+                // إيقاف جميع الأزرار والروابط لمنع أي تفاعل
+                document.querySelectorAll('a, button, [onclick]').forEach(el => {
+                    el.style.pointerEvents = 'none';
+                });
+                // إيقاف جميع المؤقتات
+                const intervalId = setInterval(() => {}, 1);
+                for (let i = 1; i < intervalId; i++) {
+                    clearInterval(i);
+                }
+                const timeoutId = setTimeout(() => {}, 1);
+                for (let i = 1; i < timeoutId; i++) {
+                    clearTimeout(i);
+                }
+            }
+        }
 
     </script>
 </body>
