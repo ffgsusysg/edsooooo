@@ -21,22 +21,22 @@
     <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
     
     <style>
-        /* Updated design variables for a cleaner look */
+        /* Modernized CSS Variables */
         :root {
-            /* New, more vibrant color palette */
-            --primary-1: #00A676; /* Emerald Green */
-            --primary-2: #167098; /* Dark Teal */
-            --primary-3: #135A7B; /* Deeper Teal */
-            --accent: #FFA726; /* Bright Orange */
-            --accent-2: #F9A825; /* Darker Orange */
+            /* الألوان الجديدة التي طلبتها */
+            --primary-1: #06b6d4; /* الفيروزي */
+            --primary-2: #7c3aed; /* البنفسجي */
+            --primary-3: #6d28d9; /* بنفسجي أغمق */
+            --accent: #FFC107; /* لون مميز للإبراز */
+            --accent-2: #F9A825; /* لون مميز أغمق */
             
             --radius: 18px; /* Softer, more modern corners */
-            --bg: #F5F7FA; /* Light gray background */
+            --bg: #F5F7FA; /* Very light gray background */
             --bg-glass: rgba(245, 247, 250, 0.95);
             --text: #1C2833; /* Dark Charcoal Text */
             --card: #FFFFFF; /* Pure White Cards */
             --border: #E0E4EB; /* Light border */
-            --hover: rgba(0, 166, 118, 0.1); /* Primary color with transparency for hover */
+            --hover: rgba(6, 182, 212, 0.08); /* Primary color with transparency for hover */
             --success: #28a745;
             --warning: #FFC107;
             --error: #DC3545;
@@ -44,25 +44,25 @@
             --telegram-light: #2aabee;
             --telegram-text: #ffffff;
             
-            /* Enhanced shadows for depth */
-            --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
-            --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
-            --shadow-lg: 0 16px 40px rgba(0,0,0,0.18);
+            /* تم تطبيق الظل الجديد هنا */
+            --shadow-sm: 0 4px 12px rgba(6,182,212,0.08);
+            --shadow-md: 0 8px 30px rgba(6,182,212,0.12);
+            --shadow-lg: 0 16px 40px rgba(6,182,212,0.18);
         }
 
         /* Dark theme adjustments */
         [data-theme="dark"] {
-            --bg: #111827;
+            --bg: #111827; /* Darker background */
             --bg-glass: rgba(17, 24, 39, 0.95);
-            --text: #E5E7EB;
-            --card: #1F2937;
-            --border: #374151;
-            --hover: rgba(0, 166, 118, 0.15);
-            --primary-1: #38B2AC; /* Lighter emerald for dark theme */
-            --primary-2: #4FB0C8; /* Lighter teal */
-            --primary-3: #4298AD;
-            --accent: #FFC107;
-            --accent-2: #F9A825;
+            --text: #E5E7EB; /* Light gray text */
+            --card: #1F2937; /* Dark gray cards */
+            --border: #374151; /* Medium gray border */
+            --hover: rgba(6, 182, 212, 0.15);
+            --primary-1: #4FC3F7; /* Lighter blue for dark theme */
+            --primary-2: #B194F9; /* لون بنفسجي فاتح للمظهر الداكن */
+            --primary-3: #9776E6;
+            --accent: #FFA726; /* Lighter orange */
+            --accent-2: #FB8C00;
         }
 
         /* General styles */
@@ -118,7 +118,8 @@
         .site-logo {
             width: 48px;
             height: 48px;
-            background: linear-gradient(45deg, var(--primary-1), var(--primary-2));
+            /* تم تحديث التدرج اللوني هنا */
+            background: linear-gradient(90deg, #06b6d4, #7c3aed);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -156,7 +157,7 @@
         .search-container input:focus {
             outline: none;
             border-color: var(--primary-2);
-            box-shadow: 0 0 0 3px rgba(22, 112, 152, 0.3);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3);
         }
 
         .search-icon {
@@ -175,7 +176,8 @@
             gap: 0.6rem;
             padding: 1rem 1.6rem;
             border-radius: var(--radius);
-            background: linear-gradient(90deg, var(--primary-1), var(--primary-2)); 
+            /* تم تحديث التدرج اللوني هنا */
+            background: linear-gradient(90deg, #06b6d4, #7c3aed); 
             color: #fff;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -187,7 +189,8 @@
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-md);
-            background: linear-gradient(90deg, var(--primary-2), var(--primary-1));
+            /* تم تحديث التدرج اللوني هنا */
+            background: linear-gradient(90deg, #7c3aed, #06b6d4);
         }
 
         .btn-outline {
@@ -262,6 +265,7 @@
             height: 140px;
             border-radius: 50%;
             object-fit: cover;
+            /* تم تحديث لون الإطار هنا */
             border: 4px solid var(--primary-2);
             box-shadow: var(--shadow-sm);
             transition: border-color 0.3s ease;
@@ -299,7 +303,7 @@
 
         .back-button {
             margin-bottom: 2rem;
-            background: linear-gradient(90deg, var(--primary-1), var(--primary-2));
+            background: linear-gradient(90deg, #06b6d4, #7c3aed);
             box-shadow: var(--shadow-sm);
         }
 
@@ -322,6 +326,7 @@
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
+            /* تم تحديث لون الإطار هنا */
             border: 5px solid var(--primary-2);
             box-shadow: var(--shadow-md);
             transition: border-color 0.3s ease;
@@ -350,6 +355,7 @@
             user-select: none;
             background: var(--bg-glass);
             backdrop-filter: blur(8px);
+            /* تم تحديث لون الخط الجانبي هنا */
             border-right: 5px solid var(--primary-2);
             transition: background 0.3s ease, border-color 0.3s ease;
         }
@@ -372,6 +378,7 @@
             position: relative;
             padding: 1rem 1.2rem 1rem 4rem;
             background: var(--hover);
+            /* تم تحديث لون الخط الجانبي هنا */
             border-right: 3px solid var(--primary-3);
             border-radius: var(--radius);
             cursor: pointer;
@@ -382,7 +389,7 @@
         }
 
         .lecture-item:hover {
-            background: rgba(0, 166, 118, 0.12);
+            background: rgba(6, 182, 212, 0.12);
         }
 
         .lecture-item svg {
@@ -446,6 +453,7 @@
             gap: 0.8rem;
             margin: 2rem 0 1.2rem;
             padding-bottom: 0.5rem;
+            /* تم تحديث لون الخط هنا */
             border-bottom: 3px solid var(--primary-1);
             color: var(--primary-1);
             transition: color 0.3s ease, border-color 0.3s ease;
