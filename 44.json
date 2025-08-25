@@ -23,8 +23,18 @@
               "title": "محاضرة 3",
               "description": "وصف المحاضرة",
               "url": "https://iframe.mediadelivery.net/embed/157276/f1a14705-35d5-473a-bf15-dd9bdbc75372"
-           
-					 }
+            },
+            {
+              "title": "محاضرة 4",
+              "description": "وصف المحاضرة",
+              "url": "https://iframe.mediadelivery.net/embed/157276/84545fb1-e4fd-45b4-9acd-e3252bf0f0de"
+					 },
+            {
+              "title": "محاضرة 5",
+              "description": "وصف المحاضرة",
+              "url": "https://iframe.mediadelivery.net/embed/157276/c52982b4-79a7-4202-a0c6-031556bc7d66"
+
+ }
           ]
         }
       ]
